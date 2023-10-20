@@ -90,29 +90,6 @@
 					},
 					childTokens: [] // Any child tokens to be visited by walkTokens
 				}
-				// {
-				// 	name: 'centered',
-				// 	level: 'block', // Is this a block-level or inline-level tokenizer?
-				// 	start(src) {
-				// 		return src.match(/>>/)?.index;
-				// 	},
-				// 	tokenizer(src, tokens) {
-				// 		const rule = /^>>([^\n]+)(?:\n)/; // Regex for the complete token, anchor to string start
-				// 		const match = rule.exec(src);
-				// 		if (match) {
-				// 			return {
-				// 				// Token to generate
-				// 				type: 'centered',
-				// 				raw: match[0],
-				// 				u: this.lexer.blockTokens(match[1])
-				// 			};
-				// 		}
-				// 	},
-				// 	renderer(token) {
-				// 		return `<span class='centered'>${this.parser.parse(token.u)}</span>`;
-				// 	},
-				// 	childTokens: [] // Any child tokens to be visited by walkTokens
-				// }
 			]
 		});
 </script>
@@ -155,56 +132,56 @@
 		) {
 		@apply pt-6;
 	}
-	:global(b, strong) {
-		@apply font-bold;
-	}
 
-	:global(ol, ul) {
+	:global(.outside-md ol, .outside-md ul) {
 		@apply pl-5;
 	}
 
-	:global(ol) {
+	:global(.outside-md ol) {
 		@apply list-decimal;
 	}
-	:global(ul) {
+	:global(.outside-md ul) {
 		@apply list-disc;
 	}
 
-	:global(ul ul, ol ol) {
+	:global(.outside-md ul ul, .outside-md ol ol) {
 		list-style-type: circle;
 		@apply pl-5;
 	}
 
-	:global(code) {
+	:global(.outside-md code) {
 		@apply p-3 bg-slate-900 text-white font-mono rounded-md;
 	}
-	:global(pre) {
+
+	:global(.outside-md pre) {
 		@apply my-10;
 	}
-	:global(u) {
-		@apply underline;
-	}
-	:global(blockquote) {
+
+	:global(.outside-md blockquote) {
 		@apply text-center place-self-center;
 	}
 
-	:global(h1, h2, h3, h4, h5) {
+	:global(.outside-md h1, .outside-md h2, .outside-md h3, .outside-md h4, .outside-md h5) {
 		@apply font-extrabold py-5;
 	}
 
-	:global(h1) {
+	:global(.outside-md h1) {
 		@apply text-5xl;
 	}
-	:global(h2) {
+	:global(.outside-md h2) {
 		@apply text-4xl;
 	}
-	:global(h3) {
+	:global(.outside-md h3) {
 		@apply text-3xl;
 	}
-	:global(h2) {
+	:global(.outside-md h2) {
 		@apply text-2xl;
 	}
-	:global(h5) {
+	:global(.outside-md h5) {
 		@apply text-xl;
+	}
+
+	:global(.outside-md a) {
+		@apply underline text-blue-700;
 	}
 </style>

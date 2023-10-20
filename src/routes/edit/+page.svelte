@@ -1,5 +1,6 @@
 <script lang="ts">
 	import AddElement from '../../components/add-element.svelte';
+	import Article from '../../components/article.svelte';
 	import EditorToolbar from '../../components/editor-toolbar.svelte';
 	import MarkdownSection from '../../components/markdown-section.svelte';
 	import Menu from '../../components/menu.svelte';
@@ -87,36 +88,39 @@ Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Rhoncus 
 <div id="pg" class="m-1 p-5">
 	{#if !$editPreview}
 		<AddElement on:click={() => createElement(0)} />
-		{#each elements as { id, classes, content }, i}
-			<div class="preview-row">
-				<MarkdownSection
-					editable
-					class={classes}
-					onblur={(textContent) => {
-						console.log(textContent);
-						updateContent(i, textContent);
-					}}
-					markdown={content}
-				/>
-				<div
-					class="preview-button-container border border-gray-500 rounded-lg bg-slate-200 hover:bg-slate-600 hover:text-white absolute top-1 right-1 px-1"
-				>
-					<Menu
-						actions={[
-							{ text: 'Move Up', action: () => elementUp(i) },
-							{ text: 'Move Down', action: () => elementDown(i) },
-							{ text: `Delete`, action: () => deleteElement(i) }
-						]}
-						icon="solar:menu-dots-bold"
+		<Article>
+			{#each elements as { id, classes, content }, i}
+				<div class="preview-row">
+					<MarkdownSection
+						editable
+						class={classes}
+						onblur={(textContent) => {
+							console.log(textContent);
+							updateContent(i, textContent);
+						}}
+						markdown={content}
 					/>
+					<div
+						class="preview-button-container border border-gray-500 rounded-lg bg-slate-200 hover:bg-slate-600 hover:text-white absolute top-1 right-1 px-1"
+					>
+						<Menu
+							actions={[
+								{ text: `Add section below`, action: () => createElement(i + 1) },
+								{ text: `Delete`, action: () => deleteElement(i) }
+							]}
+							icon="solar:menu-dots-bold"
+						/>
+					</div>
 				</div>
-			</div>
-			<AddElement on:click={() => createElement(i + 1)} />
-		{/each}
+			{/each}
+		</Article>
+		<AddElement on:click={() => createElement(elements.length)} />
 	{:else}
-		{#each elements as { id, classes, content } (id)}
-			<MarkdownSection class={classes} markdown={content} />
-		{/each}
+		<Article>
+			{#each elements as { id, classes, content } (id)}
+				<MarkdownSection class={classes} markdown={content} />
+			{/each}
+		</Article>
 	{/if}
 </div>
 
