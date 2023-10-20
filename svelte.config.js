@@ -11,7 +11,10 @@ export default {
 			fallback: undefined,
 			precompress: false,
 			strict: true
-		})
+		}),
+		paths: {
+			base: '/svelte-731-pages'
+		}
 	},
 	preprocess: vitePreprocess()
 };
