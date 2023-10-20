@@ -1,57 +1,14 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { marked } from 'marked';
+	import { writable } from 'svelte/store';
+	export let markdown: string = '';
+	export let onblur: (textContent: string) => void = () => {};
+	let focused = false;
+	export let editable = false;
+	const value = writable(markdown);
 
-	let markdown: string = `
-
-  # *Header 1*
-
-this is code
-
-## header 2
-
-## header 2+
-
-**bold**
-
-__italics?__
-
-pargraph
-
-~~underlined~~
-
-this should have underlined[[ __This is underlined text__]] text __bet ween__ brackets
-
-<br/>
-<br/>
-<br/>
-
->>Q:  Checkpoint - __How many are there?__  :  Twelve!!
-
-Q: **Topic 2**  :  something else
-
-### The end head 3
-
-1. this is one
-1. this is one
-1. this is one
-1. this is one
-1. this is one
-1. inside
-1. inside again
-
-## here's some more!
-
-- First item
-- Second item
-- Third item
-- Indented item
-- Indented item
-    - Indented item
-    - Indented item
-- Fourth item 2
-
-`;
+	$: $value = markdown.replaceAll(/\n{2,}/g, '\n\n').trim();
 
 	if (browser)
 		marked.use({
@@ -132,111 +89,107 @@ Q: **Topic 2**  :  something else
 						)}`;
 					},
 					childTokens: [] // Any child tokens to be visited by walkTokens
-				},
-				{
-					name: 'centered',
-					level: 'block', // Is this a block-level or inline-level tokenizer?
-					start(src) {
-						return src.match(/>>/)?.index;
-					},
-					tokenizer(src, tokens) {
-						const rule = /^>>([^\n]+?)(?:\n)/; // Regex for the complete token, anchor to string start
-						const match = rule.exec(src);
-						if (match) {
-							return {
-								// Token to generate
-								type: 'centered',
-								raw: match[0],
-								u: this.lexer.blockTokens(match[1])
-							};
-						}
-					},
-					renderer(token) {
-						return `<span class='centered'>${this.parser.parse(token.u)}</span>`;
-					},
-					childTokens: [] // Any child tokens to be visited by walkTokens
 				}
+				// {
+				// 	name: 'centered',
+				// 	level: 'block', // Is this a block-level or inline-level tokenizer?
+				// 	start(src) {
+				// 		return src.match(/>>/)?.index;
+				// 	},
+				// 	tokenizer(src, tokens) {
+				// 		const rule = /^>>([^\n]+)(?:\n)/; // Regex for the complete token, anchor to string start
+				// 		const match = rule.exec(src);
+				// 		if (match) {
+				// 			return {
+				// 				// Token to generate
+				// 				type: 'centered',
+				// 				raw: match[0],
+				// 				u: this.lexer.blockTokens(match[1])
+				// 			};
+				// 		}
+				// 	},
+				// 	renderer(token) {
+				// 		return `<span class='centered'>${this.parser.parse(token.u)}</span>`;
+				// 	},
+				// 	childTokens: [] // Any child tokens to be visited by walkTokens
+				// }
 			]
 		});
-
-	marked.use();
 </script>
 
-<div class="text-5xl">Welcome to SvelteKit</div>
-
-<div class="flex flex-col min-w-max gap-2 p-2 text-white">
-	<button
-		class="bg-red-400 w-full p-5"
-		on:click={() => {
-			const email = 'bbb@bbb.com';
-			const password = 'bbbbbb';
-			fetch('https://nginx-anything-storage-glovbogi2a-uc.a.run.app/auth/login', {
-				method: 'POST',
-				headers: {
-					accept: 'application/json',
-					['content-type']: 'application/json'
-				},
-				body: JSON.stringify({
-					email,
-					password
-				}),
-				credentials: 'include'
-			});
-		}}>LOG IN (form-data-nginx)</button
+{#if focused}
+	<!-- svelte-ignore a11y-autofocus -->
+	<div
+		autofocus
+		contenteditable
+		bind:innerText={$value}
+		on:focus={() => (focused = true)}
+		on:blur={(e) => {
+			onblur($value);
+			focused = false;
+		}}
+		class={`whitespace-pre-wrap focus:outline-dotted`}
 	>
-	<button
-		class="w-full bg-blue-400 p-5"
-		on:click={() => {
-			console.log('getit');
-			fetch('https://nginx-anything-storage-glovbogi2a-uc.a.run.app/app', {
-				method: 'GET',
-				credentials: 'include'
-			})
-				.then((r) => r.text().then(console.log))
-				.catch((e) => console.log('errorrrrr', e))
-				.then(() => console.log('called /'));
-		}}>Get It</button
-	>
-</div>
-
-<textarea bind:value={markdown} rows={20} cols={100} class="ml-2 pl-2 border border-gray-200" />
-
-<div>
-	<span>Preview:</span>
-	<div class="border-black border m-1 p-1 bg-slate-50">
-		{@html marked.parse(markdown)}
+		{$value}
 	</div>
-</div>
-
-<div>
-	<span>raw:</span>
-	<div>{marked.parse(markdown)}</div>
-</div>
-
-<svelte:head>
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-		rel="stylesheet"
-	/>
-</svelte:head>
+{:else}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<div class="grid w-full">
+		<div class={`${$$props.class} outside-md`} on:click={() => (focused = editable)}>
+			{@html marked.parse(markdown)}
+		</div>
+	</div>
+{/if}
 
 <style lang="postcss">
 	:global(*) {
 		font-family: 'Kanit', sans-serif;
 	}
-	:global(p) {
-		@apply pt-3;
-	}
 
+	:global(
+			.outside-md > p:not(:first-child),
+			.outside-md > ol:not(:first-child),
+			.outside-md > ul:not(:first-child),
+			.outside-md > blockquote:not(:first-child)
+		) {
+		@apply pt-6;
+	}
 	:global(b, strong) {
-		font-family: Gelasio;
 		@apply font-bold;
 	}
 
+	:global(ol, ul) {
+		@apply pl-5;
+	}
+
+	:global(ol) {
+		@apply list-decimal;
+	}
+	:global(ul) {
+		@apply list-disc;
+	}
+
+	:global(ul ul, ol ol) {
+		list-style-type: circle;
+		@apply pl-5;
+	}
+
+	:global(code) {
+		@apply p-3 bg-slate-900 text-white font-mono rounded-md;
+	}
+	:global(pre) {
+		@apply my-10;
+	}
+	:global(u) {
+		@apply underline;
+	}
+	:global(blockquote) {
+		@apply text-center place-self-center;
+	}
+
 	:global(h1, h2, h3, h4, h5) {
-		@apply font-extrabold my-5;
+		@apply font-extrabold py-5;
 	}
 
 	:global(h1) {
@@ -253,33 +206,5 @@ Q: **Topic 2**  :  something else
 	}
 	:global(h5) {
 		@apply text-xl;
-	}
-
-	:global(ol, ul) {
-		@apply pt-2 pl-5;
-	}
-
-	:global(ol) {
-		@apply list-decimal;
-	}
-	:global(ul) {
-		@apply list-disc pl-7;
-	}
-
-	:global(ul ul) {
-		list-style-type: circle;
-	}
-
-	:global(code) {
-		@apply p-3 bg-slate-900 text-white font-mono rounded-md;
-	}
-	:global(pre) {
-		@apply my-10;
-	}
-	:global(u) {
-		@apply underline;
-	}
-	:global(.centered) {
-		@apply text-center;
 	}
 </style>

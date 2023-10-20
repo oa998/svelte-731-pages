@@ -4,5 +4,10 @@ export default {
 	theme: {
 		extend: {}
 	},
+	safelist: [
+		// {
+		// 	pattern: /place-self-center/
+		// }
+	],
 	plugins: []
 };
