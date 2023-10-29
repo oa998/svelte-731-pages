@@ -1,22 +1,36 @@
 <script lang="ts">
+	import { courseMarkdown } from './../stores/course.ts';
 	import { editPreview } from './../stores/editor.ts';
-	import StyleSetter from './article-settings/style-setter.svelte';
 </script>
 
 <input type="checkbox" checked={$editPreview} class="hidden" />
 <div class="toolbar-wrapper">
 	{#if !$editPreview}
 		<div class="buttons">
-			<div class="article-settings">
-				<StyleSetter css="--article-gap" />
-				<StyleSetter css="--article-max-width" />
-				<StyleSetter css="--paragraph-margin-top" />
-			</div>
-		</div>
-		<div class="buttons">
 			<button on:click={() => ($editPreview = !$editPreview)}>Preview</button>
 			<button id="cancel">Cancel </button>
-			<button id="save">Save</button>
+			<button
+				id="save"
+				on:click={() => {
+					const courseId = `c-${Math.floor(Math.random() * 1e7)}`;
+					console.log({ courseId, courseMarkdown: $courseMarkdown.substring(0, 50) });
+					// &id=8imPjhk1VkZi579SKBgL
+					fetch(
+						`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?collectionPath=course/lashes/chapter`,
+						{
+							method: 'POST',
+							headers: {
+								accept: 'application/json',
+								['content-type']: 'application/json'
+							},
+							body: JSON.stringify({
+								courseMarkdown: $courseMarkdown
+							}),
+							credentials: 'include'
+						}
+					);
+				}}>Save</button
+			>
 		</div>
 	{:else}
 		<div class="buttons">
@@ -28,17 +42,13 @@
 </div>
 
 <style lang="postcss">
-	.menu-card button {
-		@apply relative px-3 py-1 rounded bg-violet-400 text-white shadow-md drop-shadow-md active:shadow-none active:text-gray-300 whitespace-nowrap;
-	}
-
 	.article-settings {
 		@apply w-max items-center gap-3 p-1 flex flex-row;
 	}
 
 	.toolbar-wrapper {
 		box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
-		@apply w-full fixed bottom-0 left-0 p-3 bg-white flex flex-row justify-between items-center;
+		@apply w-full fixed bottom-0 left-0 p-3 bg-white flex flex-row flex-wrap sm:justify-end justify-center items-center;
 	}
 
 	.buttons {

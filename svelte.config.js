@@ -12,6 +12,10 @@ export default {
 			precompress: false,
 			strict: true
 		}),
+		alias: {
+			// this will match a file
+			'$components/*': 'src/components'
+		},
 		paths: {
 			base: '/svelte-731-pages'
 		}
