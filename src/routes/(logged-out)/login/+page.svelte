@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CompanyName from '$components/company-name.svelte';
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_ARTICLE_URL } from '$env/static/public';
 	import { login } from '$lib/auth';
 	// @ts-ignore
 	import { toast } from '@zerodevx/svelte-toast';
@@ -57,7 +57,7 @@
 			>
 				Forgot my login
 			</button>
-			<span>{env.PUBLIC_AUTH_URL}</span>
+			<span>{PUBLIC_ARTICLE_URL}</span>
 		</div>
 	</form>
 </div>
