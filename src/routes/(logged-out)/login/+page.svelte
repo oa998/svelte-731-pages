@@ -30,7 +30,7 @@
 	<div class="bg-img" />
 	<form
 		on:submit|preventDefault={() => {}}
-		class="flex flex-col max-w-xs whitespace-nowrap m-auto h-[50vh] sm:h-[80vh] justify-center"
+		class="flex flex-col max-w-xs whitespace-nowrap m-auto h-[100vh] focus-within:h-[50vh] sm:focus-within:h-[100vh] justify-center"
 	>
 		<div class="form-container flex flex-col py-5 px-2 rounded-lg gap-2">
 			<div class="form-label">
@@ -61,6 +61,9 @@
 </div>
 
 <style lang="postcss">
+	form {
+		transition: all 1s;
+	}
 	button:first-of-type {
 		@apply mt-3;
 	}
