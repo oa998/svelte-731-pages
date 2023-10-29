@@ -1,7 +1,7 @@
-import { PUBLIC_AUTH_URL } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 
 export function login(email: string, password: string) {
-	return fetch(PUBLIC_AUTH_URL, {
+	return fetch(env.PUBLIC_AUTH_URL, {
 		method: 'POST',
 		headers: {
 			accept: 'application/json',
