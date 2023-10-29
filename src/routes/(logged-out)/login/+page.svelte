@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CompanyName from '$components/company-name.svelte';
+	import { env } from '$env/dynamic/public';
 	import { login } from '$lib/auth';
 	// @ts-ignore
 	import { toast } from '@zerodevx/svelte-toast';
@@ -56,13 +57,14 @@
 			>
 				Forgot my login
 			</button>
+			<span>{env.PUBLIC_AUTH_URL}</span>
 		</div>
 	</form>
 </div>
 
 <style lang="postcss">
 	form {
-		transition: all 1s;
+		transition: all 500ms;
 	}
 	button:first-of-type {
 		@apply mt-3;
