@@ -32,7 +32,7 @@
 		on:submit|preventDefault={() => {}}
 		class="flex flex-col max-w-xs whitespace-nowrap m-auto h-[50vh] sm:h-[80vh] justify-center"
 	>
-		<div class="form-container flex flex-col p-5 rounded-lg gap-2">
+		<div class="form-container flex flex-col py-5 px-2 rounded-lg gap-2">
 			<div class="form-label">
 				<label for="email">Email:</label>
 				<input type="text" class="border-b border-black px-2" id="email" bind:value={email} />
@@ -69,7 +69,7 @@
 	}
 	.form-label {
 		display: grid;
-		grid-template-columns: 90px 1fr;
+		grid-template-columns: 80px 1fr;
 		@apply text-sm italic font-serif;
 	}
 
