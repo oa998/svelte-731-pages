@@ -26,10 +26,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - run: echo Hello ||
+          echo  ${{ vars.PUBLIC_AUTH_URL }}
+
       - name: build
         env:
           BASE_PATH: '/your-repo-name'
-          PUBLIC_AUTH_URL: aaaaaaa
+          PUBLIC_AUTH_URL: ${{ vars.PUBLIC_AUTH_URL }}
         run: |
           pnpm run build
           touch build/.nojekyll
