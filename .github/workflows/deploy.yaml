@@ -27,7 +27,7 @@ jobs:
         run: pnpm install
 
       - run: echo Hello ||
-          echo  ${{ vars.PUBLIC_AUTH_URL }}
+          echo  ${{ env.PUBLIC_AUTH_URL }}
 
       - name: build
         env:
