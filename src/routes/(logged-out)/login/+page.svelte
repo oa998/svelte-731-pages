@@ -57,7 +57,7 @@
 			>
 				Forgot my login
 			</button>
-			<span class="text-white">{env.PUBLIC_ARTICLE_URL}</span>
+			<span class="text-white">{env.PUBLIC_AUTH_URL}</span>
 		</div>
 	</form>
 </div>
