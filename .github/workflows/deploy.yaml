@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: echo Hello ||
-          echo  ${{ env.PUBLIC_AUTH_URL }}
-
       - name: build
         env:
           BASE_PATH: '/your-repo-name'
@@ -59,3 +56,6 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v1
+
+      - run: echo Hello ||
+          echo  ${{ vars.PUBLIC_AUTH_URL }}
