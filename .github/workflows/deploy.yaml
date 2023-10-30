@@ -7,6 +7,10 @@ on:
 jobs:
   build_site:
     runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,6 +29,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - run: echo Hello1 ||
+          echo  ${{ vars.PUBLIC_AUTH_URL }}
 
       - name: build
         env:
@@ -57,5 +64,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v1
 
-      - run: echo Hello ||
+      - run: echo Hello2 ||
           echo  ${{ vars.PUBLIC_AUTH_URL }}
