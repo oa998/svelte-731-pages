@@ -13,11 +13,7 @@ const moveToAlbum = (imageHash: string) => {
 		body: formdata,
 		redirect: 'follow'
 	};
-
-	fetch('https://api.imgur.com/3/album/p2M8FFhintt0aW5/add', requestOptions).catch((error) =>
-		console.log('error moving to album', error)
-	);
-	fetch('https://api.imgur.com/3/album/OBfO4UG/add', requestOptions).catch((error) =>
+	fetch('https://api.imgur.com/3/album/OBfO4UG', requestOptions).catch((error) =>
 		console.log('error moving to album', error)
 	);
 };
