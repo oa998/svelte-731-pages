@@ -1,21 +1,35 @@
 import { env } from '$env/dynamic/public';
 
-const moveToAlbum = (imageHash: string) => {
-	const formdata = new FormData();
-	formdata.append('deletehashes[]', imageHash);
+// const moveToAlbum = (imageHash: string) => {
+// 	const formdata = new FormData();
+// 	formdata.append('deletehashes[]', imageHash);
 
-	const requestOptions = {
-		method: 'POST',
+// 	const requestOptions = {
+// 		method: 'POST',
+// 		headers: {
+// 			// Authorization: `Client-ID ${env.PUBLIC_IMGUR_CLIENT_ID}`
+// 			Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
+// 		},
+// 		body: formdata,
+// 		redirect: 'follow'
+// 	};
+// 	fetch('https://api.imgur.com/3/album/OBfO4UG', requestOptions).catch((error) =>
+// 		console.log('error moving to album', error)
+// 	);
+// };
+
+const getAlbumImages = () => {
+	fetch('https://api.imgur.com/3/album/OBfO4UG/images', {
+		method: 'GET',
 		headers: {
-			// Authorization: `Client-ID ${env.PUBLIC_IMGUR_CLIENT_ID}`
-			Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
+			Authorization: `Client-ID ${env.PUBLIC_IMGUR_CLIENT_ID}`
 		},
-		body: formdata,
+		body: new FormData(),
 		redirect: 'follow'
-	};
-	fetch('https://api.imgur.com/3/album/OBfO4UG', requestOptions).catch((error) =>
-		console.log('error moving to album', error)
-	);
+	})
+		.then((r) => r.json())
+		.then((j) => console.log(JSON.stringify(j, null, 2)))
+		.catch((e) => console.log(e));
 };
 
 export const upload = (
@@ -38,9 +52,11 @@ export const upload = (
 		.then((response) => response.json())
 		.then((result) => {
 			console.log(JSON.stringify(result, null, 2));
-			moveToAlbum(result.data.deletehash);
+			// moveToAlbum(result.data.deletehash);
 		})
 		.catch((error) => console.log('error', error));
+
+	getAlbumImages();
 };
 
 /**
