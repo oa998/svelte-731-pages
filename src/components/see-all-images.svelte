@@ -32,147 +32,21 @@
 		{#each imageURLs as url, i (url)}
 			<section>
 				<img src={url} alt={`img_${i}`} />
-				<span>{url}</span>
+				<button
+					on:click={() => {
+						navigator.clipboard.writeText(`![img](${url} "image")`);
+					}}
+				>
+					<Icon icon="ph:copy" style="font-size:small" color="white" />
+				</button>
 			</section>
 		{/each}
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={'https://i.imgur.com/mpC4Orz.gif'} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
-		<section>
-			<img src={d} alt={`img_${d}`} />
-			<button>
-				<Icon icon="ph:copy" style="font-size:small" color="white" />
-			</button>
-		</section>
 	</div>
 </div>
 
 <style lang="postcss">
 	div {
-		@apply relative flex flex-col max-w-[130px];
+		@apply relative flex flex-col w-[130px];
 	}
 
 	div.images {
@@ -186,10 +60,6 @@
 
 	section {
 		@apply relative;
-	}
-
-	span {
-		@apply text-xs text-white;
 	}
 
 	div.buttons {

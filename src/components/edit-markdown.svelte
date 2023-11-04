@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
-	import UploadImage from './upload-image.svelte';
 	export let markdown: string = '';
 	export let onblur: (textContent: string) => void = () => {};
 	const value = writable(markdown);
@@ -16,8 +15,6 @@
 >
 	{$value}
 </div>
-
-<UploadImage />
 
 <style lang="postcss">
 </style>

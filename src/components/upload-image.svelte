@@ -3,16 +3,21 @@
 
 	let imageSelected = false;
 	$: fileChange = (e) => {
-		imageSelected = !!e.target.files?.[0]?.name;
+		imageSelected = e.target.files?.[0]?.name;
 	};
 </script>
 
-<form on:submit|preventDefault={upload} class="bg-white w-full">
+<form on:submit|preventDefault={upload} class="bg-white w-full p-1">
 	<input type="file" name="image" id="image" accept="image" hidden on:change={fileChange} />
-	{#if !imageSelected}
-		<label for="image">Upload Image</label>
-	{:else}
-		<button type="submit" class="border border-black rounded">something</button>
+	<label for="image">
+		{#if !!imageSelected}
+			{imageSelected}
+		{:else}
+			Upload Image
+		{/if}
+	</label>
+	{#if !!imageSelected}
+		<button type="submit" class="border border-black rounded">Upload</button>
 	{/if}
 </form>
 
@@ -26,6 +31,8 @@
 	}
 
 	form button {
+		background-color: green;
+		color: white;
 		@apply w-full;
 	}
 </style>

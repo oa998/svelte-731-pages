@@ -5,18 +5,12 @@
 	import EditorToolbar from '$components/editor-toolbar.svelte';
 	import ImageSheet from '$components/image-sheet.svelte';
 	import MarkdownSection from '$components/markdown-section.svelte';
-	import { upload } from '$lib/image-upload';
 	import { courseMarkdown } from '../../../../../stores/course.ts';
 	import { editPreview } from '../../../../../stores/editor.ts';
 
 	let courseId = $page.params.courseId;
 	console.log({ courseId });
 	let imageSelectorOpen = true;
-
-	let imageSelected = false;
-	$: fileChange = (e) => {
-		imageSelected = !!e.target.files?.[0]?.name;
-	};
 
 	let article: string = `># This title is bold!
 
@@ -78,25 +72,7 @@ Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Rhoncus 
 </div>
 <EditorToolbar showImages={() => (imageSelectorOpen = !imageSelectorOpen)} />
 
-<form on:submit|preventDefault={upload} class="bg-white w-full">
-	<input type="file" name="image" id="image" accept="image" hidden on:change={fileChange} />
-	{#if !imageSelected}
-		<label for="image">Upload Image</label>
-	{:else}
-		<button type="submit" class="border border-black rounded">something</button>
-	{/if}
-</form>
+<div class="py-[200px]" />
 
 <style lang="postcss">
-	form {
-		@apply flex flex-col text-center;
-	}
-
-	form label {
-		@apply py-1;
-	}
-
-	form button {
-		@apply w-full;
-	}
 </style>
