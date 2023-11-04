@@ -7,13 +7,17 @@ const moveToAlbum = (imageHash: string) => {
 	const requestOptions = {
 		method: 'POST',
 		headers: {
-			Authorization: `Client-ID ${env.PUBLIC_IMGUR_CLIENT_ID}`
+			// Authorization: `Client-ID ${env.PUBLIC_IMGUR_CLIENT_ID}`
+			Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
 		},
 		body: formdata,
 		redirect: 'follow'
 	};
 
 	fetch('https://api.imgur.com/3/album/p2M8FFhintt0aW5/add', requestOptions).catch((error) =>
+		console.log('error moving to album', error)
+	);
+	fetch('https://api.imgur.com/3/album/OBfO4UG/add', requestOptions).catch((error) =>
 		console.log('error moving to album', error)
 	);
 };
