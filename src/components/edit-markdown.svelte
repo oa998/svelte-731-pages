@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
+	import SeeAllImages from './see-all-images.svelte';
 	import UploadImage from './upload-image.svelte';
 	export let markdown: string = '';
 	export let onblur: (textContent: string) => void = () => {};
@@ -18,6 +19,7 @@
 </div>
 
 <UploadImage />
+<SeeAllImages />
 
 <style lang="postcss">
 </style>

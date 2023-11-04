@@ -11,8 +11,7 @@ const moveToAlbum = (imageHash: string) => {
 	const requestOptions = {
 		method: 'POST',
 		headers,
-		body: formdata,
-		redirect: 'follow'
+		body: formdata
 	};
 
 	fetch('https://api.imgur.com/3/album/7edTTiDoC3yQpPV/add', requestOptions)
@@ -30,8 +29,7 @@ export const upload = (
 	const requestOptions = {
 		method: 'POST',
 		headers,
-		body: new FormData(e.currentTarget),
-		redirect: 'follow'
+		body: new FormData(e.currentTarget)
 	};
 
 	fetch('https://api.imgur.com/3/image', requestOptions)
@@ -46,13 +44,12 @@ export const upload = (
 export const getAlbumImages = () => {
 	const requestOptions = {
 		method: 'GET',
-		headers,
-		redirect: 'follow'
+		headers
 	};
 
-	fetch('https://api.imgur.com/3/album/AUKIaeY/images', requestOptions)
+	return fetch('https://api.imgur.com/3/album/AUKIaeY/images', requestOptions)
 		.then((response) => response.json())
-		.then((result) => console.log(result.data.map((x) => x.link)))
+		.then((result) => result.data.map((x) => x.link))
 		.catch((error) => console.log('error', error));
 };
 
