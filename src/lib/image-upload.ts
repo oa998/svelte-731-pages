@@ -50,7 +50,7 @@ export const getAlbumImages = () => {
 		redirect: 'follow'
 	};
 
-	fetch('https://api.imgur.com/3/album/{{albumHash}}/images', requestOptions)
+	fetch('https://api.imgur.com/3/album/7edTTiDoC3yQpPV/images', requestOptions)
 		.then((response) => response.text())
 		.then((result) => console.log(result))
 		.catch((error) => console.log('error', error));
