@@ -1,55 +1,13 @@
 <script lang="ts">
 	import { env } from '$env/dynamic/public';
-
-	const moveToAlbum = (imageHash: string) => {
-		const formdata = new FormData();
-		formdata.append('ids[]', imageHash);
-
-		var requestOptions = {
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
-			},
-			body: formdata,
-			redirect: 'follow'
-		};
-
-		fetch('https://api.imgur.com/3/album/p2M8FFhintt0aW5/add', requestOptions).catch((error) =>
-			console.log('error moving to album', error)
-		);
-	};
-
-	const upload = (
-		e: Event & {
-			readonly submitter: HTMLElement | null;
-		} & {
-			currentTarget: EventTarget & HTMLFormElement;
-		}
-	) => {
-		const requestOptions = {
-			method: 'POST',
-			headers: {
-				Authorization: `Client-ID ${env.PUBLIC_IMGUR_CLIENT_ID}`
-			},
-			body: new FormData(e.currentTarget),
-			redirect: 'follow'
-		};
-
-		fetch('https://api.imgur.com/3/image', requestOptions)
-			.then((response) => response.json())
-			.then((result) => {
-				console.log(JSON.stringify(result, null, 2));
-				const imgHash = result.data.id;
-				moveToAlbum(imgHash);
-			})
-			.catch((error) => console.log('error', error));
-	};
+	import { upload } from '$lib/image-upload';
 </script>
 
 <form on:submit|preventDefault={upload} class="bg-white">
 	<input type="file" name="image" id="image" accept="image" />
 	<input type="text" name="album" hidden value="p2M8FFhintt0aW5" />
-	<button type="submit">upload</button>
+	<button type="submit" class="border border-black p-1 rounded">upload</button>
+	<span class="pl-10 text-xs">var: {env.PUBLIC_IMGUR_CLIENT_ID}</span>
 </form>
 
 <!-- 
