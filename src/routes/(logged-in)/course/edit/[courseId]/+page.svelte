@@ -3,12 +3,20 @@
 	import Article from '$components/article.svelte';
 	import EditMarkdown from '$components/edit-markdown.svelte';
 	import EditorToolbar from '$components/editor-toolbar.svelte';
+	import ImageSheet from '$components/image-sheet.svelte';
 	import MarkdownSection from '$components/markdown-section.svelte';
+	import { upload } from '$lib/image-upload';
 	import { courseMarkdown } from '../../../../../stores/course.ts';
 	import { editPreview } from '../../../../../stores/editor.ts';
 
 	let courseId = $page.params.courseId;
 	console.log({ courseId });
+	let imageSelectorOpen = true;
+
+	let imageSelected = false;
+	$: fileChange = (e) => {
+		imageSelected = !!e.target.files?.[0]?.name;
+	};
 
 	let article: string = `># This title is bold!
 
@@ -66,38 +74,29 @@ Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Rhoncus 
 			{/if}
 		</Article>
 	</div>
+	<ImageSheet open={imageSelectorOpen} />
 </div>
+<EditorToolbar showImages={() => (imageSelectorOpen = !imageSelectorOpen)} />
 
-<EditorToolbar />
-
-<!-- padding to scroll past toolbar -->
-<div class="pt-[200px]" />
+<form on:submit|preventDefault={upload} class="bg-white w-full">
+	<input type="file" name="image" id="image" accept="image" hidden on:change={fileChange} />
+	{#if !imageSelected}
+		<label for="image">Upload Image</label>
+	{:else}
+		<button type="submit" class="border border-black rounded">something</button>
+	{/if}
+</form>
 
 <style lang="postcss">
-	.preview-row {
-		@apply relative;
+	form {
+		@apply flex flex-col text-center;
 	}
 
-	.preview-row:hover {
-		@apply bg-slate-100;
+	form label {
+		@apply py-1;
 	}
 
-	:global(.preview-button-container:hover svg) {
-		color: 'white';
-	}
-
-	:global(.max-width-200px) {
-		@apply max-w-sm;
-	}
-
-	.bg-img {
-		position: absolute;
-		top: 0;
-		left: 0;
-		background-image: url('https://media.discordapp.net/attachments/1030661591638745179/1167849427105480764/oa998_wavy_lines_svg_vector_colorful_full_screen_calm_abstract__b435f311-e2de-4fa7-8883-5e6d6293b862.png?ex=654f9f89&is=653d2a89&hm=1385301ee14ff16cca2e447fb54baed4d0544e0fbf288afabe348c8f04947857&=&width=1786&height=1190');
-		background-size: cover;
-		background-position-y: bottom;
-		z-index: -1;
-		@apply h-[20vh] w-full;
+	form button {
+		@apply w-full;
 	}
 </style>

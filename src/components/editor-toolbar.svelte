@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { courseMarkdown } from './../stores/course.ts';
 	import { editPreview } from './../stores/editor.ts';
+	export let showImages: () => void = () => {};
 </script>
 
 <input type="checkbox" checked={$editPreview} class="hidden" />
@@ -31,6 +32,7 @@
 					);
 				}}>Save</button
 			>
+			<button on:click={showImages}>Images</button>
 		</div>
 	{:else}
 		<div class="buttons">
