@@ -5,7 +5,6 @@
 
 <form on:submit|preventDefault={upload} class="bg-white">
 	<input type="file" name="image" id="image" accept="image" />
-	<input type="text" name="album" hidden value="p2M8FFhintt0aW5" />
 	<button type="submit" class="border border-black p-1 rounded">upload</button>
 	<span class="pl-10 text-xs">var: {env.PUBLIC_IMGUR_CLIENT_ID}</span>
 </form>
