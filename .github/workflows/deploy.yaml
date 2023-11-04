@@ -37,6 +37,7 @@ jobs:
         env:
           BASE_PATH: '/your-repo-name'
           PUBLIC_AUTH_URL: ${{ vars.PUBLIC_AUTH_URL }}
+          PUBLIC_IMGUR_CLIENT_ID: ${{ vars.PUBLIC_IMGUR_CLIENT_ID }}
         run: |
           pnpm run build
           touch build/.nojekyll
