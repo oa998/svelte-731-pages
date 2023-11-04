@@ -1,16 +1,16 @@
 <script lang="ts">
 	import CompanyName from '$components/company-name.svelte';
-	import { login } from '$lib/auth';
+	import { login, passwordReset } from '$lib/auth';
 	// @ts-ignore
 	import { toast } from '@zerodevx/svelte-toast';
 
-	let email = '';
-	let password = '';
 	let loading = false;
+	let formDirty = false;
+	let showLoginForm = true;
 
-	$: _login = () => {
+	$: _login = (email: string, password: string) => {
 		loading = true;
-		login(email, password)
+		return login(email, password)
 			.then(() => {
 				toast.push('Logged in');
 			})
@@ -23,46 +23,100 @@
 			})
 			.then(() => (loading = false));
 	};
+
+	$: _passwordReset = (email: string) => {
+		loading = true;
+		return passwordReset(email)
+			.then(() => {
+				toast.push(`Password reset sent for ${email}`);
+				document.querySelector('form')?.reset();
+			})
+			.catch((e) => {
+				toast.push('Password reset failed. Try again.', {
+					theme: {
+						'--toastBackground': 'RGBA(220, 20, 60, 0.7)'
+					}
+				});
+			})
+			.then(() => (loading = false));
+	};
+
+	$: onSubmit = (
+		e: Event & {
+			readonly submitter: HTMLElement | null;
+		} & {
+			currentTarget: EventTarget & HTMLFormElement;
+		}
+	) => {
+		const formData = new FormData(e.currentTarget);
+		if (showLoginForm) _login(formData.get('email') as string, formData.get('password') as string);
+		else {
+			_passwordReset(formData.get('email') as string);
+		}
+	};
 </script>
 
 <div class="relative">
 	<CompanyName class="text-6xl absolute top-0 left-0" />
 	<div class="bg-img" />
+	<input bind:checked={formDirty} hidden type="checkbox" />
 	<form
-		on:submit|preventDefault={() => {}}
-		class="flex flex-col max-w-xs whitespace-nowrap m-auto h-[100vh] focus-within:h-[50vh] sm:focus-within:h-[100vh] justify-center"
+		on:submit|preventDefault={onSubmit}
+		on:focusin={() => {
+			formDirty = true;
+		}}
+		class=""
 	>
-		<div class="form-container flex flex-col py-5 px-2 rounded-lg gap-2">
+		<div class="form-container">
 			<div class="form-label">
 				<label for="email">Email:</label>
-				<input type="text" class="border-b border-black px-2" id="email" bind:value={email} />
+				<input
+					type="text"
+					name="email"
+					id="email"
+					pattern=".+@.+\..+"
+					title="Valid email address"
+					required
+				/>
 			</div>
-			<div class="form-label">
-				<label for="password">Password:</label>
-				<input type="text" class="border-b border-black px-2" id="password" bind:value={password} />
-			</div>
+			{#if showLoginForm}
+				<div class="form-label">
+					<label for="password">Password:</label>
+					<input
+						type="password"
+						name="password"
+						id="password"
+						pattern=".+"
+						required
+						title="Password"
+					/>
+				</div>
 
-			<button
-				id="login"
-				class="border border-black py-1 px-5 rounded text-white disabled:bg-opacity-5 disabled:text-opacity-20"
-				style=""
-				disabled={loading}
-				on:click={_login}>LOG IN</button
-			>
-			<button
-				class="mt-5 underline py-1 rounded text-white text-xs italic w-min"
-				style="text-shadow: 1px 1px 4px black; align-self: end;"
-				on:click={() => {}}
-			>
-				Forgot my login
-			</button>
+				<button type="submit" id="login" disabled={loading}>LOG IN</button>
+			{:else}
+				<button type="submit" id="login" disabled={loading}>Send password reset</button>
+			{/if}
+			<label for="password-reset">{showLoginForm ? 'Forgot Password' : 'Return to login'}</label>
+			<input
+				type="checkbox"
+				name="password-reset"
+				bind:checked={showLoginForm}
+				id="password-reset"
+				hidden
+			/>
 		</div>
 	</form>
 </div>
 
 <style lang="postcss">
 	form {
-		transition: all 500ms;
+		transition: all 200ms;
+	}
+	/*sm*/
+	@media (max-width: 640px) {
+		input[type='checkbox']:checked ~ form {
+			height: 50vh;
+		}
 	}
 	button:first-of-type {
 		@apply mt-3;
@@ -82,18 +136,31 @@
 	}
 
 	.form-label > label {
-		text-shadow: 0 0 1px white;
-		@apply text-right pr-2;
+		text-shadow: 0 0 2px black;
+		@apply text-right pr-2 text-white;
+	}
+
+	form {
+		@apply flex flex-col max-w-xs whitespace-nowrap m-auto h-[100vh] justify-center;
 	}
 
 	.form-container {
-		/* background: linear-gradient(180deg, rgb(17 130 153) 0%, rgba(221, 23, 116, 0) 100%); */
-		background: linear-gradient(
-			180deg,
-			var(--bondi-blue) 0%,
-			/* rgba(221, 23, 116, 0.5) 70%, */ rgba(221, 23, 116, 0) 90%
-		);
-		@apply w-full;
+		background: linear-gradient(180deg, var(--bondi-blue) 0%, rgba(221, 23, 116, 0) 90%);
+		@apply w-full flex flex-col py-5 px-2 rounded-lg gap-2;
+	}
+
+	form input {
+		@apply border-b border-black px-2;
+	}
+
+	button#login {
+		@apply border border-black py-1 px-5 rounded text-white disabled:bg-opacity-5 disabled:text-opacity-20;
+	}
+
+	label[for='password-reset'] {
+		text-shadow: 1px 1px 4px black;
+		align-self: end;
+		@apply mt-5 underline py-1 rounded text-white text-xs italic w-min;
 	}
 
 	.bg-img {
@@ -106,14 +173,4 @@
 		z-index: -1;
 		@apply h-[100vh] w-full;
 	}
-
-	/* :global(svg#wave) {
-		display: none;
-	}
-
-	:global(header#company-name) {
-		font-size: 4em;
-		padding: 3rem 0 0 3rem;
-		background: transparent;
-	} */
 </style>

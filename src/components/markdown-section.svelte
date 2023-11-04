@@ -1,14 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { marked } from 'marked';
-	import { writable } from 'svelte/store';
 	export let markdown: string = '';
-	export let onblur: (textContent: string) => void = () => {};
-	let focused = false;
-	export let editable = false;
-	const value = writable(markdown);
-
-	$: $value = markdown.replaceAll(/\n{2,}/g, '\n\n').trim();
 
 	if (browser) {
 		marked.use({
@@ -64,7 +57,7 @@
 					renderer(token) {
 						return `\n<summary>${this.parser.parseInline(
 							token.dt
-						)}</summary><span>${this.parser.parseInline(token.dd)}</span>`;
+						)}</summary><div>${this.parser.parseInline(token.dd)}</div>`;
 					},
 					childTokens: [] // Any child tokens to be visited by walkTokens
 				},
@@ -108,45 +101,26 @@
 	/>
 </svelte:head>
 
-{#if focused}
-	<!-- svelte-ignore a11y-autofocus -->
-	<div
-		autofocus
-		contenteditable
-		bind:innerText={$value}
-		on:focus={() => (focused = true)}
-		on:blur={(e) => {
-			onblur($value);
-			focused = false;
-		}}
-		class={`whitespace-pre-wrap focus:outline-dotted`}
-	>
-		{$value}
-	</div>
-{:else}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div class="">
-		<div class={`outside-md ${$$props.class ?? ''}`} on:click={() => (focused = editable)}>
-			{@html marked.parse(markdown)}
-		</div>
-	</div>
-{/if}
+<div class={`outside-md ${$$props.class ?? ''}`}>
+	{@html marked.parse(markdown)}
+</div>
 
 <style lang="postcss">
 	:global(.outside-md) {
 		overflow: scroll;
 		@apply text-white;
 	}
-	:global(.outside-md p, .outside-md ul, .outside-md ol) {
+	:global(.outside-md *) {
+		text-wrap: wrap;
+	}
+	:global(.outside-md p, .outside-md ul, .outside-md ol, .outside-md details) {
 		font-family: 'Taviraj', serif;
 		@apply text-xl font-light;
 	}
 
 	@media (max-width: 640px) {
-		:global(.outside-md p, .outside-md ul, .outside-md ol) {
-			font-family: 'Taviraj', serif;
-			@apply text-lg font-light;
+		:global(.outside-md p, .outside-md ul, .outside-md ol, .outside-md details) {
+			@apply text-lg;
 		}
 	}
 
@@ -174,8 +148,8 @@
 		@apply whitespace-nowrap text-center place-self-center;
 	}
 	:global(.outside-md h1, .outside-md h2, .outside-md h3, .outside-md h4, .outside-md h5) {
-		font-family: 'Exo 2', sans-serif;
-		@apply py-5;
+		font-family: 'Lobster', sans-serif;
+		@apply py-5 font-light;
 	}
 	:global(.outside-md h1) {
 		@apply text-5xl;
@@ -207,5 +181,17 @@
 
 	:global(.outside-md blockquote ul, .outside-md blockquote ol) {
 		@apply text-left;
+	}
+	:global(.outside-md details) {
+		@apply rounded border border-white;
+	}
+
+	:global(.outside-md summary) {
+		background-color: var(--bondi-blue);
+		@apply p-5;
+	}
+
+	:global(.outside-md details[open] div) {
+		@apply py-5 bg-opacity-80;
 	}
 </style>

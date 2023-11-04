@@ -1,26 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import AddElement from '$components/add-element.svelte';
 	import Article from '$components/article.svelte';
+	import EditMarkdown from '$components/edit-markdown.svelte';
 	import EditorToolbar from '$components/editor-toolbar.svelte';
 	import MarkdownSection from '$components/markdown-section.svelte';
-	import Menu from '$components/menu.svelte';
 	import { courseMarkdown } from '../../../../../stores/course.ts';
 	import { editPreview } from '../../../../../stores/editor.ts';
 
 	let courseId = $page.params.courseId;
 	console.log({ courseId });
 
-	type Element = {
-		id: string;
-		content?: string;
-		classes?: string;
-	};
-
-	let elements: Element[] = [
-		{
-			id: '489380',
-			content: `># This title is bold!
+	let article: string = `># This title is bold!
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus turpis in eu mi. Sit amet consectetur adipiscing elit ut aliquam. Et molestie ac feugiat sed lectus. At __augue eget__ arcu dictum varius duis. Faucibus et molestie ac feugiat. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Scelerisque varius morbi enim nunc. Ac auctor augue mauris augue neque gravida in fermentum et. Aliquam purus sit amet luctus venenatis lectus magna fringilla. Sapien eget mi proin sed libero enim. Sit amet dictum sit amet justo donec enim. Ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet.
 
@@ -49,73 +39,32 @@ Lobortis feugiat vivamus at augue. Posuere urna nec tincidunt praesent. Tincidun
 
 Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Rhoncus mattis rhoncus urna neque viverra. Quam viverra orci sagittis eu volutpat. Magna eget est lorem ipsum dolor sit. Amet purus gravida quis blandit turpis cursus in hac. Netus et malesuada fames ac turpis egestas maecenas pharetra convallis. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin. Sed risus pretium quam vulputate. Quis enim lobortis scelerisque fermentum dui. Tempor orci eu lobortis elementum. Sem integer vitae justo eget. Eros in cursus turpis massa tincidunt dui ut. Pulvinar elementum integer enim neque volutpat ac. Dignissim enim sit amet venenatis urna cursus eget. Ut sem nulla pharetra diam sit amet. Habitant morbi tristique senectus et netus et malesuada. Sed viverra ipsum nunc aliquet bibendum enim facilisis.
 
-![img](https://i.imgur.com/IL3lkkB.jpg "an image")`
-		}
-	];
+![img](https://i.imgur.com/IL3lkkB.jpg "an image")`;
 
 	$: {
 		console.log('course markdown updated');
-		$courseMarkdown = JSON.stringify(elements);
+		$courseMarkdown = JSON.stringify(article);
 	}
 
-	function createElement(i: number) {
-		elements = elements
-			.slice(0, i)
-			.concat({
-				id: Math.floor(Math.random() * 9e10) + '',
-				content: 'click to edit'
-			})
-			.concat(elements.slice(i));
-	}
-
-	function deleteElement(i: number) {
-		elements.splice(i, 1);
-		elements = elements;
-	}
-
-	function updateContent(i: number, content: string) {
-		elements[i].content = content;
-		elements = elements.slice(0);
+	function updateArticle(newArticle: string) {
+		article = newArticle;
 	}
 </script>
 
 <div class="relative">
 	<div id="pg" class="p-5">
-		{#if !$editPreview}
-			<AddElement on:click={() => createElement(0)} />
-			<Article>
-				{#each elements as { id, classes, content }, i}
-					<div class="preview-row">
-						<MarkdownSection
-							editable
-							class={classes}
-							onblur={(textContent) => {
-								updateContent(i, textContent);
-							}}
-							markdown={content}
-						/>
-						<div
-							class="preview-button-container border border-gray-500 rounded-lg bg-slate-200 hover:bg-slate-600 hover:text-white absolute top-1 right-1 px-1"
-						>
-							<Menu
-								actions={[
-									{ text: `Add section below`, action: () => createElement(i + 1) },
-									{ text: `Delete`, action: () => deleteElement(i) }
-								]}
-								icon="solar:menu-dots-bold"
-							/>
-						</div>
-					</div>
-				{/each}
-			</Article>
-			<AddElement on:click={() => createElement(elements.length)} />
-		{:else}
-			<Article>
-				{#each elements as { id, classes, content } (id)}
-					<MarkdownSection class={classes} markdown={content} />
-				{/each}
-			</Article>
-		{/if}
+		<Article>
+			{#if !$editPreview}
+				<EditMarkdown
+					markdown={article}
+					onblur={(modifiedArticle) => {
+						updateArticle(modifiedArticle);
+					}}
+				/>
+			{:else}
+				<MarkdownSection markdown={article} />
+			{/if}
+		</Article>
 	</div>
 </div>
 
