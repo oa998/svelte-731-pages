@@ -30,6 +30,7 @@
 				<img src={link} alt={`img_${i}`} />
 
 				<button
+					class="delete"
 					on:click={() => {
 						removeFromAlbum(id)
 							.then((r) => {
@@ -40,10 +41,11 @@
 							.catch((e) => console.error(e));
 					}}
 				>
-					<Icon icon="ph:x-fill" style="font-size:small" color="red" />
+					<Icon icon="ph:x-fill" style="font-size:x-large" color="red" />
 				</button>
 
 				<button
+					class="copy"
 					on:click={() => {
 						navigator.clipboard.writeText(`![img](${link} "image")`);
 					}}
@@ -81,8 +83,12 @@
 		background-color: var(--bondi-blue);
 	}
 
-	section button {
+	section button.copy {
 		@apply absolute bottom-1 right-1 bg-black rounded p-2;
+	}
+
+	section button.delete {
+		@apply absolute top-1 right-1 bg-white rounded;
 	}
 
 	button:disabled {
