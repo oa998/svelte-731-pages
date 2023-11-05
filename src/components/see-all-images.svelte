@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { deleteImage, getAlbumImages } from '$lib/imgur-apis';
-	import { toastErrorCatch } from '$lib/toast';
+	import { toastMsg } from '$lib/toast';
 	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
+	import { toastErrorCatch } from './../lib/toast.ts';
 	import UploadImage from './upload-image.svelte';
 
 	let imgJsons: { link: string; id: string }[] = [];
@@ -33,8 +34,11 @@
 					class="delete"
 					on:click={() => {
 						deleteImage(id)
-							.then()
-							.catch((e) => console.error(e));
+							.then(() => {
+								toastMsg('Image deleted');
+								load();
+							})
+							.catch(toastErrorCatch);
 					}}
 				>
 					<Icon icon="ph:x-fill" style="font-size:x-large" color="red" />

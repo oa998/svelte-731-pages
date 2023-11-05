@@ -82,3 +82,37 @@ export const getAlbumImages = () => {
 		.then((response) => response.json())
 		.then((result) => (result.data?.error ? [] : result?.data));
 };
+
+/*
+  album image objects:
+  {
+    account_id:null
+    account_url:null
+    ad_type:0
+    ad_url:""
+    animated:false
+    bandwidth:262423
+    datetime:1699203015
+    deletehash:"xaxaxaxaxaxa"
+    description:null
+    edited:"0"
+    favorite:false
+    has_sound:false
+    height:546
+    id:"aaaaaa"
+    in_gallery:false
+    in_most_viral:false
+    is_ad:false
+    link:"https://i.imgur.com/aaaaaa.png"
+    name:null
+    nsfw:null
+    section:null
+    size:262423
+    tags:[]
+    title:null
+    type:"image/png"
+    views:1
+    vote:null
+    width:728
+  }
+*/
