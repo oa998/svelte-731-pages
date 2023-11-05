@@ -1,25 +1,18 @@
 <script lang="ts">
-	import { deleteImage, getAlbumImages } from '$lib/image-upload';
+	import { deleteImage, getAlbumImages } from '$lib/imgur-apis';
+	import { toastErrorCatch } from '$lib/toast';
 	import Icon from '@iconify/svelte';
-	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import UploadImage from './upload-image.svelte';
 
 	let imgJsons: { link: string; id: string }[] = [];
 	let loading = false;
-	let d = 'https://i.imgur.com/Fngg8iI.png';
 
 	const load = () => {
 		loading = true;
 		getAlbumImages()
 			.then((imgs) => (imgJsons = imgs))
-			.catch((e) => {
-				toast.push(e.message, {
-					theme: {
-						'--toastBackground': 'RGBA(220, 20, 60, 0.7)'
-					}
-				});
-			})
+			.catch(toastErrorCatch)
 			.then(() => (loading = false));
 	};
 
@@ -40,11 +33,7 @@
 					class="delete"
 					on:click={() => {
 						deleteImage(id)
-							.then((r) => {
-								if (r.status === 200) {
-									imgJsons = imgJsons.filter((j) => j.id !== id);
-								}
-							})
+							.then()
 							.catch((e) => console.error(e));
 					}}
 				>

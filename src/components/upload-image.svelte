@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { upload } from '$lib/image-upload';
-	import { toast } from '@zerodevx/svelte-toast';
+	import { upload } from '$lib/imgur-apis';
+	import { toastErrorCatch, toastMsg } from '$lib/toast';
 	import { createEventDispatcher } from 'svelte';
 
 	let imageSelected = '';
@@ -12,16 +12,10 @@
 		upload(e)
 			.then((r) => {
 				dispatch('image-uploaded', r);
-				toast.push(`${imageSelected} uploaded`);
+				toastMsg(`${imageSelected} uploaded`);
 				imageSelected = '';
 			})
-			.catch((e) => {
-				toast.push(e.message, {
-					theme: {
-						'--toastBackground': 'RGBA(220, 20, 60, 0.7)'
-					}
-				});
-			});
+			.catch(toastErrorCatch);
 	};
 </script>
 

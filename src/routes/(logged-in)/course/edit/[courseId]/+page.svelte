@@ -5,7 +5,7 @@
 	import EditorToolbar from '$components/editor-toolbar.svelte';
 	import ImageSheet from '$components/image-sheet.svelte';
 	import MarkdownSection from '$components/markdown-section.svelte';
-	import { createAlbum } from '$lib/image-upload.ts';
+	import { createAlbum } from '$lib/imgur-apis.ts';
 	import { courseMarkdown } from '../../../../../stores/course.ts';
 	import { editPreview } from '../../../../../stores/editor.ts';
 

@@ -1,8 +1,7 @@
 <script lang="ts">
 	import CompanyName from '$components/company-name.svelte';
 	import { login, passwordReset } from '$lib/auth';
-	// @ts-ignore
-	import { toast } from '@zerodevx/svelte-toast';
+	import { toastErrorMsg, toastMsg } from '$lib/toast';
 
 	let loading = false;
 	let formDirty = false;
@@ -11,16 +10,8 @@
 	$: _login = (email: string, password: string) => {
 		loading = true;
 		return login(email, password)
-			.then(() => {
-				toast.push('Logged in');
-			})
-			.catch((e) => {
-				toast.push('Login failed. Try again.', {
-					theme: {
-						'--toastBackground': 'RGBA(220, 20, 60, 0.7)'
-					}
-				});
-			})
+			.then(() => toastMsg('Logged in'))
+			.catch((e) => toastErrorMsg('Login failed. Try again.'))
 			.then(() => (loading = false));
 	};
 
@@ -28,16 +19,10 @@
 		loading = true;
 		return passwordReset(email)
 			.then(() => {
-				toast.push(`Password reset sent for ${email}`);
+				toastMsg(`Password reset sent for ${email}`);
 				document.querySelector('form')?.reset();
 			})
-			.catch((e) => {
-				toast.push('Password reset failed. Try again.', {
-					theme: {
-						'--toastBackground': 'RGBA(220, 20, 60, 0.7)'
-					}
-				});
-			})
+			.catch((e) => toastErrorMsg('sword reset failed. Try again.'))
 			.then(() => (loading = false));
 	};
 
