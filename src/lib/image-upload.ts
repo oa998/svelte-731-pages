@@ -1,7 +1,23 @@
 import { env } from '$env/dynamic/public';
 
 const headers = {
-	Authorization: `Client-ID ${env.PUBLIC_IMGUR_CLIENT_ID}`
+	Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
+};
+
+export const createAlbum = () => {
+	const formdata = new FormData();
+	formdata.append('title', '731V' + Math.floor(Math.random() * 1e5));
+
+	const requestOptions = {
+		method: 'POST',
+		headers,
+		body: formdata
+	};
+
+	fetch('https://api.imgur.com/3/album', requestOptions)
+		.then((response) => response.text())
+		.then((result) => console.log('album create', result))
+		.catch((error) => console.log('error', error));
 };
 
 const moveToAlbum = (imageHash: string) => {

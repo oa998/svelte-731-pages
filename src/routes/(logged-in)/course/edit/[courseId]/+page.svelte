@@ -5,6 +5,7 @@
 	import EditorToolbar from '$components/editor-toolbar.svelte';
 	import ImageSheet from '$components/image-sheet.svelte';
 	import MarkdownSection from '$components/markdown-section.svelte';
+	import { createAlbum } from '$lib/image-upload.ts';
 	import { courseMarkdown } from '../../../../../stores/course.ts';
 	import { editPreview } from '../../../../../stores/editor.ts';
 
@@ -70,6 +71,7 @@ Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Rhoncus 
 	</div>
 	<ImageSheet open={imageSelectorOpen && !$editPreview} />
 </div>
+<button class="bg-black text-white" on:click={createAlbum}>create album</button>
 <EditorToolbar showImages={() => (imageSelectorOpen = !imageSelectorOpen)} />
 
 <div class="py-[200px]" />
