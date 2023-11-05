@@ -13,13 +13,13 @@
 		loading = true;
 		getAlbumImages()
 			.then((imgs) => (imgJsons = imgs))
-			.catch(e => {
-        toast.push(e.message, {
+			.catch((e) => {
+				toast.push(e.message, {
 					theme: {
 						'--toastBackground': 'RGBA(220, 20, 60, 0.7)'
 					}
-				};
-      })
+				});
+			})
 			.then(() => (loading = false));
 	};
 
