@@ -35,8 +35,15 @@
 <div class="text-blue-50 text-3xl">hello</div>
 
 <form on:submit|preventDefault={_createCourse}>
-	<input placeholder="courseId" id="courseId" name="courseId" type="text" required pattern="\S+" />
-	<input placeholder="title" id="title" name="title" type="text" required pattern="\S+" />
+	<input
+		placeholder="courseId"
+		id="courseId"
+		name="courseId"
+		type="text"
+		required
+		pattern="^[^\s]+.*$"
+	/>
+	<input placeholder="title" id="title" name="title" type="text" required pattern="^[^\s]+.*$" />
 	<textarea placeholder="markdown" id="markdown" name="markdown" cols={20} rows={30} required />
 	<button type="submit">Save</button>
 </form>
