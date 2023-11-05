@@ -63,6 +63,7 @@ export const getAlbumImages = () => {
 	return fetch('https://api.imgur.com/3/album/AUKIaeY/images', requestOptions)
 		.then((response) => response.json())
 		.then((result) => {
+			console.log(result?.data);
 			return result.data?.error ? [] : result?.data;
 		});
 };
