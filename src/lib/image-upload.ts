@@ -4,6 +4,11 @@ const headers = {
 	Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
 };
 
+const throwIfNot2xx = (message) => (response: Response) => {
+	if (/^2..$/.test(`${response.status}`)) return response;
+	throw new Error(message);
+};
+
 const albumHash = 'bEsql5b';
 const albumDelete = 'zOhklJIXmESkgad';
 
@@ -17,10 +22,9 @@ export const createAlbum = () => {
 		body: formdata
 	};
 
-	fetch('https://api.imgur.com/3/album', requestOptions)
-		.then((response) => response.text())
-		.then((result) => console.log('album create', result))
-		.catch((error) => console.log('error', error));
+	return fetch('https://api.imgur.com/3/album', requestOptions).then(
+		throwIfNot2xx('Failed to create album')
+	);
 };
 
 const moveToAlbum = (imageHash: string) => {
@@ -33,9 +37,9 @@ const moveToAlbum = (imageHash: string) => {
 		body: formdata
 	};
 
-	fetch(`https://api.imgur.com/3/album/${albumHash}/add`, requestOptions)
-		.catch((error) => console.log('error moving to album', error))
-		.then(() => getAlbumImages());
+	return fetch(`https://api.imgur.com/3/album/${albumHash}/add`, requestOptions).then(
+		throwIfNot2xx('Failed to add image to album')
+	);
 };
 
 export const deleteImage = (imageHash: string) => {
@@ -43,7 +47,9 @@ export const deleteImage = (imageHash: string) => {
 		method: 'DELETE',
 		headers
 	};
-	return fetch(`https://api.imgur.com/3/image/${imageHash}`, requestOptions);
+	return fetch(`https://api.imgur.com/3/image/${imageHash}`, requestOptions).then(
+		throwIfNot2xx('Failed to delete image')
+	);
 };
 
 export const upload = (
@@ -60,12 +66,9 @@ export const upload = (
 	};
 
 	return fetch('https://api.imgur.com/3/image', requestOptions)
+		.then(throwIfNot2xx('Failed to upload image'))
 		.then((response) => response.json())
-		.then((result) => {
-			console.log(JSON.stringify(result, null, 2));
-			moveToAlbum(result.data.deletehash);
-		})
-		.catch((error) => console.log('error', error));
+		.then((result) => moveToAlbum(result.data.deletehash));
 };
 
 export const getAlbumImages = () => {
@@ -75,16 +78,7 @@ export const getAlbumImages = () => {
 	};
 
 	return fetch(`https://api.imgur.com/3/album/${albumHash}/images`, requestOptions)
+		.then(throwIfNot2xx('Failed to read album'))
 		.then((response) => response.json())
-		.then((result) => {
-			console.log(result?.data);
-			return result.data?.error ? [] : result?.data;
-		});
+		.then((result) => (result.data?.error ? [] : result?.data));
 };
-
-/*
-  
-// title:  731-vibes-album
-{"data":{"id":"AUKIaeY","deletehash":"${albumHash}"},"success":true,"status":200}
-
- */

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { deleteImage, getAlbumImages } from '$lib/image-upload';
 	import Icon from '@iconify/svelte';
+	import { toast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import UploadImage from './upload-image.svelte';
 
@@ -12,7 +13,13 @@
 		loading = true;
 		getAlbumImages()
 			.then((imgs) => (imgJsons = imgs))
-			.catch((e) => console.log(e))
+			.catch(e => {
+        toast.push(e.message, {
+					theme: {
+						'--toastBackground': 'RGBA(220, 20, 60, 0.7)'
+					}
+				};
+      })
 			.then(() => (loading = false));
 	};
 
@@ -22,7 +29,7 @@
 <div>
 	<div class="buttons">
 		<button disabled={loading} on:click={load}>{loading ? 'Loading' : 'Refresh images'}</button>
-		<UploadImage />
+		<UploadImage on:image-uploaded={load} />
 	</div>
 	<div class="images">
 		{#each imgJsons as { link, id }, i (id)}
