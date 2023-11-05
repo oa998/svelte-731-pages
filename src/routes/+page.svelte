@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { getAllChapters, getChapter, getCourse, postCourse, type Course } from '$lib/articles';
+	import { getAllChapters, getCourse, postCourse, type Course } from '$lib/articles';
 	import { toastErrorCatch, toastMsg } from '$lib/toast';
 	import { onMount } from 'svelte';
 
 	onMount(() => {
 		getAllChapters('lashes').then((allChapters) => console.log({ allChapters }));
 		getCourse('lashes').then((course) => console.log({ course }));
-		getChapter('lashes', '2YzscsLXatdgDj1N0Eaj').then((chapter) => console.log({ chapter }));
 	});
 
 	$: _createCourse = (
@@ -26,7 +25,7 @@
 		postCourse(course)
 			.then(() => {
 				toastMsg(`Course ${course.courseId} created`);
-				e.currentTarget.reset();
+				(e.target as HTMLFormElement).reset();
 			})
 			.catch(toastErrorCatch);
 	};

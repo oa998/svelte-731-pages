@@ -62,7 +62,7 @@ export function getChapter(courseId: string, chapterId: string) {
 
 export function postCourse(body: Course) {
 	return fetch(
-		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}`,
+		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${body.courseId}`,
 		{
 			method: 'POST',
 			headers: {
@@ -78,7 +78,7 @@ export function postCourse(body: Course) {
 
 export function postChapter(courseId: string, body: Chapter) {
 	return fetch(
-		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}/chapter/${chapterId}`,
+		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}/chapter/${body.chapterId}`,
 		{
 			method: 'POST',
 			headers: {
