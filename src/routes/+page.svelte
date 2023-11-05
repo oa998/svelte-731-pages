@@ -40,3 +40,9 @@
 	<textarea placeholder="markdown" id="markdown" name="markdown" cols={20} rows={50} required />
 	<button type="submit">Save</button>
 </form>
+
+<style lang="postcss">
+	form * {
+		@apply bg-black text-white;
+	}
+</style>
