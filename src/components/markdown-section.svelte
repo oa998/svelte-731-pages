@@ -183,7 +183,7 @@
 		@apply text-left;
 	}
 	:global(.outside-md details) {
-		@apply rounded border border-white;
+		@apply rounded border border-white cursor-pointer;
 	}
 
 	:global(.outside-md summary) {
