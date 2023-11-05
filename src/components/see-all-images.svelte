@@ -20,9 +20,8 @@
 	onMount(load);
 </script>
 
-<div>
+<div class="wrapper">
 	<div class="buttons">
-		<button disabled={loading} on:click={load}>{loading ? 'Loading' : 'Refresh images'}</button>
 		<UploadImage on:image-uploaded={load} />
 	</div>
 	<div class="images">
@@ -58,7 +57,7 @@
 </div>
 
 <style lang="postcss">
-	div {
+	div.wrapper {
 		@apply relative flex flex-col w-[130px];
 	}
 
@@ -76,11 +75,7 @@
 	}
 
 	div.buttons {
-		@apply text-xs sticky top-[-1px] right-0 z-10 grid gap-1 bg-black py-1;
-	}
-
-	div.buttons button {
-		background-color: var(--bondi-blue);
+		@apply text-xs sticky top-[-1px] right-0 z-10 grid gap-1 bg-black pb-1;
 	}
 
 	section button.copy {

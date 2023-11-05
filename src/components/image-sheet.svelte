@@ -15,7 +15,8 @@
 		max-height: 80vh;
 		overflow-y: scroll;
 		top: 10vh;
-		@apply grid justify-center fixed right-0 h-full w-full bg-black;
+		box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+		@apply grid justify-center fixed right-0 h-full w-full bg-black rounded;
 	}
 	input:not(:checked) ~ div {
 		@apply hidden;
