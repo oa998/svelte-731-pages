@@ -32,7 +32,7 @@ export const upload = (
 		body: new FormData(e.currentTarget)
 	};
 
-	fetch('https://api.imgur.com/3/image', requestOptions)
+	return fetch('https://api.imgur.com/3/image', requestOptions)
 		.then((response) => response.json())
 		.then((result) => {
 			console.log(JSON.stringify(result, null, 2));
