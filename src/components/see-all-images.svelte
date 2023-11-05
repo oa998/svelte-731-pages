@@ -11,8 +11,7 @@
 	const load = () => {
 		loading = true;
 		getAlbumImages()
-			.then(console.log)
-			.then((imgs) => (imgJsons = imgs))
+			.then((imgs) => (imgJsons = imgs.sort((a, b) => b.datetime - a.datetime)))
 			.catch(toastErrorCatch)
 			.then(() => (loading = false));
 	};
