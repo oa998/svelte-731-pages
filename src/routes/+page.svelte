@@ -34,15 +34,18 @@
 
 <div class="text-blue-50 text-3xl">hello</div>
 
-<form on:submit|preventDefault={_createCourse} class="text-white bg-black flex flex-col">
+<form on:submit|preventDefault={_createCourse}>
 	<input placeholder="courseId" id="courseId" name="courseId" type="text" required pattern="\S+" />
 	<input placeholder="title" id="title" name="title" type="text" required pattern="\S+" />
-	<textarea placeholder="markdown" id="markdown" name="markdown" cols={20} rows={50} required />
+	<textarea placeholder="markdown" id="markdown" name="markdown" cols={20} rows={30} required />
 	<button type="submit">Save</button>
 </form>
 
 <style lang="postcss">
+	form {
+		@apply max-w-sm m-auto gap-1 text-white bg-black flex flex-col;
+	}
 	form * {
-		@apply bg-black text-white;
+		@apply border border-white rounded bg-black text-white pl-1;
 	}
 </style>
