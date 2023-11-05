@@ -11,6 +11,7 @@
 	const load = () => {
 		loading = true;
 		getAlbumImages()
+			.then(console.log)
 			.then((imgs) => (imgJsons = imgs))
 			.catch(toastErrorCatch)
 			.then(() => (loading = false));
