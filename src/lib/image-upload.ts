@@ -4,6 +4,9 @@ const headers = {
 	Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
 };
 
+const albumHash = 'bEsql5b';
+const albumDelete = 'zOhklJIXmESkgad';
+
 export const createAlbum = () => {
 	const formdata = new FormData();
 	formdata.append('title', '731V' + Math.floor(Math.random() * 1e5));
@@ -30,7 +33,7 @@ const moveToAlbum = (imageHash: string) => {
 		body: formdata
 	};
 
-	fetch('https://api.imgur.com/3/album/7edTTiDoC3yQpPV/add', requestOptions)
+	fetch(`https://api.imgur.com/3/album/${albumHash}/add`, requestOptions)
 		.catch((error) => console.log('error moving to album', error))
 		.then(() => getAlbumImages());
 };
@@ -45,7 +48,7 @@ export const removeFromAlbum = (imageHash: string) => {
 		body: formdata
 	};
 
-	return fetch('https://api.imgur.com/3/album/7edTTiDoC3yQpPV/remove_images', requestOptions);
+	return fetch(`https://api.imgur.com/3/album/${albumHash}/remove_images`, requestOptions);
 };
 
 export const upload = (
@@ -76,7 +79,7 @@ export const getAlbumImages = () => {
 		headers
 	};
 
-	return fetch('https://api.imgur.com/3/album/AUKIaeY/images', requestOptions)
+	return fetch(`https://api.imgur.com/3/album/${albumHash}/images`, requestOptions)
 		.then((response) => response.json())
 		.then((result) => {
 			console.log(result?.data);
@@ -87,6 +90,6 @@ export const getAlbumImages = () => {
 /*
   
 // title:  731-vibes-album
-{"data":{"id":"AUKIaeY","deletehash":"7edTTiDoC3yQpPV"},"success":true,"status":200}
+{"data":{"id":"AUKIaeY","deletehash":"${albumHash}"},"success":true,"status":200}
 
  */
