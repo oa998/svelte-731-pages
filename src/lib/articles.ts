@@ -1,11 +1,13 @@
 import { throwIfNot2xx } from './fetch-utils';
 
-type Course = {
+export type Course = {
+	courseId: string;
 	title: string;
 	markdown: string;
 };
 
-type Chapter = {
+export type Chapter = {
+	chapterId: string;
 	title: string;
 	markdown: string;
 	sequence: number;
@@ -58,7 +60,7 @@ export function getChapter(courseId: string, chapterId: string) {
 		});
 }
 
-export function postCourse(courseId: string, body: Course) {
+export function postCourse(body: Course) {
 	return fetch(
 		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}`,
 		{
@@ -66,15 +68,15 @@ export function postCourse(courseId: string, body: Course) {
 			headers: {
 				['content-type']: 'application/json'
 			},
-			body: JSON.stringify({ ...body, courseId }),
+			body: JSON.stringify(body),
 			credentials: 'include'
 		}
 	)
-		.then(throwIfNot2xx(`Unable to set course ${courseId}`))
+		.then(throwIfNot2xx(`Unable to set course ${body.courseId}`))
 		.then((r) => r.json());
 }
 
-export function postChapter(courseId: string, chapterId: string, body: Chapter) {
+export function postChapter(courseId: string, body: Chapter) {
 	return fetch(
 		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}/chapter/${chapterId}`,
 		{
@@ -82,10 +84,10 @@ export function postChapter(courseId: string, chapterId: string, body: Chapter) 
 			headers: {
 				['content-type']: 'application/json'
 			},
-			body: JSON.stringify({ ...body, chapterId }),
+			body: JSON.stringify(body),
 			credentials: 'include'
 		}
 	)
-		.then(throwIfNot2xx(`Unable to set chapter ${chapterId} of course ${courseId}`))
+		.then(throwIfNot2xx(`Unable to set chapter ${body.chapterId} of course ${courseId}`))
 		.then((r) => r.json());
 }
