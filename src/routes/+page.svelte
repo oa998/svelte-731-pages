@@ -34,9 +34,9 @@
 
 <div class="text-blue-50 text-3xl">hello</div>
 
-<form on:submit|preventDefault={_createCourse} class="text-white bg-black">
+<form on:submit|preventDefault={_createCourse} class="text-white bg-black flex flex-col">
 	<input placeholder="courseId" id="courseId" name="courseId" type="text" required pattern="\S+" />
 	<input placeholder="title" id="title" name="title" type="text" required pattern="\S+" />
-	<textarea placeholder="markdown" id="markdown" name="markdown" cols={40} rows={50} required />
+	<textarea placeholder="markdown" id="markdown" name="markdown" cols={20} rows={50} required />
 	<button type="submit">Save</button>
 </form>
