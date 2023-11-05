@@ -1,3 +1,5 @@
+import { throwIfNot2xx } from './fetch-utils';
+
 export function getAllChapters(courseId: string) {
 	return fetch(
 		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}/chapter`,
@@ -6,10 +8,6 @@ export function getAllChapters(courseId: string) {
 			credentials: 'include'
 		}
 	)
-		.then((r) => r.json())
-		.then((j) => {
-			if (!/^2\d\d$/.test('' + j.status)) {
-				throw new Error(j.message);
-			}
-		});
+		.then(throwIfNot2xx(`Unable to read all chapters for ${courseId}`))
+		.then((r) => r.json());
 }

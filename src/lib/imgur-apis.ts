@@ -1,16 +1,12 @@
 import { env } from '$env/dynamic/public';
+import { throwIfNot2xx } from './fetch-utils';
 
 const headers = {
 	Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
 };
 
-const throwIfNot2xx = (message) => (response: Response) => {
-	if (/^2..$/.test(`${response.status}`)) return response;
-	throw new Error(message);
-};
-
 const albumHash = 'bEsql5b';
-const albumDelete = 'zOhklJIXmESkgad';
+// const albumDelete = 'zOhklJIXmESkgad';
 
 export const createAlbum = () => {
 	const formdata = new FormData();
