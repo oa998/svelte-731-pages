@@ -68,7 +68,7 @@ Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Rhoncus 
 			{/if}
 		</Article>
 	</div>
-	<ImageSheet open={imageSelectorOpen} />
+	<ImageSheet open={imageSelectorOpen && !$editPreview} />
 </div>
 <EditorToolbar showImages={() => (imageSelectorOpen = !imageSelectorOpen)} />
 
