@@ -11,7 +11,8 @@
 	$: _upload = (e) => {
 		upload(e)
 			.then((r) => {
-				dispatch('image-uploaded', r).toast.push(`${imageSelected} uploaded`);
+				dispatch('image-uploaded', r);
+				toast.push(`${imageSelected} uploaded`);
 				imageSelected = '';
 			})
 			.catch((e) => {
