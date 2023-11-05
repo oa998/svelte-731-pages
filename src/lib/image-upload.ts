@@ -19,6 +19,19 @@ const moveToAlbum = (imageHash: string) => {
 		.then(() => getAlbumImages());
 };
 
+export const removeFromAlbum = (imageHash: string) => {
+	const formdata = new FormData();
+	formdata.append('ids[]', imageHash);
+
+	const requestOptions = {
+		method: 'POST',
+		headers,
+		body: formdata
+	};
+
+	return fetch('https://api.imgur.com/3/album/7edTTiDoC3yQpPV/remove_images', requestOptions);
+};
+
 export const upload = (
 	e: Event & {
 		readonly submitter: HTMLElement | null;
@@ -50,8 +63,7 @@ export const getAlbumImages = () => {
 	return fetch('https://api.imgur.com/3/album/AUKIaeY/images', requestOptions)
 		.then((response) => response.json())
 		.then((result) => {
-			console.log(JSON.stringify(result));
-			return result.data?.error ? [] : result?.data?.map((x) => x.link);
+			return result.data?.error ? [] : result?.data;
 		});
 };
 

@@ -1,21 +1,17 @@
 <script lang="ts">
-	import { getAlbumImages } from '$lib/image-upload';
+	import { getAlbumImages, removeFromAlbum } from '$lib/image-upload';
 	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
 	import UploadImage from './upload-image.svelte';
 
-	let imageURLs: string[] = [];
+	let imgJsons: { link: string; id: string }[] = [];
 	let loading = false;
 	let d = 'https://i.imgur.com/Fngg8iI.png';
 
 	const load = () => {
 		loading = true;
 		getAlbumImages()
-			.then((r) => {
-				console.log({ r });
-				return r;
-			})
-			.then((urls) => (imageURLs = urls))
+			.then((imgs) => (imgJsons = imgs))
 			.catch((e) => console.log(e))
 			.then(() => (loading = false));
 	};
@@ -29,12 +25,27 @@
 		<UploadImage />
 	</div>
 	<div class="images">
-		{#each imageURLs as url, i (url)}
+		{#each imgJsons as { link, id }, i (id)}
 			<section>
-				<img src={url} alt={`img_${i}`} />
+				<img src={link} alt={`img_${i}`} />
+
 				<button
 					on:click={() => {
-						navigator.clipboard.writeText(`![img](${url} "image")`);
+						removeFromAlbum(id)
+							.then((r) => {
+								if (r.status === 200) {
+									imgJsons = imgJsons.filter((j) => j.id !== id);
+								}
+							})
+							.catch((e) => console.error(e));
+					}}
+				>
+					<Icon icon="ph:x-fill" style="font-size:small" color="red" />
+				</button>
+
+				<button
+					on:click={() => {
+						navigator.clipboard.writeText(`![img](${link} "image")`);
 					}}
 				>
 					<Icon icon="ph:copy" style="font-size:small" color="white" />
