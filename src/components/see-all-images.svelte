@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAlbumImages, removeFromAlbum } from '$lib/image-upload';
+	import { deleteImage, getAlbumImages } from '$lib/image-upload';
 	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
 	import UploadImage from './upload-image.svelte';
@@ -32,7 +32,7 @@
 				<button
 					class="delete"
 					on:click={() => {
-						removeFromAlbum(id)
+						deleteImage(id)
 							.then((r) => {
 								if (r.status === 200) {
 									imgJsons = imgJsons.filter((j) => j.id !== id);

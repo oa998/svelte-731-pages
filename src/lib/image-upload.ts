@@ -38,17 +38,12 @@ const moveToAlbum = (imageHash: string) => {
 		.then(() => getAlbumImages());
 };
 
-export const removeFromAlbum = (imageHash: string) => {
-	const formdata = new FormData();
-	formdata.append('ids[]', imageHash);
-
+export const deleteImage = (imageHash: string) => {
 	const requestOptions = {
-		method: 'POST',
-		headers,
-		body: formdata
+		method: 'DELETE',
+		headers
 	};
-
-	return fetch(`https://api.imgur.com/3/album/${albumHash}/remove_images`, requestOptions);
+	return fetch(`https://api.imgur.com/3/image/${imageHash}`, requestOptions);
 };
 
 export const upload = (
