@@ -5,6 +5,7 @@
 
 	let imageSelected: string | undefined = '';
 	const dispatch = createEventDispatcher();
+	let uploading = false;
 
 	$: fileChange = (
 		e: Event & {
@@ -22,13 +23,15 @@
 			currentTarget: EventTarget & HTMLFormElement;
 		}
 	) => {
+		uploading = true;
 		upload(e)
 			.then((r) => {
 				dispatch('image-uploaded', r);
 				toastMsg(`${imageSelected} uploaded`);
 				imageSelected = '';
 			})
-			.catch(toastErrorCatch);
+			.catch(toastErrorCatch)
+			.then(() => (uploading = false));
 	};
 </script>
 
@@ -42,7 +45,9 @@
 		{/if}
 	</label>
 	{#if !!imageSelected}
-		<button type="submit" class="border border-black rounded">Upload</button>
+		<button type="submit" class="border border-black rounded" disabled={uploading}
+			>{uploading ? 'Uploading' : 'Upload'}</button
+		>
 	{/if}
 </form>
 
@@ -59,5 +64,9 @@
 		background-color: green;
 		color: white;
 		@apply w-full;
+	}
+
+	button:disabled {
+		@apply bg-gray-500 text-black;
 	}
 </style>
