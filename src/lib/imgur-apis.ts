@@ -1,4 +1,5 @@
 import { env } from '$env/dynamic/public';
+import { images } from '../stores/images';
 import { throwIfNot2xx } from './fetch-utils';
 
 const headers = {
@@ -76,7 +77,13 @@ export const getAlbumImages = () => {
 	return fetch(`https://api.imgur.com/3/album/${albumHash}/images`, requestOptions)
 		.then(throwIfNot2xx('Failed to read album'))
 		.then((response) => response.json())
-		.then((result) => (result.data?.error ? [] : result?.data));
+		.then((result) => {
+			if (result.data?.error) {
+				images.set([]);
+			} else {
+				images.set(result?.data);
+			}
+		});
 };
 
 /*

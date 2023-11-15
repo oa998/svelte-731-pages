@@ -1,16 +1,7 @@
 <script context="module">
 	import { getAlbumImages } from '$lib/imgur-apis';
-	let loading = false;
-	/**
-	 *  { link: string; id: string }[]
-	 */
-	let imgJsons = [];
 	export function refreshImages() {
-		loading = true;
-		getAlbumImages()
-			.then((imgs) => (imgJsons = imgs.sort((a, b) => b.datetime - a.datetime)))
-			.catch(toastErrorCatch)
-			.then(() => (loading = false));
+		getAlbumImages().catch(toastErrorCatch);
 	}
 </script>
 
@@ -20,12 +11,13 @@
 	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
 	import { toastErrorCatch } from '../lib/toast.ts';
+	import { images } from '../stores/images.ts';
 	onMount(refreshImages);
 </script>
 
 <div class="wrapper">
 	<div class="images">
-		{#each imgJsons as { link, id }, i (id)}
+		{#each $images as { link, id }, i (id)}
 			<section>
 				<img src={link} alt={`img_${i}`} />
 
