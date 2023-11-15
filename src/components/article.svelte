@@ -1,23 +1,9 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { styleOverrides, variableMapping } from './../stores/editor.ts';
-
-	let loaded = false;
-	let r: HTMLElement;
-	if (browser) r = document.querySelector(':root')!;
-	$: if (r) {
-		Object.keys(variableMapping).forEach((cssVar) =>
-			r!.style.setProperty(cssVar, $styleOverrides[cssVar])
-		);
-		loaded = true;
-	}
 </script>
 
-{#if loaded}
-	<article id="custom-article">
-		<slot />
-	</article>
-{/if}
+<article id="custom-article">
+	<slot />
+</article>
 
 <style lang="postcss">
 	article {

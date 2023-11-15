@@ -1,12 +1,13 @@
 <script lang="ts">
-	import SeeAllImages from './see-all-images.svelte';
-
+	import ImageColumn, { refreshImages } from './image-column.svelte';
+	import UploadImage from './upload-image.svelte';
 	export let open = false;
 </script>
 
 <input type="checkbox" bind:checked={open} hidden />
 <div>
-	<SeeAllImages />
+	<UploadImage on:image-uploaded={refreshImages} />
+	<ImageColumn />
 </div>
 
 <style lang="postcss">
@@ -14,9 +15,10 @@
 		max-width: max-content;
 		max-height: 80vh;
 		overflow-y: scroll;
-		top: 10vh;
 		box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-		@apply grid justify-center fixed right-0 h-full w-full bg-black rounded;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 20fr;
+		@apply grid justify-center h-full w-full bg-black rounded;
 	}
 	input:not(:checked) ~ div {
 		@apply hidden;

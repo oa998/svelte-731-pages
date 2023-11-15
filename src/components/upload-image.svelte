@@ -3,12 +3,25 @@
 	import { toastErrorCatch, toastMsg } from '$lib/toast';
 	import { createEventDispatcher } from 'svelte';
 
-	let imageSelected = '';
+	let imageSelected: string | undefined = '';
 	const dispatch = createEventDispatcher();
-	$: fileChange = (e) => {
-		imageSelected = e.target.files?.[0]?.name;
+
+	$: fileChange = (
+		e: Event & {
+			target: HTMLInputElement | null | EventTarget;
+			currentTarget: EventTarget & HTMLInputElement;
+		}
+	) => {
+		imageSelected = (e.target as HTMLInputElement).files?.[0]?.name;
 	};
-	$: _upload = (e) => {
+
+	$: _upload = (
+		e: Event & {
+			readonly submitter: HTMLElement | null;
+		} & {
+			currentTarget: EventTarget & HTMLFormElement;
+		}
+	) => {
 		upload(e)
 			.then((r) => {
 				dispatch('image-uploaded', r);

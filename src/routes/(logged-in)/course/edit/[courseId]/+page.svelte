@@ -2,10 +2,9 @@
 	import { page } from '$app/stores';
 	import Article from '$components/article.svelte';
 	import EditMarkdown from '$components/edit-markdown.svelte';
-	import EditorToolbar from '$components/editor-toolbar.svelte';
 	import ImageSheet from '$components/image-sheet.svelte';
 	import MarkdownSection from '$components/markdown-section.svelte';
-	import { createAlbum } from '$lib/imgur-apis.ts';
+	import Icon from '@iconify/svelte';
 	import { courseMarkdown } from '../../../../../stores/course.ts';
 	import { editPreview } from '../../../../../stores/editor.ts';
 
@@ -69,12 +68,53 @@ Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Rhoncus 
 			{/if}
 		</Article>
 	</div>
+</div>
+<div class="side">
+	<div class="toolbar">
+		<button
+			class={imageSelectorOpen ? 'opened' : ''}
+			on:click={() => {
+				imageSelectorOpen = !imageSelectorOpen;
+				$editPreview = false;
+			}}
+		>
+			<Icon icon="ion:image-outline" style="font-size:xx-large" />
+		</button>
+		<button
+			class={$editPreview ? 'opened' : ''}
+			on:click={() => {
+				$editPreview = !$editPreview;
+				imageSelectorOpen = false;
+			}}
+		>
+			<Icon icon="mdi:eye-outline" style="font-size:xx-large" />
+		</button>
+	</div>
+	<br />
 	<ImageSheet open={imageSelectorOpen && !$editPreview} />
 </div>
-<button class="bg-black text-white" on:click={createAlbum}>create album</button>
-<EditorToolbar showImages={() => (imageSelectorOpen = !imageSelectorOpen)} />
-
 <div class="py-[200px]" />
 
 <style lang="postcss">
+	.side {
+		@apply top-0 fixed right-0 flex flex-col items-end;
+	}
+	.toolbar {
+		background: darkgray;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		width: min-content;
+		@apply py-2 px-2 gap-4;
+	}
+	.toolbar button {
+		@apply shadow-md shadow-black rounded text-white;
+	}
+
+	.toolbar button:active {
+		@apply shadow-sm shadow-gray-600;
+	}
+
+	button.opened {
+		@apply text-violet-600;
+	}
 </style>

@@ -1,29 +1,29 @@
-<script lang="ts">
-	import { deleteImage, getAlbumImages } from '$lib/imgur-apis';
-	import { toastMsg } from '$lib/toast';
-	import Icon from '@iconify/svelte';
-	import { onMount } from 'svelte';
-	import { toastErrorCatch } from './../lib/toast.ts';
-	import UploadImage from './upload-image.svelte';
-
-	let imgJsons: { link: string; id: string }[] = [];
+<script context="module">
+	import { getAlbumImages } from '$lib/imgur-apis';
 	let loading = false;
-
-	const load = () => {
+	/**
+	 *  { link: string; id: string }[]
+	 */
+	let imgJsons = [];
+	export function refreshImages() {
 		loading = true;
 		getAlbumImages()
 			.then((imgs) => (imgJsons = imgs.sort((a, b) => b.datetime - a.datetime)))
 			.catch(toastErrorCatch)
 			.then(() => (loading = false));
-	};
+	}
+</script>
 
-	onMount(load);
+<script lang="ts">
+	import { deleteImage } from '$lib/imgur-apis';
+	import { toastMsg } from '$lib/toast';
+	import Icon from '@iconify/svelte';
+	import { onMount } from 'svelte';
+	import { toastErrorCatch } from '../lib/toast.ts';
+	onMount(refreshImages);
 </script>
 
 <div class="wrapper">
-	<div class="buttons">
-		<UploadImage on:image-uploaded={load} />
-	</div>
 	<div class="images">
 		{#each imgJsons as { link, id }, i (id)}
 			<section>
@@ -35,7 +35,7 @@
 						deleteImage(id)
 							.then(() => {
 								toastMsg('Image deleted');
-								load();
+								refreshImages();
 							})
 							.catch(toastErrorCatch);
 					}}
@@ -72,10 +72,6 @@
 
 	section {
 		@apply relative;
-	}
-
-	div.buttons {
-		@apply text-xs sticky top-[-1px] right-0 z-10 grid gap-1 bg-black pb-1;
 	}
 
 	section button.copy {
