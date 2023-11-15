@@ -67,6 +67,6 @@
 	}
 
 	button:disabled {
-		@apply bg-gray-500 text-black;
+		@apply bg-gray-500 text-gray-700;
 	}
 </style>
