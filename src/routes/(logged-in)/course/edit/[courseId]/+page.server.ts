@@ -1,18 +1,18 @@
 import { redirect } from '@sveltejs/kit';
 
-const courses = { nails: {}, lashes: {}, fish: {} };
+const courses = ['nails', 'lashes', 'fish'];
 
-export function load({ params }: { params: { courseId: keyof typeof courses } }) {
+export function load({ params }: { params: { courseId: string } }) {
 	const courseId = params.courseId;
-	if (!courses[courseId]) {
+	if (!courses.includes(courseId)) {
 		throw redirect(307, '/');
 	}
-	return courses[courseId];
+	return {};
 }
 
 /** @type {import('./$types').EntryGenerator} */
 export function entries() {
-	return Object.keys(courses).map((courseId) => ({ courseId }));
+	return courses.map((courseId) => ({ courseId }));
 }
 
 export const prerender = true;

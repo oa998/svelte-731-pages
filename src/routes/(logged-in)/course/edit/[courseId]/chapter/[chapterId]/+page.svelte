@@ -8,9 +8,10 @@
 	import { editPreview } from '$stores/editor.ts';
 	import Icon from '@iconify/svelte';
 
-	let courseId = $page.params.courseId;
-	console.log({ courseId });
-	let imageSelectorOpen = false;
+	let { courseId, chapterId } = $page.params;
+
+	let imageSelectorOpen = true;
+
 	let article: string = `># This title is bold!
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus turpis in eu mi. Sit amet consectetur adipiscing elit ut aliquam. Et molestie ac feugiat sed lectus. At __augue eget__ arcu dictum varius duis. Faucibus et molestie ac feugiat. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Scelerisque varius morbi enim nunc. Ac auctor augue mauris augue neque gravida in fermentum et. Aliquam purus sit amet luctus venenatis lectus magna fringilla. Sapien eget mi proin sed libero enim. Sit amet dictum sit amet justo donec enim. Ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet.
@@ -52,6 +53,13 @@ Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Rhoncus 
 	}
 </script>
 
+<div class="text-white">
+	{courseId}
+</div>
+<div class="text-white">
+	{chapterId}
+</div>
+
 <div class="relative">
 	<div id="pg" class="p-5">
 		<Article>
@@ -87,6 +95,16 @@ Lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet. Rhoncus 
 			}}
 		>
 			<Icon icon="mdi:eye-outline" style="font-size:xx-large" />
+		</button>
+		<button
+			style="grid-column: 2;"
+			class={$editPreview ? 'opened' : ''}
+			on:click={() => {
+				$editPreview = !$editPreview;
+				imageSelectorOpen = false;
+			}}
+		>
+			<Icon icon="mdi:pencil" style="font-size:xx-large" />
 		</button>
 	</div>
 	<br />

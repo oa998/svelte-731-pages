@@ -14,7 +14,8 @@ export default {
 		}),
 		alias: {
 			// this will match a file
-			'$components/*': 'src/components'
+			'$components/*': 'src/components',
+			'$stores/*': 'src/stores'
 		},
 		paths: {
 			base: '/svelte-731-pages'
