@@ -1,10 +1,8 @@
 <script>
-	import Header from '$components/header.svelte';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import '../../app.css';
 </script>
 
-<Header />
 <slot />
 <SvelteToast options={{ reversed: true, intro: { y: 192 } }} />
 
