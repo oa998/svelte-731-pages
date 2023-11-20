@@ -3,7 +3,9 @@ import { throwIfNot2xx } from './fetch-utils';
 export type Course = {
 	courseId: string;
 	title: string;
-	markdown: string;
+	summary: string;
+	image: string;
+	fake?: boolean;
 };
 
 export type Chapter = {
@@ -12,6 +14,16 @@ export type Chapter = {
 	markdown: string;
 	sequence: number;
 };
+
+export function getAllCourses() {
+	return fetch(`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course`, {
+		method: 'GET',
+		credentials: 'include'
+	})
+		.then(throwIfNot2xx(`Unable to read all courses`))
+		.then((r) => r.json())
+		.then((j) => j as Course[]);
+}
 
 export function getAllChapters(courseId: string) {
 	return fetch(

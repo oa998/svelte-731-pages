@@ -9,4 +9,9 @@ export const toastErrorMsg = (str: string) => {
 };
 export const toastErrorCatch = (err: Error) => toastErrorMsg(err.message);
 
-export const toastMsg = (str: string) => toast.push(str);
+export const toastMsg = (str: string) =>
+	toast.push(str, {
+		theme: {
+			'--toastBackground': 'RGBA(80, 90, 0, 0.7)'
+		}
+	});

@@ -124,7 +124,7 @@
 		:global(.md_wrapper h3) {
 			@apply text-2xl;
 		}
-		:global(.md_wrapper h2) {
+		:global(.md_wrapper h4) {
 			@apply text-xl;
 		}
 	}

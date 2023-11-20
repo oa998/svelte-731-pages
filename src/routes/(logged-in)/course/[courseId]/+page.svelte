@@ -22,7 +22,8 @@
 	onMount(() => {
 		getCourse(courseId).then((_course) => {
 			course = _course;
-		});
+		});-webkit-mask-image: url('/img/curved-triangle.svg');
+mask-image: url('/img/curved-triangle.svg');
 
 		// postCourse({
 		// 	courseId,
@@ -219,7 +220,6 @@ We look forward to serving you and making your experience with us memorable!`,
 
 	aside#sidebar {
 		background: color-mix(in srgb, var(--rich-black) 30%, transparent);
-		/* filter: blur(2px); */
 		max-height: 100dvh;
 		@apply flex flex-col gap-1 sticky top-0 overflow-scroll;
 	}
@@ -252,13 +252,13 @@ We look forward to serving you and making your experience with us memorable!`,
 	}
 
 	.close {
-		transition: max-height 300ms linear, padding 300ms linear, opacity 200ms linear;
+		transition: max-height 200ms linear, padding 200ms linear, opacity 200ms linear;
 		max-height: 0;
 		opacity: 0;
 		overflow: hidden;
 	}
 	.open {
-		transition: max-height 1200ms ease, opacity 1000ms ease, padding 400ms ease;
+		transition: max-height 600ms ease, opacity 500ms ease, padding 400ms ease;
 		opacity: 1;
 		max-height: 100%;
 		@apply py-3;
