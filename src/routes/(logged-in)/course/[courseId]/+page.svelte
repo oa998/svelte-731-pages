@@ -22,8 +22,7 @@
 	onMount(() => {
 		getCourse(courseId).then((_course) => {
 			course = _course;
-		});-webkit-mask-image: url('/img/curved-triangle.svg');
-mask-image: url('/img/curved-triangle.svg');
+		});
 
 		// postCourse({
 		// 	courseId,
