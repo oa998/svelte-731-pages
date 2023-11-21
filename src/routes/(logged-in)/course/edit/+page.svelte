@@ -82,8 +82,8 @@
 			{/each}
 		</div>
 	</aside>
-	{#if chapters}
-		<aside id="sidebar">
+	<aside id="sidebar">
+		{#if chapters}
 			<span class="subtitle">Chapters:</span>
 			<div id="chapters-container">
 				{#each chapters.sort((a, b) => a.sequence - b.sequence) as chapter (chapter.chapterId)}
@@ -99,10 +99,10 @@
 					</button>
 				{/each}
 			</div>
-		</aside>
-	{/if}
-	{#if course}
-		<div class="edit-column">
+		{/if}
+	</aside>
+	<div class="edit-column">
+		{#if course}
 			<CourseEditForm {course} on:course-updated={refreshCourses} minimize={!!chapter} />
 			{#if chapter}
 				<ChapterEditForm
@@ -112,10 +112,10 @@
 					minimize={!chapter}
 				/>
 			{/if}
-		</div>
-	{/if}
+		{/if}
+	</div>
+	<ImageSheet open />
 </div>
-<ImageSheet open />
 
 <div class="py-[200px]">{courseId}</div>
 
@@ -134,7 +134,7 @@
 	}
 
 	#pg {
-		grid-template-columns: 1fr 1fr 3fr;
+		grid-template-columns: 1fr 1fr 3fr 1fr;
 	}
 
 	aside#sidebar {

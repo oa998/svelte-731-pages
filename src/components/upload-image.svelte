@@ -35,7 +35,7 @@
 	};
 </script>
 
-<form on:submit|preventDefault={_upload} class="bg-white p-1 max-w-[130px]">
+<form on:submit|preventDefault={_upload} class="bg-white p-1">
 	<input type="file" name="image" id="image" accept="image" hidden on:change={fileChange} />
 	<label for="image" class="overflow-hidden">
 		{#if !!imageSelected}
