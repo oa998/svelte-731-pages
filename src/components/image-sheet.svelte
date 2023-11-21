@@ -15,7 +15,6 @@
 <style lang="postcss">
 	div {
 		overflow-y: scroll;
-		border: solid black 1px;
 		grid-template-columns: 1fr;
 		grid-template-rows: 1fr 20fr;
 		max-height: 100vh;
