@@ -45,25 +45,7 @@
 					anchors
 				};
 			});
-			chapters = chapters
-				.concat(
-					chapters.map((x) => ({
-						...x,
-						chapterId: Math.random() + ''
-					}))
-				)
-				.concat(
-					chapters.map((x) => ({
-						...x,
-						chapterId: Math.random() + ''
-					}))
-				)
-				.concat(
-					chapters.map((x) => ({
-						...x,
-						chapterId: Math.random() + ''
-					}))
-				);
+			chapters = chapters;
 			chapterId = _chapters[2].chapterId;
 		});
 		/*

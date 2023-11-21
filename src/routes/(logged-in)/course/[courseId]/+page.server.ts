@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 
-const courses = ['nails', 'lashes', 'fish'];
+const courses = ['crs_6431203430'];
 
 export function load({ params }: { params: { courseId: string } }) {
 	const courseId = params.courseId;
