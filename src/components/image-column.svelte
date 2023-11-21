@@ -35,14 +35,25 @@
 					<Icon icon="ph:x-fill" style="font-size:x-large" color="red" />
 				</button>
 
-				<button
-					class="copy"
-					on:click={() => {
-						navigator.clipboard.writeText(`![img](${link} "image")`);
-					}}
-				>
-					<Icon icon="ph:copy" style="font-size:small" color="white" />
-				</button>
+				<div class="copy">
+					<button
+						on:click={() => {
+							navigator.clipboard.writeText(link);
+							navigator.clipboard.readText().then((s) => toastMsg(`copied: ${s}`));
+						}}
+					>
+						<Icon icon="material-symbols:link" style="font-size:large" color="black" />
+					</button>
+
+					<button
+						on:click={() => {
+							navigator.clipboard.writeText(`![img](${link} "image")`);
+							navigator.clipboard.readText().then((s) => toastMsg(`copied: ${s}`));
+						}}
+					>
+						<Icon icon="pepicons-pencil:eye-frame" style="font-size:large" color="black" />
+					</button>
+				</div>
 			</section>
 		{/each}
 	</div>
@@ -50,11 +61,12 @@
 
 <style lang="postcss">
 	div.wrapper {
-		@apply relative flex flex-col w-[130px];
+		@apply relative flex flex-col;
 	}
 
 	div.images {
-		@apply flex flex-col gap-1;
+		grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+		@apply grid gap-2 relative;
 	}
 
 	section,
@@ -66,8 +78,12 @@
 		@apply relative;
 	}
 
-	section button.copy {
-		@apply absolute bottom-1 right-1 bg-black rounded p-2;
+	section .copy {
+		@apply flex flex-row gap-1 absolute bottom-1 right-1;
+	}
+
+	section .copy button {
+		@apply bg-white rounded border border-black;
 	}
 
 	section button.delete {
@@ -76,5 +92,9 @@
 
 	button:disabled {
 		@apply bg-slate-300 text-gray-500;
+	}
+
+	section .copy button:active {
+		@apply bg-green-600;
 	}
 </style>
