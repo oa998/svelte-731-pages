@@ -12,7 +12,8 @@
 	};
 
 	let courseId = $page.params.courseId;
-	let article: string;
+	let markdown: string;
+	let videoURL: string | undefined;
 	let chapters: ChapterEnriched[] = [];
 	let course: Course = { title: '', courseId: '', markdown: '' };
 	let chapterId: string;
@@ -51,7 +52,8 @@
 	};
 
 	$: if (chapterId) {
-		article = chapters.find((c) => c.chapterId === chapterId)!.markdown;
+		const chapter = chapters.find((c) => c.chapterId === chapterId)!;
+		({ markdown, videoURL } = chapter);
 	}
 
 	$: if (screenWidth > 640) showChapters = true;
@@ -93,8 +95,19 @@
 	</aside>
 	<div id="article">
 		<Article>
-			{#if article}
-				<MarkdownSection markdown={article} />
+			<!-- svelte-ignore a11y-media-has-caption -->
+			<div>{videoURL || 'no video url'}</div>
+			<video
+				class="w-full z-0"
+				oncontextmenu="return false;"
+				id="my-video-player"
+				controls
+				controlsList="nodownload"
+			>
+				<source src={videoURL} />
+			</video>
+			{#if markdown}
+				<MarkdownSection {markdown} />
 			{:else}
 				<div class="text-white">Loading....</div>
 			{/if}

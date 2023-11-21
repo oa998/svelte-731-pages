@@ -13,6 +13,7 @@ export type Chapter = {
 	title: string;
 	markdown: string;
 	sequence: number;
+	videoURL?: string;
 };
 
 export function getAllCourses() {

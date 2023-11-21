@@ -16,6 +16,7 @@
 	let title: string;
 	let markdown: string;
 	let sequence: number;
+	let videoURL: string;
 	let dispatch = createEventDispatcher();
 
 	$: if (chapter.chapterId !== chapterId) {
@@ -23,6 +24,7 @@
 		title = chapter.title;
 		markdown = chapter.markdown;
 		sequence = chapter.sequence;
+		videoURL = chapter.videoURL;
 	}
 
 	$: _save = (
@@ -36,7 +38,8 @@
 			chapterId,
 			title,
 			markdown,
-			sequence
+			sequence,
+			videoURL
 		};
 		saving = true;
 		postChapter(courseId, chapter)
@@ -72,6 +75,16 @@
 
 			<label for="sequence">Sequence</label>
 			<input id="sequence" name="sequence" required type="number" min={0} bind:value={sequence} />
+
+			<label for="videoURL">Video URL</label>
+			<input
+				id="videoURL"
+				name="videoURL"
+				type="text"
+				required
+				pattern="^[^\s]+.*$"
+				bind:value={videoURL}
+			/>
 
 			<label for="markdown">Markdown</label>
 			<textarea
