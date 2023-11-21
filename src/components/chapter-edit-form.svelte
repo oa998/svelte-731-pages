@@ -109,6 +109,18 @@
 		</div>
 		{#if preview}
 			<div class="preview">
+				{#if videoURL}
+					<!-- svelte-ignore a11y-media-has-caption -->
+					<video
+						class="w-full z-0 pt-5"
+						oncontextmenu="return false;"
+						id="my-video-player"
+						controls
+						controlsList="nodownload"
+					>
+						<source src={videoURL} />
+					</video>
+				{/if}
 				<Article>
 					<MarkdownSection {markdown} />
 				</Article>

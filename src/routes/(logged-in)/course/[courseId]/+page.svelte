@@ -95,11 +95,10 @@
 	</aside>
 	<div id="article">
 		<Article>
-			<div>{videoURL || 'no video url'}</div>
 			{#if videoURL}
 				<!-- svelte-ignore a11y-media-has-caption -->
 				<video
-					class="w-full z-0"
+					class="w-full z-0 pt-5"
 					oncontextmenu="return false;"
 					id="my-video-player"
 					controls
