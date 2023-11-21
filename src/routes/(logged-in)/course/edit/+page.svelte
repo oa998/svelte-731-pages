@@ -64,7 +64,7 @@
 </script>
 
 <div id="pg">
-	<aside id="sidebar">
+	<aside id="sidebar" class="darken-bg">
 		<span class="subtitle">Courses:</span>
 		<div id="chapters-container">
 			{#each courses as course (course.courseId)}
@@ -82,7 +82,7 @@
 			{/each}
 		</div>
 	</aside>
-	<aside id="sidebar">
+	<aside id="sidebar" class="darken-bg">
 		{#if chapters}
 			<span class="subtitle">Chapters:</span>
 			<div id="chapters-container">
@@ -101,7 +101,7 @@
 			</div>
 		{/if}
 	</aside>
-	<div class="edit-column">
+	<div class="edit-column darken-bg">
 		{#if course}
 			<CourseEditForm {course} on:course-updated={refreshCourses} minimize={!!chapter} />
 			{#if chapter}
@@ -114,7 +114,9 @@
 			{/if}
 		{/if}
 	</div>
-	<ImageSheet open />
+	<div class="darken-bg">
+		<ImageSheet open />
+	</div>
 </div>
 
 <div class="py-[200px]">{courseId}</div>
@@ -137,8 +139,11 @@
 		grid-template-columns: 1fr 1fr 3fr 1fr;
 	}
 
-	aside#sidebar {
+	.darken-bg {
 		background: color-mix(in srgb, var(--rich-black) 30%, transparent);
+	}
+
+	aside#sidebar {
 		/* filter: blur(2px); */
 		max-height: 100dvh;
 		@apply flex flex-col gap-1 sticky top-0 overflow-scroll;

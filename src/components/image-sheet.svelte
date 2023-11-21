@@ -15,10 +15,11 @@
 <style lang="postcss">
 	div {
 		overflow-y: scroll;
-		box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+		border: solid black 1px;
 		grid-template-columns: 1fr;
 		grid-template-rows: 1fr 20fr;
-		@apply grid justify-center h-full w-full gap-1 bg-black rounded;
+		max-height: 100vh;
+		@apply grid justify-center h-full w-full gap-1 pb-10;
 	}
 	input:not(:checked) ~ div {
 		@apply hidden;
