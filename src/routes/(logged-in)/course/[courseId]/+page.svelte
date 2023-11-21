@@ -24,12 +24,6 @@
 			course = _course;
 		});
 
-		// postCourse({
-		// 	courseId,
-		// 	markdown: `# This course is about ${courseId}`,
-		// 	title: `${courseId}!`
-		// });
-
 		getAllChapters(courseId).then((_chapters) => {
 			chapters = _chapters.map((c) => {
 				const div = document.createElement('div');
@@ -46,43 +40,8 @@
 				};
 			});
 			chapters = chapters;
-			chapterId = _chapters[2].chapterId;
+			chapterId = _chapters[0].chapterId;
 		});
-		/*
-		postChapter(courseId, {
-			chapterId: 'c3',
-			markdown: `
-# Welcome to Our Website
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et dolor ac turpis varius facilisis eget a sapien. Proin convallis, justo vel feugiat scelerisque, velit risus interdum est, et aliquam libero lectus ac est.
-
-## Our Mission
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-### Services We Offer
-
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur ut blandit mi. Integer euismod erat vel risus facilisis, vel facilisis ante congue.
-
-![Placeholder Image](https://placekitten.com/600/300)
-
-## Our Team
-
-> **"Success is not final, failure is not fatal: It is the courage to continue that counts." - Winston Churchill**
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat sapien eu tellus efficitur, vel efficitur justo tincidunt. Suspendisse potenti.
-
-### Contact Us
-
-Curabitur ac felis arcu. Sed cursus ligula at augue lacinia, vel scelerisque ante tristique. Integer non bibendum est. Nullam tincidunt vestibulum orci, non euismod sem fermentum a.
-
-In hac habitasse platea dictumst. Maecenas aliquet odio non nisl consequat, id blandit ligula cursus. Duis rhoncus, justo in bibendum dictum, purus tellus fermentum justo, vel gravida urna velit at augue.
-
-We look forward to serving you and making your experience with us memorable!`,
-			sequence: 2,
-			title: 'Treating people kindly'
-		});
-*/
 	});
 
 	$: _scroll = (href: string) => {
@@ -114,14 +73,6 @@ We look forward to serving you and making your experience with us memorable!`,
 		<span class="subtitle">Chapters:</span>
 		<div id="chapters-container">
 			{#each chapters as chapter, i (chapter.chapterId)}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-				<!-- <details
-        open={chapterId == chapter.chapterId}
-        on:click|preventDefault={() => {
-          chapterId = chapter.chapterId;
-        }}
-				> -->
 				<button
 					on:click|preventDefault={() => {
 						chapterId = chapter.chapterId;
@@ -166,8 +117,11 @@ We look forward to serving you and making your experience with us memorable!`,
 		@apply fixed top-0;
 	}
 	label[for='show-chapters'] {
-		background: color-mix(in srgb, var(--rich-black) 80%, transparent);
+		background: color-mix(in srgb, blue 90%, transparent);
 		@apply py-1 text-white text-center absolute bottom-0 left-0 z-20 w-full;
+	}
+	label[for='show-chapters']:active {
+		background: color-mix(in srgb, blue 60%, transparent);
 	}
 	input#show-chapters:not(:checked) ~ aside#sidebar {
 		transform: translateX(-100vw);
@@ -180,11 +134,7 @@ We look forward to serving you and making your experience with us memorable!`,
 	@media (max-width: 640px) {
 		#pg {
 			grid-template-columns: 1fr;
-		}
-		aside#sidebar {
-			transition: transform 0.2s linear;
-			position: absolute;
-			top: 0;
+			grid-template-rows: 100vh 1fr;
 		}
 	}
 	@media (min-width: 640px) {
@@ -196,6 +146,13 @@ We look forward to serving you and making your experience with us memorable!`,
 	@media (min-width: 768px) {
 		label[for='show-chapters'] {
 			@apply hidden;
+		}
+	}
+	@media (max-width: 768px) {
+		aside#sidebar {
+			transition: transform 0.2s linear;
+			position: absolute;
+			top: 0;
 		}
 	}
 
