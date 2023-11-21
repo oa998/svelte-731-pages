@@ -95,8 +95,8 @@
 	</aside>
 	<div id="article">
 		<Article>
-			<!-- svelte-ignore a11y-media-has-caption -->
 			<div>{videoURL || 'no video url'}</div>
+			<!-- svelte-ignore a11y-media-has-caption -->
 			<video
 				class="w-full z-0"
 				oncontextmenu="return false;"
