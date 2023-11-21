@@ -1,22 +1,27 @@
 <script lang="ts">
 	import ChapterEditForm from '$components/chapter-edit-form.svelte';
 	import CourseEditForm from '$components/course-edit-form.svelte';
+	import ImageSheet from '$components/image-sheet.svelte';
 	import { getAllChapters, getAllCourses, type Chapter, type Course } from '$lib/articles';
 	import { toastErrorCatch } from '$lib/toast';
 	import { onMount } from 'svelte';
 
 	let courseId: string;
-	let chapter: Chapter;
+	let chapter: Chapter | undefined;
 	let chapters: Chapter[] = [];
-	let course: Course;
+	let course: Course | undefined;
 	let chapterId: string;
 	let courses: Course[] = [];
 
 	$: if (courseId !== undefined) {
 		course = courses.find((c) => c.courseId === courseId)!;
+	} else {
+		course = undefined;
 	}
 	$: if (chapterId) {
 		chapter = chapters.find((c) => c.chapterId === chapterId)!;
+	} else {
+		chapter = undefined;
 	}
 
 	const refreshCourses = () =>
@@ -66,6 +71,7 @@
 				<button
 					on:click={() => {
 						courseId = course.courseId;
+						chapterId = '';
 					}}
 					class="details"
 				>
@@ -109,6 +115,7 @@
 		</div>
 	{/if}
 </div>
+<ImageSheet open />
 
 <div class="py-[200px]">{courseId}</div>
 
