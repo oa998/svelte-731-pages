@@ -11,3 +11,12 @@
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
+
+.p-family {
+	font-family: 'Rubik', serif;
+	font-weight: 200;
+}
+
+.h-family {
+	font-family: 'Lobster', sans-serif;
+}

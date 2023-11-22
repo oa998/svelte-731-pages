@@ -36,8 +36,8 @@
 		text-wrap: wrap;
 	}
 	:global(.md_wrapper p, .md_wrapper ul, .md_wrapper ol, .md_wrapper details) {
-		font-family: 'Taviraj', serif;
-		@apply text-xl font-light;
+		font-family: 'Rubik', serif;
+		@apply text-lg font-light;
 	}
 
 	:global(.md_wrapper > p) {
