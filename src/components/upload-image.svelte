@@ -17,6 +17,8 @@
 		imageSelected = (e.target as HTMLInputElement).files?.[0]?.name;
 	};
 
+	$: _selectFile = () => fileInput.click();
+
 	$: _upload = (
 		e: Event & {
 			readonly submitter: HTMLElement | null;
@@ -46,7 +48,11 @@
 		bind:this={fileInput}
 		on:change={fileChange}
 	/>
-	<button class="overflow-hidden" on:click|preventDefault={() => fileInput.click()}>
+	<button
+		type="button"
+		class="overflow-hidden"
+		on:click|preventDefault|stopPropagation={_selectFile}
+	>
 		{#if !!imageSelected}
 			{imageSelected}
 		{:else}
