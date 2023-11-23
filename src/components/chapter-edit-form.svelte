@@ -77,14 +77,7 @@
 			<input id="sequence" name="sequence" required type="number" min={0} bind:value={sequence} />
 
 			<label for="videoURL">Video URL</label>
-			<input
-				id="videoURL"
-				name="videoURL"
-				type="text"
-				required
-				pattern="^[^\s]+.*$"
-				bind:value={videoURL}
-			/>
+			<input id="videoURL" name="videoURL" type="text" pattern="^[^\s]+.*$" bind:value={videoURL} />
 
 			<label for="markdown">Markdown</label>
 			<textarea
