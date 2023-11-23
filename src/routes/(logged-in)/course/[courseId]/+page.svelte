@@ -215,7 +215,7 @@
 		opacity: 0;
 		overflow: hidden;
 	}
-	.open {
+	.open:has(ul li) {
 		transition: max-height 600ms ease, opacity 500ms ease, padding 400ms ease;
 		opacity: 1;
 		max-height: 100%;
