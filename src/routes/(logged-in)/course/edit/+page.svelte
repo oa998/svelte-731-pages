@@ -4,6 +4,7 @@
 	import ImageSheet from '$components/image-sheet.svelte';
 	import { getAllChapters, getAllCourses, type Chapter, type Course } from '$lib/articles';
 	import { toastErrorCatch } from '$lib/toast';
+	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
 
 	let courseId: string;
@@ -12,6 +13,8 @@
 	let course: Course | undefined;
 	let chapterId: string;
 	let courses: Course[] = [];
+	let coursesLoading = true;
+	let chaptersLoading = false;
 
 	$: if (courseId !== undefined) {
 		course = courses.find((c) => c.courseId === courseId)!;
@@ -24,7 +27,8 @@
 		chapter = undefined;
 	}
 
-	const refreshCourses = () =>
+	const refreshCourses = () => {
+		coursesLoading = true;
 		getAllCourses()
 			.then((_courses) => {
 				courses = _courses.concat({
@@ -35,20 +39,26 @@
 					fake: true // fake denotes that it's just client-side and hasn't been saved yet
 				});
 			})
-			.catch(toastErrorCatch);
+			.catch(toastErrorCatch)
+			.then(() => (coursesLoading = false));
+	};
 
 	onMount(() => {
 		refreshCourses();
 	});
 
 	const refreshChapters = async (courseId: string) => {
-		if (course.fake) {
+		if (course?.fake) {
 			chapters = [];
 		} else {
-			await getAllChapters(courseId).then((_chapters) => {
-				chapters = _chapters;
-			});
+			chaptersLoading = true;
+			await getAllChapters(courseId)
+				.then((_chapters) => {
+					chapters = _chapters;
+				})
+				.catch(toastErrorCatch);
 		}
+		chaptersLoading = false;
 		chapters = chapters.concat({
 			chapterId: 'chap_' + Math.floor(Math.random() * 9e9),
 			title: 'NEW CHAPTER',
@@ -81,6 +91,9 @@
 				</button>
 			{/each}
 		</div>
+		<div class="loader" hidden={!coursesLoading}>
+			<Icon icon="eos-icons:loading" style="font-size:xx-large" color="white" />
+		</div>
 	</aside>
 	<aside id="sidebar" class="darken-bg">
 		{#if chapters}
@@ -100,6 +113,9 @@
 				{/each}
 			</div>
 		{/if}
+		<div class="loader" hidden={!chaptersLoading}>
+			<Icon icon="eos-icons:loading" style="font-size:xx-large" color="white" />
+		</div>
 	</aside>
 	<div class="edit-column darken-bg">
 		{#if course}
@@ -150,6 +166,10 @@
 	}
 	aside#sidebar::-webkit-scrollbar {
 		display: none;
+	}
+
+	.loader {
+		place-self: center;
 	}
 
 	.edit-column {
