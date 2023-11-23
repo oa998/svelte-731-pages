@@ -100,16 +100,18 @@
 	<div id="article">
 		<Article>
 			{#if videoURL}
-				<!-- svelte-ignore a11y-media-has-caption -->
-				<video
-					class="w-full z-0 pt-5"
-					oncontextmenu="return false;"
-					id="my-video-player"
-					controls
-					controlsList="nodownload"
-				>
-					<source src={videoURL} />
-				</video>
+				{#key videoURL}
+					<!-- svelte-ignore a11y-media-has-caption -->
+					<video
+						class="w-full z-0 pt-5"
+						oncontextmenu="return false;"
+						id="my-video-player"
+						controls
+						controlsList="nodownload"
+					>
+						<source src={videoURL} />
+					</video>
+				{/key}
 			{/if}
 			{#if markdown}
 				<MarkdownSection {markdown} />
