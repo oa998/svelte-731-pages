@@ -81,6 +81,7 @@ export const getAlbumImages = () => {
 			if (result.data?.error) {
 				images.set([]);
 			} else {
+				console.log('results', result.data);
 				images.set(result?.data);
 			}
 		});
