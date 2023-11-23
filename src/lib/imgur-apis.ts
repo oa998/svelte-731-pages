@@ -81,8 +81,9 @@ export const getAlbumImages = () => {
 			if (result.data?.error) {
 				images.set([]);
 			} else {
-				console.log('results', result.data);
-				images.set(result?.data);
+				const imgs = (result?.data || []) as { datetime: number; link: string; id: string }[];
+				const sortedImages = imgs.sort((a, b) => b.datetime - a.datetime);
+				images.set(sortedImages);
 			}
 		});
 };
