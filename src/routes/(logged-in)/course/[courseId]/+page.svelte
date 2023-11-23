@@ -26,22 +26,24 @@
 		});
 
 		getAllChapters(courseId).then((_chapters) => {
-			chapters = _chapters.map((c) => {
-				const div = document.createElement('div');
-				div.innerHTML = customMarked.parse(c.markdown);
-				const anchors = [...div.querySelectorAll('a[class="anchor"]')].map((a) => {
+			chapters = _chapters
+				.map((c) => {
+					const div = document.createElement('div');
+					div.innerHTML = customMarked.parse(c.markdown);
+					const anchors = [...div.querySelectorAll('a[class="anchor"]')].map((a) => {
+						return {
+							text: a.getAttribute('name') || '',
+							href: a.getAttribute('href') || ''
+						};
+					});
 					return {
-						text: a.getAttribute('name') || '',
-						href: a.getAttribute('href') || ''
+						...c,
+						anchors
 					};
-				});
-				return {
-					...c,
-					anchors
-				};
-			});
+				})
+				.sort((a, b) => a.sequence - b.sequence);
 			chapters = chapters;
-			chapterId = _chapters[0].chapterId;
+			chapterId = chapters[0].chapterId;
 		});
 	});
 
@@ -84,11 +86,13 @@
 					<div class="summary">{i + 1}. {chapter.title}</div>
 				</button>
 				<div class={`summary-content ${chapterId == chapter.chapterId ? 'open' : 'close'}`}>
-					{#each chapter.anchors as anchor}
-						<div>
-							<button on:click={() => _scroll(anchor.href)}>{anchor.text}</button>
-						</div>
-					{/each}
+					<ul>
+						{#each chapter.anchors as anchor}
+							<li>
+								<button on:click={() => _scroll(anchor.href)}>{anchor.text}</button>
+							</li>
+						{/each}
+					</ul>
 				</div>
 			{/each}
 		</div>
@@ -216,13 +220,16 @@
 		@apply py-3;
 	}
 
+	li {
+		list-style: disc;
+	}
+
 	.summary-content {
 		background: rgba(255, 255, 255, 0.2);
 		@apply pl-5 text-white;
 	}
 
 	.summary {
-		list-style: none;
 		color: black;
 		background: white;
 		@apply py-5 pl-5 cursor-pointer;
@@ -237,6 +244,6 @@
 	}
 
 	.summary-content button {
-		@apply underline text-blue-100 italic;
+		@apply text-white italic text-left text-sm py-1 font-extralight;
 	}
 </style>

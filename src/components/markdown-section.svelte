@@ -87,6 +87,10 @@
 		@apply underline text-blue-700;
 	}
 
+	:global(.md_wrapper b, .md_wrapper strong) {
+		@apply font-semibold;
+	}
+
 	:global(.md_wrapper blockquote, .md_wrapper p:has(> img)) {
 		@apply flex flex-row justify-center w-full;
 	}
