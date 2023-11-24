@@ -23,7 +23,7 @@
 	<div class="images">
 		{#each $images as { link, id }, i (id)}
 			<section>
-				<img src={link} alt={`img_${i}`} loading="lazy" class="min-h-[50px]" />
+				<img src={link} alt={`img_${i}`} loading="lazy" class="min-h-[100px]" />
 
 				<button
 					class="delete"
