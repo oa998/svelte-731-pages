@@ -43,7 +43,9 @@
 
 <div class="relative">
 	<CompanyName class="text-6xl absolute top-0 left-0" />
-	<div class="bg-img" />
+	<div class="bg-img-blur">
+		<img class="bg-img-full" src="/login-hair.png" alt="login" />
+	</div>
 	<input bind:checked={formDirty} hidden type="checkbox" />
 	<form
 		on:submit|preventDefault={onSubmit}
@@ -148,14 +150,19 @@
 		@apply mt-5 underline py-1 rounded text-white text-xs italic w-min;
 	}
 
-	.bg-img {
+	.bg-img-blur {
 		position: absolute;
 		top: 0;
 		left: 0;
-		background-image: url('https://cdn.discordapp.com/attachments/1030661591638745179/1167618963480526990/oa998_wavy_hair_svg_vector_colorful_full_screen_bright_abstract_99a2691b-4100-48ea-9c8a-a891ac516804.png?ex=654ec8e6&is=653c53e6&hm=ff14ebcac829cdc5aa20853ada2469bb75c21e8ae9874f9085859d4b5b11908d&');
+		background-image: url('/login-hair-small.png');
 		background-size: cover;
-		background-position-y: 30%;
+		background-position: 0 30%;
 		z-index: -1;
+		@apply h-[100vh] w-full;
+	}
+	.bg-img-full {
+		object-fit: cover;
+		object-position: 0 30%;
 		@apply h-[100vh] w-full;
 	}
 </style>
