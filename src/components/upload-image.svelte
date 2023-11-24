@@ -71,10 +71,6 @@
 		@apply flex flex-col text-center;
 	}
 
-	form label {
-		@apply py-1;
-	}
-
 	form button[type='submit'] {
 		background-color: green;
 		color: white;
