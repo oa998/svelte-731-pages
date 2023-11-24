@@ -88,6 +88,62 @@ export const getAlbumImages = () => {
 		});
 };
 
+export const setMockImages = () => {
+	images.set([
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/lUsy2i1.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/h7tqK2W.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/RyvVS2P.png', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/Gqya0UU.jpg', id: '' + Math.floor(Math.random() * 9e9) },
+		{ link: 'https://i.imgur.com/UWyQBjk.png', id: '' + Math.floor(Math.random() * 9e9) }
+	]);
+};
+
 /*
   album image objects:
   {

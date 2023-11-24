@@ -1,5 +1,9 @@
 import { env } from '$env/dynamic/public';
 
+export function ping() {
+	fetch(`${env.PUBLIC_AUTH_URL}/ping`);
+}
+
 export function login(email: string, password: string) {
 	return fetch(`${env.PUBLIC_AUTH_URL}/login`, {
 		method: 'POST',

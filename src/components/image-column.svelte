@@ -1,7 +1,11 @@
 <script context="module">
-	import { getAlbumImages } from '$lib/imgur-apis';
+	import { getAlbumImages, setMockImages } from '$lib/imgur-apis';
 	export function refreshImages() {
-		getAlbumImages().catch(toastErrorCatch);
+		if (window.location.host.includes('localhost')) {
+			setMockImages();
+		} else {
+			getAlbumImages().catch(toastErrorCatch);
+		}
 	}
 </script>
 
@@ -19,7 +23,7 @@
 	<div class="images">
 		{#each $images as { link, id }, i (id)}
 			<section>
-				<img src={link} alt={`img_${i}`} />
+				<img src={link} alt={`img_${i}`} loading="lazy" class="min-h-[50px]" />
 
 				<button
 					class="delete"
@@ -75,7 +79,7 @@
 	}
 
 	section {
-		@apply relative;
+		@apply relative bg-black bg-opacity-80 grid h-full items-center;
 	}
 
 	section .copy {

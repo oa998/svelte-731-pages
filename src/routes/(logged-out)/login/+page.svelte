@@ -1,11 +1,16 @@
 <script lang="ts">
 	import CompanyName from '$components/company-name.svelte';
-	import { login, passwordReset } from '$lib/auth';
+	import { login, passwordReset, ping } from '$lib/auth';
 	import { toastErrorMsg, toastMsg } from '$lib/toast';
+	import { onMount } from 'svelte';
 
 	let loading = false;
 	let formDirty = false;
 	let showLoginForm = true;
+
+	onMount(() => {
+		ping();
+	});
 
 	$: _login = (email: string, password: string) => {
 		loading = true;
