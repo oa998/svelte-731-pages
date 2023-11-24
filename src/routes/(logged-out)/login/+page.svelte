@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import CompanyName from '$components/company-name.svelte';
 	import { login, passwordReset, ping } from '$lib/auth';
 	import { toastErrorMsg, toastMsg } from '$lib/toast';
@@ -49,7 +50,7 @@
 <div class="relative">
 	<CompanyName class="text-6xl absolute top-0 left-0" />
 	<div class="bg-img-blur">
-		<img class="bg-img-full" src="/login-hair.png" alt="login" />
+		<img class="bg-img-full" src={`${base}/login-hair.png`} alt="login" />
 	</div>
 	<input bind:checked={formDirty} hidden type="checkbox" />
 	<form
@@ -159,7 +160,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		background-image: url('/login-hair-small.png');
+		background-image: url('/svelte-731-pages/login-hair-small.png');
 		background-size: cover;
 		background-position: 0 30%;
 		z-index: -1;
