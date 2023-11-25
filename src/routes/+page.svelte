@@ -93,11 +93,22 @@
 	.poly-behind {
 		background: linear-gradient(
 			to right,
-			var(--rich-black) 15%,
+			var(--rich-black) 5%,
 			rebeccapurple 30%,
 			rebeccapurple 70%,
 			var(--rich-black) 85%
 		);
+	}
+	@media (max-width: 1000px) {
+		.poly-behind {
+			background: linear-gradient(
+				to right,
+				var(--rich-black) 2%,
+				rebeccapurple 30%,
+				rebeccapurple 70%,
+				var(--rich-black) 93%
+			);
+		}
 	}
 	.content {
 		width: 100%;
@@ -158,7 +169,7 @@
 	}
 
 	.container-731 {
-		/* position: fixed;
-		top: 0; */
+		position: fixed;
+		top: 0;
 	}
 </style>
