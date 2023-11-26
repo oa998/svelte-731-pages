@@ -244,29 +244,29 @@
 
 <style lang="postcss">
 	:root {
-		--banner-height: calc(max(200px, 30dvh));
+		--banner-height: calc(max(200px, 30lvh));
 		--top-color: #e00b43;
 		--bottom-color: #271c7d;
 	}
 	.poly {
 		position: absolute;
 		left: 0;
-		top: 10dvh;
+		top: 10lvh;
 		height: var(--banner-height);
 		transform: rotate(-2deg) translate(-5vw);
 		min-height: 200px;
 		width: 120vw;
-		margin-top: 6dvh;
+		margin-top: 6lvh;
 	}
 	.poly-front {
 		background: color-mix(in srgb, var(--bottom-color) 80%, black);
 		z-index: 12;
 		overflow: hidden;
-		margin-top: 6.5dvh;
+		margin-top: 6.5lvh;
 	}
 	@media (max-width: 720px) {
 		.poly-front {
-			margin-top: 6dvh;
+			margin-top: 6lvh;
 		}
 	}
 	.poly-behind {
@@ -286,7 +286,7 @@
 	.bg {
 		overflow: hidden;
 		position: relative;
-		/* min-height: 200dvh; */
+		/* min-height: 200lvh; */
 		z-index: 10;
 		min-height: calc(var(--banner-height) * 1.7);
 		@apply max-w-2xl m-auto;
@@ -312,7 +312,7 @@
 	}
 
 	.spacer {
-		min-height: calc(var(--banner-height) + 15dvh);
+		min-height: calc(var(--banner-height) + 15lvh);
 	}
 
 	.banner-img {
