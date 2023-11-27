@@ -1,3 +1,4 @@
+import { env } from '$env/dynamic/public';
 import { throwIfNot2xx } from './fetch-utils';
 
 export type Course = {
@@ -17,7 +18,7 @@ export type Chapter = {
 };
 
 export function getAllCourses() {
-	return fetch(`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course`, {
+	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course`, {
 		method: 'GET',
 		credentials: 'include'
 	})
@@ -27,26 +28,20 @@ export function getAllCourses() {
 }
 
 export function getAllChapters(courseId: string) {
-	return fetch(
-		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}/chapter`,
-		{
-			method: 'GET',
-			credentials: 'include'
-		}
-	)
+	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${courseId}/chapter`, {
+		method: 'GET',
+		credentials: 'include'
+	})
 		.then(throwIfNot2xx(`Unable to read all chapters for ${courseId}`))
 		.then((r) => r.json())
 		.then((j) => j as Chapter[]);
 }
 
 export function getCourse(courseId: string) {
-	return fetch(
-		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}`,
-		{
-			method: 'GET',
-			credentials: 'include'
-		}
-	)
+	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${courseId}`, {
+		method: 'GET',
+		credentials: 'include'
+	})
 		.then(throwIfNot2xx(`Unable to read course ${courseId}`))
 		.then((r) => r.json())
 		.then((j) => {
@@ -57,13 +52,10 @@ export function getCourse(courseId: string) {
 }
 
 export function getChapter(courseId: string, chapterId: string) {
-	return fetch(
-		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}/chapter/${chapterId}`,
-		{
-			method: 'GET',
-			credentials: 'include'
-		}
-	)
+	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${courseId}/chapter/${chapterId}`, {
+		method: 'GET',
+		credentials: 'include'
+	})
 		.then(throwIfNot2xx(`Unable to read chapters ${chapterId} of course ${courseId}`))
 		.then((r) => r.json())
 		.then((j) => {
@@ -74,33 +66,27 @@ export function getChapter(courseId: string, chapterId: string) {
 }
 
 export function postCourse(body: Course) {
-	return fetch(
-		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${body.courseId}`,
-		{
-			method: 'POST',
-			headers: {
-				['content-type']: 'application/json'
-			},
-			body: JSON.stringify(body),
-			credentials: 'include'
-		}
-	)
+	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${body.courseId}`, {
+		method: 'POST',
+		headers: {
+			['content-type']: 'application/json'
+		},
+		body: JSON.stringify(body),
+		credentials: 'include'
+	})
 		.then(throwIfNot2xx(`Unable to set course ${body.courseId}`))
 		.then((r) => r.json());
 }
 
 export function postChapter(courseId: string, body: Chapter) {
-	return fetch(
-		`https://nginx-anything-storage-glovbogi2a-uc.a.run.app/storage?q=course/${courseId}/chapter/${body.chapterId}`,
-		{
-			method: 'POST',
-			headers: {
-				['content-type']: 'application/json'
-			},
-			body: JSON.stringify(body),
-			credentials: 'include'
-		}
-	)
+	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${courseId}/chapter/${body.chapterId}`, {
+		method: 'POST',
+		headers: {
+			['content-type']: 'application/json'
+		},
+		body: JSON.stringify(body),
+		credentials: 'include'
+	})
 		.then(throwIfNot2xx(`Unable to set chapter ${body.chapterId} of course ${courseId}`))
 		.then((r) => r.json());
 }

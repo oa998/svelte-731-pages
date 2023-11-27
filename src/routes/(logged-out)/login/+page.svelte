@@ -3,6 +3,7 @@
 	import CompanyName from '$components/company-name.svelte';
 	import { login, passwordReset, ping } from '$lib/auth';
 	import { toastErrorMsg, toastMsg } from '$lib/toast';
+	import { session } from '$stores/session';
 	import { onMount } from 'svelte';
 
 	let loading = false;
@@ -45,6 +46,11 @@
 			_passwordReset(formData.get('email') as string);
 		}
 	};
+
+	$: if ($session.loggedIn) {
+		console.log('Logged in!');
+		// TODO: How to send to page using sveltekit?
+	}
 </script>
 
 <div class="relative">

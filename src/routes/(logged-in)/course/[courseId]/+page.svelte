@@ -121,7 +121,7 @@
 		</Article>
 	</div>
 </div>
-<div class="py-[200px]">{courseId}</div>
+<div class="py-[200px]" />
 
 <style lang="postcss">
 	#pg {
@@ -239,10 +239,6 @@
 
 	button.details:has(+ .summary-content.open) > .summary {
 		background: linear-gradient(70deg, whitesmoke 90%, #eb6a9f 90%, #a9295e);
-	}
-
-	.summary::-webkit-details-marker {
-		display: none;
 	}
 
 	.summary-content button {

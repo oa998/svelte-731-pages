@@ -13,10 +13,11 @@
 }
 
 .p-family {
-	font-family: 'Rubik', serif;
+	font-family: 'Roboto Slab', serif;
 	font-weight: 200;
 }
 
 .h-family {
-	font-family: 'Lobster', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
+	@apply font-thin;
 }

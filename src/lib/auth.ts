@@ -4,6 +4,18 @@ export function ping() {
 	fetch(`${env.PUBLIC_AUTH_URL}/ping`);
 }
 
+export function sessionPing() {
+	return fetch(`${env.PUBLIC_AUTH_URL}/ping`)
+		.then((r) => /^2..$/.test(`${r.status}`))
+		.catch(() => false);
+}
+
+export function adminPing() {
+	return fetch(`${env.PUBLIC_AUTH_URL}/ping`)
+		.then((r) => /^2..$/.test(`${r.status}`))
+		.catch(() => false);
+}
+
 export function login(email: string, password: string) {
 	return fetch(`${env.PUBLIC_AUTH_URL}/login`, {
 		method: 'POST',

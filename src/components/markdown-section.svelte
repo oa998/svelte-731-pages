@@ -36,7 +36,7 @@
 		text-wrap: wrap;
 	}
 	:global(.md_wrapper p, .md_wrapper ul, .md_wrapper ol, .md_wrapper details) {
-		font-family: 'Rubik', serif;
+		font-family: 'Roboto Slab', serif;
 		@apply text-lg font-light;
 	}
 
@@ -45,7 +45,7 @@
 	}
 
 	:global(.md_wrapper > :not(:first-child)) {
-		@apply pt-8;
+		@apply pt-4;
 	}
 	:global(.md_wrapper ol, .md_wrapper ul) {
 		@apply pl-5;
@@ -64,8 +64,8 @@
 		@apply whitespace-nowrap text-center place-self-center;
 	}
 	:global(.md_wrapper h1, .md_wrapper h2, .md_wrapper h3, .md_wrapper h4, .md_wrapper h5) {
-		font-family: 'Lobster', sans-serif;
-		@apply py-5 font-light;
+		font-family: 'Josefin Sans', sans-serif;
+		@apply my-6;
 	}
 	:global(.md_wrapper h1) {
 		@apply text-5xl;
