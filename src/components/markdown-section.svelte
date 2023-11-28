@@ -36,8 +36,7 @@
 		text-wrap: wrap;
 	}
 	:global(.md_wrapper p, .md_wrapper ul, .md_wrapper ol, .md_wrapper details) {
-		font-family: 'Roboto Slab', serif;
-		@apply text-lg font-light;
+		@apply text-base font-extralight font-serif;
 	}
 
 	:global(.md_wrapper > p) {
@@ -64,8 +63,7 @@
 		@apply whitespace-nowrap text-center place-self-center;
 	}
 	:global(.md_wrapper h1, .md_wrapper h2, .md_wrapper h3, .md_wrapper h4, .md_wrapper h5) {
-		font-family: 'Josefin Sans', sans-serif;
-		@apply my-6;
+		@apply my-6 font-sans font-normal;
 	}
 	:global(.md_wrapper h1) {
 		@apply text-5xl;

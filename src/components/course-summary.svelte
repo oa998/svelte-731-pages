@@ -1,64 +1,82 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import type { Course } from '$lib/articles';
-	import { session } from '$stores/session';
+	import { onMount } from 'svelte';
 
 	export let course: Course;
-	let cardWidth: number;
+	let modalRef: HTMLDialogElement;
+
+	onMount(() => {
+		if (modalRef) {
+			const closeModal: (e: MouseEvent) => void = (e) => {
+				const dialogDimensions = modalRef.getBoundingClientRect();
+				if (
+					e.clientX < dialogDimensions.left ||
+					e.clientX > dialogDimensions.right ||
+					e.clientY < dialogDimensions.top ||
+					e.clientY > dialogDimensions.bottom
+				) {
+					modalRef.close();
+				}
+			};
+
+			modalRef.addEventListener('click', closeModal);
+
+			return () => {
+				modalRef.removeEventListener('click', closeModal);
+			};
+		}
+	});
 </script>
 
-<div class="outer" bind:clientWidth={cardWidth}>
-	<div
-		class="bg-image"
-		style={`background-image: url(${course.image}); padding-top: ${(cardWidth / 4) * 3}px`}
+<button class="outer" on:click={() => modalRef.showModal()}>
+	<div class="bg-img" style={`background-image: url(${course.image});`} />
+	<img
+		alt="img"
+		src={course.image}
+		class="object-contain object-center w-full h-auto absolute top-1/2 -translate-y-1/2"
 	/>
-	<div class="summary p-family">
-		<h1 class="h-family">{course.title}</h1>
-		<div>{course.summary}</div>
+	<!-- <div class="bg-image" style={`background-image: url(${course.image});`} /> -->
+	<h1>{course.title}</h1>
+</button>
 
-		{#if $session.loggedIn}
-			<a
-				href={`${base}/course/${course.courseId}`}
-				class="m-auto block text-white border border-white bg-lime-800 py-3 px-8 rounded-lg w-fit"
-				>Start Course</a
-			>
-		{:else}
-			<a
-				href={`${base}/login`}
-				class="m-auto block text-white border border-white bg-blue-500 py-3 px-8 rounded-lg w-fit"
-				>Login to Enroll</a
-			>
-		{/if}
+<dialog
+	bind:this={modalRef}
+	class="z-10 rounded-xl bg-black bg-opacity-90 text-white max-h-[80lvh] overflow-scroll"
+>
+	<div class="m-auto max-w-md">
+		<div class="w-full text-center text-3xl font-sans font-thin py-3" tabindex="-1">
+			{course.title}
+		</div>
+		<div class="font-serif font-thin whitespace-pre-wrap">{course.summary}</div>
+		<br />
+		<div class="flex justify-between gap-3">
+			<form method="dialog">
+				<button>Close</button>
+			</form>
+			<button class="bg-blue-800">Enroll</button>
+		</div>
 	</div>
-</div>
+</dialog>
 
 <style lang="postcss">
 	.outer {
-		max-height: 80lvh;
-		background: linear-gradient(to bottom, transparent, var(--rich-black));
-		@apply max-w-xl w-full rounded-lg flex flex-col relative overflow-y-scroll;
+		aspect-ratio: 1 / 1;
+		max-height: 50lvh;
+		@apply max-w-sm w-full rounded-lg relative overflow-hidden shadow-md shadow-black active:shadow-sm;
 	}
-	.bg-image {
-		aspect-ratio: 4/3;
-		width: 100%;
-		height: auto;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
-		position: sticky;
-		top: 0;
+
+	.bg-img {
+		@apply w-full h-full absolute top-0 blur-sm bg-cover bg-no-repeat bg-center;
 	}
-	.overlay {
-		height: 100%;
-		background: linear-gradient(to bottom, transparent 60%, var(--rich-black));
-	}
-	h1 {
+
+	.outer h1 {
 		color: var(--lemon-chiffon);
-		@apply font-bold text-3xl w-full text-center py-2 z-10;
+		@apply text-3xl w-full text-center py-2 z-10 absolute bottom-1 font-sans font-thin;
 	}
-	.summary {
-		background: linear-gradient(to bottom, transparent, var(--rich-black) 40px);
-		top: -40px;
-		@apply text-white p-6 text-base whitespace-pre-wrap font-thin relative;
+	dialog div button {
+		@apply border border-white py-1 px-4 rounded;
+	}
+	dialog::backdrop {
+		@apply bg-pink-900 bg-opacity-50;
 	}
 </style>

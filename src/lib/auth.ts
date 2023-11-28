@@ -31,6 +31,17 @@ export function login(email: string, password: string) {
 	});
 }
 
+export function logout() {
+	return fetch(`${env.PUBLIC_AUTH_URL}/logout`, {
+		method: 'POST',
+		headers: {
+			accept: 'application/json',
+			['content-type']: 'application/json'
+		},
+		credentials: 'include'
+	});
+}
+
 export function passwordReset(email: string) {
 	return fetch(`${env.PUBLIC_AUTH_URL}/email-reset`, {
 		method: 'PUT',

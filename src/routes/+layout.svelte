@@ -1,4 +1,6 @@
 <script>
+	import '@fontsource-variable/hepta-slab';
+	import '@fontsource-variable/quicksand';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import '../app.css';
 </script>

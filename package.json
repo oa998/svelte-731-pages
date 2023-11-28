@@ -35,6 +35,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource-variable/hepta-slab": "^5.0.17",
+		"@fontsource-variable/quicksand": "^5.0.15",
 		"@iconify/svelte": "^3.1.4",
 		"marked": "^9.1.2"
 	}

@@ -127,7 +127,7 @@
 <style lang="postcss">
 	form {
 		background: color-mix(in srgb, var(--rich-black) 30%, transparent);
-		max-height: 95dvh;
+		max-height: 95lvh;
 		@apply max-w-4xl overflow-y-scroll;
 	}
 

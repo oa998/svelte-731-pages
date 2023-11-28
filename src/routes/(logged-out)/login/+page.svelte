@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import CompanyName from '$components/company-name.svelte';
 	import { login, passwordReset, ping } from '$lib/auth';
@@ -47,9 +49,9 @@
 		}
 	};
 
-	$: if ($session.loggedIn) {
+	$: if (browser && $session.loggedIn) {
 		console.log('Logged in!');
-		// TODO: How to send to page using sveltekit?
+		goto(`${base}/courses`);
 	}
 </script>
 
