@@ -38,13 +38,15 @@ export function login(email: string, password: string) {
 			password
 		}),
 		credentials: 'include'
-	})
-		.then(throwIfNot2xx('Login failed. Try again.'))
-		.then((j) => {
+	}).then(async (r) => {
+		if (r.status == 200) {
+			const j = await r.json();
 			if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
 				session.set(j);
 			}
-		});
+		}
+		return r;
+	});
 }
 
 export function logout() {
