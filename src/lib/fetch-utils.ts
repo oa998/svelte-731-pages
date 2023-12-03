@@ -1,7 +1,7 @@
 import { session } from '$stores/session';
 
 export const throwIfNot2xx = (message: string) => (response: Response) => {
-	console.log('tsting', response.url);
+	console.log('testing for non2xx', response.url, ':', /^2..$/.test(`${response.status}`));
 	if (/^2..$/.test(`${response.status}`)) return response;
 	throw new Error(message);
 };

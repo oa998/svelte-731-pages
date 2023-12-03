@@ -1,9 +1,6 @@
-import { goto } from '$app/navigation';
-import { base } from '$app/paths';
 import { env } from '$env/dynamic/public';
 import { session } from '$stores/session';
 import { peekFor401, throwIfNot2xx } from './fetch-utils';
-import { toastErrorMsg, toastMsg } from './toast';
 
 export function ping() {
 	fetch(`${env.PUBLIC_SERVER_URL}/auth/wakeup-ping`);
@@ -40,20 +37,7 @@ export function login(email: string, password: string) {
 			password
 		}),
 		credentials: 'include'
-	})
-		.then(throwIfNot2xx('Login failed. Try again.'))
-		.then(async (r) => {
-			if (r.status == 200) {
-				const j = await r.json();
-				if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
-					session.set(j);
-				}
-			}
-			return r;
-		})
-		.then(() => toastMsg('Logged in'))
-		.then(() => goto(`${base}/courses`))
-		.catch((e) => toastErrorMsg(e.message));
+	});
 }
 
 export function logout() {
@@ -64,17 +48,7 @@ export function logout() {
 			['content-type']: 'application/json'
 		},
 		credentials: 'include'
-	})
-		.then(throwIfNot2xx('Logout failed'))
-		.then(async (r) => {
-			if (r.status == 200) {
-				session.set({ admin: false, auth: false });
-			}
-			return r;
-		})
-		.then(() => toastMsg('Logged out'))
-		.then(() => goto(`${base}`))
-		.catch(() => toastErrorMsg('Failed to logout'));
+	});
 }
 
 export function passwordReset(email: string) {

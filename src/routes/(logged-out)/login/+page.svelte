@@ -3,6 +3,7 @@
 	import { base } from '$app/paths';
 	import CompanyName from '$components/company-name.svelte';
 	import { login, passwordReset, sessionPing } from '$lib/auth';
+	import { throwIfNot2xx } from '$lib/fetch-utils';
 	import { toastErrorMsg, toastMsg } from '$lib/toast';
 	import { session } from '$stores/session';
 	import { onMount } from 'svelte';
@@ -13,6 +14,7 @@
 
 	onMount(() => {
 		if (!$session.auth) {
+			console.log('calling session ping');
 			sessionPing();
 		}
 	});
@@ -23,7 +25,21 @@
 
 	$: _login = (email: string, password: string) => {
 		loading = true;
-		return login(email, password).then(() => (loading = false));
+		return login(email, password)
+			.then(throwIfNot2xx('Login failed. Try again.'))
+			.then(async (r) => {
+				if (/^2..$/.test(`${r.status}`)) {
+					const j = await r.json();
+					if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
+						session.set(j);
+					}
+				}
+				return r;
+			})
+			.then(() => toastMsg('Logged in'))
+			.then(() => goto(`${base}/courses`))
+			.catch((e) => toastErrorMsg(e.message))
+			.then(() => (loading = false));
 	};
 
 	$: _passwordReset = (email: string) => {
