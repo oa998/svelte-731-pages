@@ -40,15 +40,20 @@ export function login(email: string, password: string) {
 			password
 		}),
 		credentials: 'include'
-	}).then(async (r) => {
-		if (r.status == 200) {
-			const j = await r.json();
-			if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
-				session.set(j);
+	})
+		.then(throwIfNot2xx('Login failed. Try again.'))
+		.then(async (r) => {
+			if (r.status == 200) {
+				const j = await r.json();
+				if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
+					session.set(j);
+				}
 			}
-		}
-		return r;
-	});
+			return r;
+		})
+		.then(() => toastMsg('Logged in'))
+		.then(() => goto(`${base}/courses`))
+		.catch((e) => toastErrorMsg(e.message));
 }
 
 export function logout() {

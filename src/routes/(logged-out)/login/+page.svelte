@@ -3,7 +3,6 @@
 	import { base } from '$app/paths';
 	import CompanyName from '$components/company-name.svelte';
 	import { login, passwordReset, sessionPing } from '$lib/auth';
-	import { throwIfNot2xx } from '$lib/fetch-utils';
 	import { toastErrorMsg, toastMsg } from '$lib/toast';
 	import { session } from '$stores/session';
 	import { onMount } from 'svelte';
@@ -24,12 +23,7 @@
 
 	$: _login = (email: string, password: string) => {
 		loading = true;
-		return login(email, password)
-			.then(throwIfNot2xx('Login failed. Try again.'))
-			.then(() => toastMsg('Logged in'))
-			.then(() => goto(`${base}/courses`))
-			.catch((e) => toastErrorMsg(e.message))
-			.then(() => (loading = false));
+		return login(email, password).then(() => (loading = false));
 	};
 
 	$: _passwordReset = (email: string) => {
