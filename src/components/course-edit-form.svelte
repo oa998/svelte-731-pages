@@ -42,7 +42,7 @@
 				toastMsg(`Course ${course.courseId} updated`);
 				dispatch('course-updated', course);
 			})
-			.catch(toastErrorCatch)
+			.catch(toastErrorCatch('Could not update course details'))
 			.then(() => (saving = false));
 	};
 </script>

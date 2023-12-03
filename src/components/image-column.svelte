@@ -4,7 +4,7 @@
 		if (window.location.host.includes('localhost')) {
 			setMockImages();
 		} else {
-			getAlbumImages().catch(toastErrorCatch);
+			getAlbumImages().catch(toastErrorCatch('Could not load images'));
 		}
 	}
 </script>
@@ -33,7 +33,7 @@
 								toastMsg('Image deleted');
 								refreshImages();
 							})
-							.catch(toastErrorCatch);
+							.catch(toastErrorCatch('Could not delete image'));
 					}}
 				>
 					<Icon icon="ph:x-fill" style="font-size:x-large" color="red" />

@@ -7,7 +7,10 @@ export const toastErrorMsg = (str: string) => {
 		}
 	});
 };
-export const toastErrorCatch = (err: Error) => toastErrorMsg(err.message);
+export const toastErrorCatch = (alternate: string) => (err: Error) => {
+	const display = err.message == 'Failed to fetch' ? alternate : err.message;
+	toastErrorMsg(display);
+};
 
 export const toastMsg = (str: string) =>
 	toast.push(str, {

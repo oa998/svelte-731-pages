@@ -39,7 +39,7 @@
 					fake: true // fake denotes that it's just client-side and hasn't been saved yet
 				});
 			})
-			.catch(toastErrorCatch)
+			.catch(toastErrorCatch('Could not load courses'))
 			.then(() => (coursesLoading = false));
 	};
 
@@ -56,7 +56,7 @@
 				.then((_chapters) => {
 					chapters = _chapters;
 				})
-				.catch(toastErrorCatch);
+				.catch(toastErrorCatch('Could not load chapters'));
 		}
 		chaptersLoading = false;
 		chapters = chapters.concat({

@@ -47,7 +47,7 @@
 				toastMsg(`Chapter ${chapter.chapterId} updated`);
 				dispatch('chapter-updated', chapter);
 			})
-			.catch(toastErrorCatch)
+			.catch(toastErrorCatch('Could not save chapter'))
 			.then(() => (saving = false));
 	};
 </script>

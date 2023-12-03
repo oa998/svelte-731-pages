@@ -33,7 +33,7 @@
 				toastMsg(`${imageSelected} uploaded`);
 				imageSelected = '';
 			})
-			.catch(toastErrorCatch)
+			.catch(toastErrorCatch('Could not upload image'))
 			.then(() => (uploading = false));
 	};
 </script>
