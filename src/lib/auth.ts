@@ -1,7 +1,9 @@
+import { goto } from '$app/navigation';
 import { env } from '$env/dynamic/public';
+import { base } from '$service-worker';
 import { session } from '$stores/session';
 import { peekFor401, throwIfNot2xx } from './fetch-utils';
-import { toastMsg } from './toast';
+import { toastErrorMsg, toastMsg } from './toast';
 
 export function ping() {
 	fetch(`${env.PUBLIC_SERVER_URL}/auth/wakeup-ping`);
@@ -50,7 +52,6 @@ export function login(email: string, password: string) {
 }
 
 export function logout() {
-	console.log('logging out....');
 	return fetch(`${env.PUBLIC_SERVER_URL}/auth/logout`, {
 		method: 'POST',
 		headers: {
@@ -60,9 +61,15 @@ export function logout() {
 		credentials: 'include'
 	})
 		.then(throwIfNot2xx('Logout failed'))
-		.then(() => {
-			toastMsg('Logged out');
-		});
+		.then(async (r) => {
+			if (r.status == 200) {
+				session.set({ admin: false, auth: false });
+			}
+			return r;
+		})
+		.then(() => toastMsg('Logged out'))
+		.then(() => goto(`${base}`))
+		.catch(() => toastErrorMsg('Failed to logout'));
 }
 
 export function passwordReset(email: string) {

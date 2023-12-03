@@ -1,8 +1,6 @@
 <script>
-	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import { logout, sessionPing } from '$lib/auth';
-	import { toastErrorMsg } from '$lib/toast';
 	import { session } from '$stores/session';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
@@ -17,11 +15,7 @@
 	let loading = false;
 	const _logout = () => {
 		loading = true;
-		logout()
-			.then(() => session.set({ admin: false, auth: false }))
-			.then(() => goto(`${base}`))
-			.catch(() => toastErrorMsg('Failed to logout'))
-			.then(() => (loading = false));
+		logout().then(() => (loading = false));
 	};
 </script>
 
