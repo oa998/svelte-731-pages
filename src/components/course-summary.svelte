@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Course } from '$lib/articles';
+	import type { Course } from '$lib/courses';
 	import { onMount } from 'svelte';
 
 	export let course: Course;

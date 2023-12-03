@@ -3,7 +3,7 @@
 	import Article from '$components/article.svelte';
 	import Header from '$components/header.svelte';
 	import MarkdownSection from '$components/markdown-section.svelte';
-	import { getAllChapters, getCourse, type Chapter, type Course } from '$lib/articles';
+	import { getAllChapters, getCourse, type Chapter, type Course } from '$lib/courses';
 	import { customMarked } from '$lib/marked-custom';
 	import { onMount } from 'svelte';
 

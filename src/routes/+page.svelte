@@ -6,7 +6,7 @@
 	let bannerImgRef: HTMLImageElement;
 	let titleRef: HTMLDivElement;
 	let containerRef: HTMLDivElement;
-	const scrollOffset = 80;
+	const scrollOffset = 125;
 
 	$: if (contentWidth && bannerImgRef) {
 		bannerImgRef.width = contentWidth * 0.9;

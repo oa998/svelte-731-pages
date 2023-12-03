@@ -30,14 +30,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: echo Hello1 ||
-          echo  ${{ vars.PUBLIC_AUTH_URL }}
-
       - name: build
         env:
           BASE_PATH: '/your-repo-name'
-          PUBLIC_AUTH_URL: ${{ vars.PUBLIC_AUTH_URL }}
-          PUBLIC_PUBLIC_STORAGE_URL: ${{ vars.PUBLIC_PUBLIC_STORAGE_URL }}
+          PUBLIC_SERVER_URL: ${{ vars.PUBLIC_SERVER_URL }}
           PUBLIC_IMGUR_CLIENT_ID: ${{ vars.PUBLIC_IMGUR_CLIENT_ID }}
           PUBLIC_IMGUR_ACCESS_TOKEN: ${{ vars.PUBLIC_IMGUR_ACCESS_TOKEN }}
         run: |
@@ -66,6 +62,3 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v1
-
-      - run: echo Hello2 ||
-          echo  ${{ vars.PUBLIC_AUTH_URL }}

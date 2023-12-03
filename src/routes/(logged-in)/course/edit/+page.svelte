@@ -2,7 +2,7 @@
 	import ChapterEditForm from '$components/chapter-edit-form.svelte';
 	import CourseEditForm from '$components/course-edit-form.svelte';
 	import ImageSheet from '$components/image-sheet.svelte';
-	import { getAllChapters, getAllCourses, type Chapter, type Course } from '$lib/articles';
+	import { getAllChapters, getAllCourses, type Chapter, type Course } from '$lib/courses';
 	import { toastErrorCatch } from '$lib/toast';
 	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';

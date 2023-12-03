@@ -1,23 +1,31 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import { logout } from '$lib/auth';
+	import { logout, sessionPing } from '$lib/auth';
 	import { toastErrorMsg } from '$lib/toast';
 	import { session } from '$stores/session';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
+	import { onMount } from 'svelte';
 	import '../../app.css';
+
+	onMount(() => {
+		if (!$session.auth) {
+			sessionPing();
+		}
+	});
 
 	let loading = false;
 	const _logout = () => {
 		loading = true;
 		logout()
+			.then(() => session.set({ admin: false, auth: false }))
 			.then(() => goto(`${base}`))
 			.catch(() => toastErrorMsg('Failed to logout'))
 			.then(() => (loading = false));
 	};
 </script>
 
-{#if $session.loggedIn}
+{#if $session.auth}
 	<div class="text-white text-center flex flex-row gap-2 items-center justify-end py-1">
 		<span>Logged in</span>
 		<span

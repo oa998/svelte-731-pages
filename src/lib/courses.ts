@@ -18,7 +18,7 @@ export type Chapter = {
 };
 
 export function getAllCourses() {
-	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course`, {
+	return fetch(`${env.PUBLIC_SERVER_URL}/course-overview`, {
 		method: 'GET',
 		credentials: 'include'
 	})
@@ -28,7 +28,7 @@ export function getAllCourses() {
 }
 
 export function getAllChapters(courseId: string) {
-	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${courseId}/chapter`, {
+	return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${courseId}/chapter`, {
 		method: 'GET',
 		credentials: 'include'
 	})
@@ -38,7 +38,7 @@ export function getAllChapters(courseId: string) {
 }
 
 export function getCourse(courseId: string) {
-	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${courseId}`, {
+	return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${courseId}`, {
 		method: 'GET',
 		credentials: 'include'
 	})
@@ -52,7 +52,7 @@ export function getCourse(courseId: string) {
 }
 
 export function getChapter(courseId: string, chapterId: string) {
-	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${courseId}/chapter/${chapterId}`, {
+	return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${courseId}/chapter/${chapterId}`, {
 		method: 'GET',
 		credentials: 'include'
 	})
@@ -66,7 +66,7 @@ export function getChapter(courseId: string, chapterId: string) {
 }
 
 export function postCourse(body: Course) {
-	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${body.courseId}`, {
+	return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${body.courseId}`, {
 		method: 'POST',
 		headers: {
 			['content-type']: 'application/json'
@@ -79,7 +79,7 @@ export function postCourse(body: Course) {
 }
 
 export function postChapter(courseId: string, body: Chapter) {
-	return fetch(`${env.PUBLIC_STORAGE_URL}?q=course/${courseId}/chapter/${body.chapterId}`, {
+	return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${courseId}/chapter/${body.chapterId}`, {
 		method: 'POST',
 		headers: {
 			['content-type']: 'application/json'

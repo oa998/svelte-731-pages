@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { postCourse, type Course } from '$lib/articles';
+	import { postCourse, type Course } from '$lib/courses';
 	import { toastErrorCatch, toastMsg } from '$lib/toast';
 	import Icon from '@iconify/svelte';
 	import { createEventDispatcher } from 'svelte';

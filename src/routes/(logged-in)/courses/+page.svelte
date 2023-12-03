@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CourseSummary from '$components/course-summary.svelte';
 	import Header from '$components/header.svelte';
-	import { getAllCourses, type Course } from '$lib/articles';
+	import { getAllCourses, type Course } from '$lib/courses';
 	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
 

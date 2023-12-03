@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import CompanyName from '$components/company-name.svelte';
-	import { login, passwordReset, ping } from '$lib/auth';
+	import { login, passwordReset, sessionPing } from '$lib/auth';
 	import { toastErrorMsg, toastMsg } from '$lib/toast';
 	import { session } from '$stores/session';
 	import { onMount } from 'svelte';
@@ -13,14 +12,21 @@
 	let showLoginForm = true;
 
 	onMount(() => {
-		ping();
+		if (!$session.auth) {
+			sessionPing();
+		}
 	});
+
+	$: if ($session.auth) {
+		goto(`${base}/courses`);
+	}
 
 	$: _login = (email: string, password: string) => {
 		loading = true;
 		return login(email, password)
 			.then(() => toastMsg('Logged in'))
-			.catch((e) => toastErrorMsg('Login failed. Try again.'))
+			.then(() => goto(`${base}/courses`))
+			.catch((e) => toastErrorMsg(e.message))
 			.then(() => (loading = false));
 	};
 
@@ -48,11 +54,6 @@
 			_passwordReset(formData.get('email') as string);
 		}
 	};
-
-	$: if (browser && $session.loggedIn) {
-		console.log('Logged in!');
-		goto(`${base}/courses`);
-	}
 </script>
 
 <div class="relative">

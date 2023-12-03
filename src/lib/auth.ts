@@ -1,23 +1,33 @@
 import { env } from '$env/dynamic/public';
+import { session } from '$stores/session';
+import { peekFor401, throwIfNot2xx } from './fetch-utils';
+import { toastMsg } from './toast';
 
 export function ping() {
-	fetch(`${env.PUBLIC_AUTH_URL}/ping`);
+	fetch(`${env.PUBLIC_SERVER_URL}/auth/wakeup-ping`);
 }
 
 export function sessionPing() {
-	return fetch(`${env.PUBLIC_AUTH_URL}/ping`)
-		.then((r) => /^2..$/.test(`${r.status}`))
-		.catch(() => false);
-}
-
-export function adminPing() {
-	return fetch(`${env.PUBLIC_AUTH_URL}/ping`)
-		.then((r) => /^2..$/.test(`${r.status}`))
-		.catch(() => false);
+	return fetch(`${env.PUBLIC_SERVER_URL}/auth/session-ping`, {
+		method: 'GET',
+		headers: {
+			accept: 'application/json',
+			['content-type']: 'application/json'
+		},
+		credentials: 'include'
+	})
+		.then(peekFor401)
+		.then(throwIfNot2xx('Not logged in'))
+		.then((r) => r.json())
+		.then((j) => {
+			if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
+				session.set(j);
+			}
+		});
 }
 
 export function login(email: string, password: string) {
-	return fetch(`${env.PUBLIC_AUTH_URL}/login`, {
+	return fetch(`${env.PUBLIC_SERVER_URL}/auth/login`, {
 		method: 'POST',
 		headers: {
 			accept: 'application/json',
@@ -28,22 +38,33 @@ export function login(email: string, password: string) {
 			password
 		}),
 		credentials: 'include'
-	});
+	})
+		.then(throwIfNot2xx('Login failed. Try again.'))
+		.then((j) => {
+			if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
+				session.set(j);
+			}
+		});
 }
 
 export function logout() {
-	return fetch(`${env.PUBLIC_AUTH_URL}/logout`, {
+	console.log('logging out....');
+	return fetch(`${env.PUBLIC_SERVER_URL}/auth/logout`, {
 		method: 'POST',
 		headers: {
 			accept: 'application/json',
 			['content-type']: 'application/json'
 		},
 		credentials: 'include'
-	});
+	})
+		.then(throwIfNot2xx('Logout failed'))
+		.then(() => {
+			toastMsg('Logged out');
+		});
 }
 
 export function passwordReset(email: string) {
-	return fetch(`${env.PUBLIC_AUTH_URL}/email-reset`, {
+	return fetch(`${env.PUBLIC_SERVER_URL}/auth/email-reset`, {
 		method: 'PUT',
 		headers: {
 			accept: 'application/json',
