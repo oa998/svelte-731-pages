@@ -52,80 +52,97 @@
 	};
 </script>
 
-<form on:submit|preventDefault={_save}>
-	<div class="header">
-		<h1>Chapter Data</h1>
-		<button on:click|preventDefault={() => (minimize = !minimize)}
-			><Icon
-				icon={minimize ? 'solar:maximize-bold' : 'solar:minimize-bold'}
-				style="font-size:small"
-			/></button
-		>
-	</div>
-	{#if !minimize}
-		<div class="form-grid">
-			<label for="chapterId">ID</label>
-			<div class="flex flex-row">
-				<input id="chapterId" name="chapterId" type="text" bind:value={chapterId} disabled />
-				<span class="text-white px-2 italic text-sm self-center">(Not editable)</span>
-			</div>
-
-			<label for="title">Title</label>
-			<input id="title" name="title" type="text" required pattern="^[^\s]+.*$" bind:value={title} />
-
-			<label for="sequence">Sequence</label>
-			<input id="sequence" name="sequence" required type="number" min={0} bind:value={sequence} />
-
-			<label for="videoURL">Video URL</label>
-			<input id="videoURL" name="videoURL" type="text" pattern="^[^\s]+.*$" bind:value={videoURL} />
-
-			<label for="markdown">Markdown</label>
-			<textarea
-				id="markdown"
-				name="markdown"
-				class="outline-none p-1"
-				cols={20}
-				rows={16}
-				required
-				on:paste={(v) =>
-					setTimeout(() => {
-						markdown = markdown.trim();
-					})}
-				bind:value={markdown}
-			/>
-		</div>
-		<div class="flex flex-row w-full justify-end gap-5 py-2 px-5">
-			<button on:click|preventDefault={() => (preview = !preview)}>Preview</button>
-			<button type="submit" disabled={saving}
-				>Save {#if saving} <Icon icon="eos-icons:loading" style="font-size: small" /> {/if}</button
+<div>
+	<form on:submit|preventDefault={_save}>
+		<div class="header">
+			<h1>Chapter Data</h1>
+			<button on:click|preventDefault={() => (minimize = !minimize)}
+				><Icon
+					icon={minimize ? 'solar:maximize-bold' : 'solar:minimize-bold'}
+					style="font-size:small"
+				/></button
 			>
 		</div>
-		{#if preview}
-			<div class="preview">
-				<Article>
-					{#if videoURL}
-						{#key videoURL}
-							<!-- svelte-ignore a11y-media-has-caption -->
-							<video
-								class="w-full z-0 pt-5"
-								oncontextmenu="return false;"
-								id="my-video-player"
-								controls
-								controlsList="nodownload"
-							>
-								<source src={videoURL} />
-							</video>
-						{/key}
-					{/if}
-					<MarkdownSection {markdown} />
-				</Article>
+		{#if !minimize}
+			<div class="form-grid">
+				<label for="chapterId">ID</label>
+				<div class="flex flex-row">
+					<input id="chapterId" name="chapterId" type="text" bind:value={chapterId} disabled />
+					<span class="text-white px-2 italic text-sm self-center">(Not editable)</span>
+				</div>
+
+				<label for="title">Title</label>
+				<input
+					id="title"
+					name="title"
+					type="text"
+					required
+					pattern="^[^\s]+.*$"
+					bind:value={title}
+				/>
+
+				<label for="sequence">Sequence</label>
+				<input id="sequence" name="sequence" required type="number" min={0} bind:value={sequence} />
+
+				<label for="videoURL">Video URL</label>
+				<input
+					id="videoURL"
+					name="videoURL"
+					type="text"
+					pattern="^[^\s]+.*$"
+					bind:value={videoURL}
+				/>
+
+				<label for="markdown">Markdown</label>
+				<textarea
+					id="markdown"
+					name="markdown"
+					class="outline-none p-1"
+					cols={20}
+					rows={16}
+					required
+					on:paste={(v) =>
+						setTimeout(() => {
+							markdown = markdown.trim();
+						})}
+					bind:value={markdown}
+				/>
+			</div>
+			<div class="flex flex-row w-full justify-end gap-5 py-2 px-5">
+				<button on:click|preventDefault={() => (preview = !preview)}>Preview</button>
+				<button type="submit" disabled={saving}
+					>Save {#if saving}
+						<Icon icon="eos-icons:loading" style="font-size: small" />
+					{/if}</button
+				>
 			</div>
 		{/if}
+	</form>
+	{#if preview}
+		<div class="preview">
+			<Article>
+				{#if videoURL}
+					{#key videoURL}
+						<!-- svelte-ignore a11y-media-has-caption -->
+						<video
+							class="w-full z-0 pt-5"
+							oncontextmenu="return false;"
+							id="my-video-player"
+							controls
+							controlsList="nodownload"
+						>
+							<source src={videoURL} />
+						</video>
+					{/key}
+				{/if}
+				<MarkdownSection {markdown} />
+			</Article>
+		</div>
 	{/if}
-</form>
+</div>
 
 <style lang="postcss">
-	form {
+	div:has(> form) {
 		background: color-mix(in srgb, var(--rich-black) 30%, transparent);
 		max-height: 95lvh;
 		@apply max-w-4xl overflow-y-scroll;

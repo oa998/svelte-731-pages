@@ -47,7 +47,7 @@
 	};
 </script>
 
-<form on:submit|preventDefault={_save}>
+<div>
 	<div class="header">
 		<h1>Course Data</h1>
 		<button on:click|preventDefault={() => (minimize = !minimize)}
@@ -57,58 +57,67 @@
 			/></button
 		>
 	</div>
-	{#if !minimize}
-		<div class="form-grid">
-			<label for="courseId">ID</label>
-			<div class="flex flex-row">
-				<input id="courseId" name="courseId" type="text" bind:value={courseId} disabled />
-				<span class="text-white px-2 italic text-sm self-center">(Not editable)</span>
-			</div>
+	<form on:submit|preventDefault={_save}>
+		{#if !minimize}
+			<div class="form-grid">
+				<label for="courseId">ID</label>
+				<div class="flex flex-row">
+					<input id="courseId" name="courseId" type="text" bind:value={courseId} disabled />
+					<span class="text-white px-2 italic text-sm self-center">(Not editable)</span>
+				</div>
 
-			<label for="title">Title</label>
-			<input id="title" name="title" type="text" required pattern="^[^\s]+.*$" bind:value={title} />
+				<label for="title">Title</label>
+				<input
+					id="title"
+					name="title"
+					type="text"
+					required
+					pattern="^[^\s]+.*$"
+					bind:value={title}
+				/>
 
-			<label for="image">Image URL</label>
-			<input id="image" name="image" required pattern="^[^\s]+.*$" bind:value={image} />
+				<label for="image">Image URL</label>
+				<input id="image" name="image" required pattern="^[^\s]+.*$" bind:value={image} />
 
-			<label for="summary">Summary</label>
-			<textarea
-				id="summary"
-				name="summary"
-				class="outline-none p-1"
-				cols={20}
-				rows={8}
-				required
-				on:paste={(v) =>
-					setTimeout(() => {
-						summary = summary.trim();
-					})}
-				bind:value={summary}
-			/>
-		</div>
-		<div class="flex flex-row w-full justify-end gap-5 py-2 px-5">
-			<button on:click|preventDefault={() => (preview = !preview)}>Preview</button>
-			<button type="submit" disabled={saving}
-				>Save {#if saving} <Icon icon="eos-icons:loading" /> {/if}</button
-			>
-		</div>
-		{#if preview}
-			<div class="preview">
-				<CourseSummary
-					course={{
-						courseId,
-						image,
-						summary,
-						title
-					}}
+				<label for="summary">Summary</label>
+				<textarea
+					id="summary"
+					name="summary"
+					class="outline-none p-1"
+					cols={20}
+					rows={8}
+					required
+					on:paste={(v) =>
+						setTimeout(() => {
+							summary = summary.trim();
+						})}
+					bind:value={summary}
 				/>
 			</div>
+			<div class="flex flex-row w-full justify-end gap-5 py-2 px-5">
+				<button on:click|preventDefault={() => (preview = !preview)}>Preview</button>
+				<button type="submit" disabled={saving}
+					>Save {#if saving} <Icon icon="eos-icons:loading" /> {/if}</button
+				>
+			</div>
 		{/if}
+	</form>
+	{#if preview && !minimize}
+		<div class="preview">
+			<CourseSummary
+				course={{
+					courseId,
+					image,
+					summary,
+					title
+				}}
+			/>
+		</div>
 	{/if}
-</form>
+</div>
 
 <style lang="postcss">
-	form {
+	div:has(> form) {
 		background: color-mix(in srgb, var(--rich-black) 30%, transparent);
 		max-height: 95lvh;
 		@apply max-w-4xl overflow-y-scroll;
