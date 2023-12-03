@@ -1,6 +1,6 @@
 import { goto } from '$app/navigation';
+import { base } from '$app/paths';
 import { env } from '$env/dynamic/public';
-import { base } from '$service-worker';
 import { session } from '$stores/session';
 import { peekFor401, throwIfNot2xx } from './fetch-utils';
 import { toastErrorMsg, toastMsg } from './toast';
