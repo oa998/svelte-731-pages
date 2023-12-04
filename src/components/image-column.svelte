@@ -33,7 +33,7 @@
 								toastMsg('Image deleted');
 								refreshImages();
 							})
-							.catch(toastErrorCatch('Could not delete image'));
+							.catch(toastErrorCatch);
 					}}
 				>
 					<Icon icon="ph:x-fill" style="font-size:x-large" color="red" />

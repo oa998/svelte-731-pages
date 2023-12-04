@@ -7,9 +7,8 @@ export const toastErrorMsg = (str: string) => {
 		}
 	});
 };
-export const toastErrorCatch = (alternate: string) => (err: Error) => {
-	const display = err.message == 'Failed to fetch' ? alternate : err.message;
-	toastErrorMsg(display);
+export const toastErrorCatch = (err: Error) => {
+	toastErrorMsg(err.message);
 };
 
 export const toastMsg = (str: string) =>

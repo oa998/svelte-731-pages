@@ -1,6 +1,9 @@
+import { goto } from '$app/navigation';
+import { base } from '$app/paths';
 import { env } from '$env/dynamic/public';
-import { session } from '$stores/session';
+import { resetSession, session } from '$stores/session';
 import { peekFor401, throwIfNot2xx } from './fetch-utils';
+import { toastErrorCatch, toastMsg } from './toast';
 
 export function ping() {
 	fetch(`${env.PUBLIC_SERVER_URL}/auth/wakeup-ping`);
@@ -16,9 +19,10 @@ export function sessionPing() {
 		credentials: 'include'
 	})
 		.then(peekFor401)
-		.then(throwIfNot2xx('Not logged in'))
+		.then(throwIfNot2xx)
 		.then((r) => r.json())
 		.then((j) => {
+			alert('we are setting session');
 			if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
 				session.set(j);
 			}
@@ -37,7 +41,20 @@ export function login(email: string, password: string) {
 			password
 		}),
 		credentials: 'include'
-	});
+	})
+		.then(throwIfNot2xx)
+		.then(async (r) => {
+			if (/^2..$/.test(`${r.status}`)) {
+				const j = await r.json();
+				if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
+					session.set(j);
+				}
+			}
+			return r;
+		})
+		.then(() => toastMsg('Logged in'))
+		.then(() => goto(`${base}/courses`))
+		.catch(toastErrorCatch);
 }
 
 export function logout() {
@@ -48,7 +65,16 @@ export function logout() {
 			['content-type']: 'application/json'
 		},
 		credentials: 'include'
-	});
+	})
+		.then(throwIfNot2xx)
+		.then(async (r) => {
+			if (/^2..$/.test(`${r.status}`)) {
+				resetSession();
+			}
+			return r;
+		})
+		.then(() => toastMsg('Logged out'))
+		.then(() => goto(`${base}`));
 }
 
 export function passwordReset(email: string) {
@@ -62,5 +88,7 @@ export function passwordReset(email: string) {
 			email
 		}),
 		credentials: 'include'
-	});
+	})
+		.then(throwIfNot2xx)
+		.then(() => toastMsg(`Password reset sent for ${email}`));
 }

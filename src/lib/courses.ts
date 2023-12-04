@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/public';
-import { throwIfNot2xx } from './fetch-utils';
+import { throwCustomIfNot2xx } from './fetch-utils';
 
 export type Course = {
 	courseId: string;
@@ -22,7 +22,7 @@ export function getAllCourses() {
 		method: 'GET',
 		credentials: 'include'
 	})
-		.then(throwIfNot2xx(`Unable to read all courses`))
+		.then(throwCustomIfNot2xx(`Unable to read all courses`))
 		.then((r) => r.json())
 		.then((j) => j as Course[]);
 }
@@ -32,7 +32,7 @@ export function getAllChapters(courseId: string) {
 		method: 'GET',
 		credentials: 'include'
 	})
-		.then(throwIfNot2xx(`Unable to read all chapters for ${courseId}`))
+		.then(throwCustomIfNot2xx(`Unable to read all chapters for ${courseId}`))
 		.then((r) => r.json())
 		.then((j) => j as Chapter[]);
 }
@@ -42,7 +42,7 @@ export function getCourse(courseId: string) {
 		method: 'GET',
 		credentials: 'include'
 	})
-		.then(throwIfNot2xx(`Unable to read course ${courseId}`))
+		.then(throwCustomIfNot2xx(`Unable to read course ${courseId}`))
 		.then((r) => r.json())
 		.then((j) => {
 			const courses = j as Course[];
@@ -56,7 +56,7 @@ export function getChapter(courseId: string, chapterId: string) {
 		method: 'GET',
 		credentials: 'include'
 	})
-		.then(throwIfNot2xx(`Unable to read chapters ${chapterId} of course ${courseId}`))
+		.then(throwCustomIfNot2xx(`Unable to read chapters ${chapterId} of course ${courseId}`))
 		.then((r) => r.json())
 		.then((j) => {
 			const chapters = j as Chapter[];
@@ -74,7 +74,7 @@ export function postCourse(body: Course) {
 		body: JSON.stringify(body),
 		credentials: 'include'
 	})
-		.then(throwIfNot2xx(`Unable to set course ${body.courseId}`))
+		.then(throwCustomIfNot2xx(`Unable to set course ${body.courseId}`))
 		.then((r) => r.json());
 }
 
@@ -87,6 +87,6 @@ export function postChapter(courseId: string, body: Chapter) {
 		body: JSON.stringify(body),
 		credentials: 'include'
 	})
-		.then(throwIfNot2xx(`Unable to set chapter ${body.chapterId} of course ${courseId}`))
+		.then(throwCustomIfNot2xx(`Unable to set chapter ${body.chapterId} of course ${courseId}`))
 		.then((r) => r.json());
 }

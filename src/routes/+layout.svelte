@@ -8,7 +8,7 @@
 <slot />
 <SvelteToast options={{ reversed: true, intro: { y: 192 } }} />
 
-<style>
+<style lang="postcss">
 	:root {
 		--toastContainerTop: auto;
 		--toastContainerRight: 10px;

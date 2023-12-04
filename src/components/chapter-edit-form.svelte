@@ -47,22 +47,22 @@
 				toastMsg(`Chapter ${chapter.chapterId} updated`);
 				dispatch('chapter-updated', chapter);
 			})
-			.catch(toastErrorCatch('Could not save chapter'))
+			.catch(toastErrorCatch)
 			.then(() => (saving = false));
 	};
 </script>
 
 <div>
+	<div class="header">
+		<h1>Chapter Data</h1>
+		<button on:click|preventDefault={() => (minimize = !minimize)}
+			><Icon
+				icon={minimize ? 'solar:maximize-bold' : 'solar:minimize-bold'}
+				style="font-size:small"
+			/></button
+		>
+	</div>
 	<form on:submit|preventDefault={_save}>
-		<div class="header">
-			<h1>Chapter Data</h1>
-			<button on:click|preventDefault={() => (minimize = !minimize)}
-				><Icon
-					icon={minimize ? 'solar:maximize-bold' : 'solar:minimize-bold'}
-					style="font-size:small"
-				/></button
-			>
-		</div>
 		{#if !minimize}
 			<div class="form-grid">
 				<label for="chapterId">ID</label>
@@ -118,7 +118,7 @@
 			</div>
 		{/if}
 	</form>
-	{#if preview}
+	{#if preview && !minimize}
 		<div class="preview">
 			<Article>
 				{#if videoURL}

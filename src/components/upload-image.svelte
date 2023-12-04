@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { upload } from '$lib/imgur-apis';
-	import { toastErrorCatch, toastMsg } from '$lib/toast';
+	import { toastMsg } from '$lib/toast';
 	import { createEventDispatcher } from 'svelte';
 
 	let fileInput: HTMLInputElement;
@@ -33,7 +33,7 @@
 				toastMsg(`${imageSelected} uploaded`);
 				imageSelected = '';
 			})
-			.catch(toastErrorCatch('Could not upload image'))
+			.catch()
 			.then(() => (uploading = false));
 	};
 </script>
