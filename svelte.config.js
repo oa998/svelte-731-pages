@@ -18,7 +18,7 @@ export default {
 			'$stores/*': 'src/stores'
 		},
 		paths: {
-			// base: '/svelte-731-pages'
+			base: '/svelte-731-pages'
 		}
 	},
 	preprocess: vitePreprocess()
