@@ -77,7 +77,7 @@ export function logout() {
 			return r;
 		})
 		.then(() => toastMsg('Logged out'))
-		.then(() => goto(`${base == '/' ? '' : base}`));
+		.then(() => goto(`${base}`));
 }
 
 export function passwordReset(email: string) {
