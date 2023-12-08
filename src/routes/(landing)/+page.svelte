@@ -8,6 +8,8 @@
 	let containerRef: HTMLDivElement;
 	const scrollOffset = 125;
 
+	console.log({ base });
+
 	$: if (contentWidth && bannerImgRef) {
 		bannerImgRef.width = contentWidth * 0.9;
 		bannerImgRef.style.opacity = '1';
