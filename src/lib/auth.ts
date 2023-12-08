@@ -1,16 +1,17 @@
 import { goto } from '$app/navigation';
 import { base } from '$app/paths';
-import { env } from '$env/dynamic/public';
 import { resetSession, session } from '$stores/session';
 import { peekFor401, throwIfNot2xx } from './fetch-utils';
 import { toastErrorCatch, toastMsg } from './toast';
 
 export function ping() {
-	fetch(`${env.PUBLIC_SERVER_URL}/auth/wakeup-ping`);
+	// fetch(`${env.PUBLIC_SERVER_URL}/auth/wakeup-ping`);
+	fetch(`/data/auth/wakeup-ping`);
 }
 
 export function sessionPing() {
-	return fetch(`${env.PUBLIC_SERVER_URL}/auth/session-ping`, {
+	// return fetch(`${env.PUBLIC_SERVER_URL}/auth/session-ping`, {
+	return fetch(`/data/auth/session-ping`, {
 		method: 'GET',
 		headers: {
 			accept: 'application/json',
@@ -30,7 +31,8 @@ export function sessionPing() {
 }
 
 export function login(email: string, password: string) {
-	return fetch(`${env.PUBLIC_SERVER_URL}/auth/login`, {
+	// return fetch(`${env.PUBLIC_SERVER_URL}/auth/login`, {
+	return fetch(`/data/auth/login`, {
 		method: 'POST',
 		headers: {
 			accept: 'application/json',
@@ -58,7 +60,8 @@ export function login(email: string, password: string) {
 }
 
 export function logout() {
-	return fetch(`${env.PUBLIC_SERVER_URL}/auth/logout`, {
+	// return fetch(`${env.PUBLIC_SERVER_URL}/auth/logout`, {
+	return fetch(`/data/auth/logout`, {
 		method: 'POST',
 		headers: {
 			accept: 'application/json',
@@ -78,7 +81,8 @@ export function logout() {
 }
 
 export function passwordReset(email: string) {
-	return fetch(`${env.PUBLIC_SERVER_URL}/auth/email-reset`, {
+	// return fetch(`${env.PUBLIC_SERVER_URL}/auth/email-reset`, {
+	return fetch(`/data/auth/email-reset`, {
 		method: 'PUT',
 		headers: {
 			accept: 'application/json',
