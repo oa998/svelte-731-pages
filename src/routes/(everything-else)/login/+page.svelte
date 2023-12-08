@@ -11,7 +11,7 @@
 	let showLoginForm = true;
 
 	$: if ($session.auth) {
-		goto(`${base}/courses`);
+		goto(`${base == '/' ? '' : base}/courses`);
 	}
 
 	$: _login = (email: string, password: string) => {
@@ -45,7 +45,7 @@
 <div class="relative">
 	<CompanyName class="text-6xl absolute top-0 left-0" />
 	<div class="bg-img-blur">
-		<img class="bg-img-full" src={`${base}/login-hair.png`} alt="login" />
+		<img class="bg-img-full" src={`${base == '/' ? '' : base}/login-hair.png`} alt="login" />
 	</div>
 	<input bind:checked={formDirty} hidden type="checkbox" />
 	<form

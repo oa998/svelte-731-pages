@@ -24,7 +24,7 @@
 			// 	return r;
 			// })
 			// .then(() => toastMsg('Logged out'))
-			// .then(() => goto(`${base}`))
+			// .then(() => goto(`${base == '/' ? '' : base}`))
 			// .catch(() => toastErrorMsg('Failed to logout'))
 			.then(() => (loading = false));
 	};
@@ -44,7 +44,9 @@
 		>
 	</div>
 {:else}
-	<div class="text-white text-center"><a href={`${base}/login`}>Click to log in</a></div>
+	<div class="text-white text-center">
+		<a href={`${base == '/' ? '' : base}/login`}>Click to log in</a>
+	</div>
 {/if}
 <slot />
 <SvelteToast options={{ reversed: true, intro: { y: 192 } }} />

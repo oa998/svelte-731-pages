@@ -55,7 +55,7 @@ export function login(email: string, password: string) {
 			return r;
 		})
 		.then(() => toastMsg('Logged in'))
-		.then(() => goto(`${base}/courses`))
+		.then(() => goto(`${base == '/' ? '' : base}/courses`))
 		.catch(toastErrorCatch);
 }
 
@@ -77,7 +77,7 @@ export function logout() {
 			return r;
 		})
 		.then(() => toastMsg('Logged out'))
-		.then(() => goto(`${base}`));
+		.then(() => goto(`${base == '/' ? '' : base}`));
 }
 
 export function passwordReset(email: string) {

@@ -52,7 +52,7 @@
 			<div class="poly poly-front">
 				<img
 					bind:this={bannerImgRef}
-					src={`${base}/5standing-cropped.webp`}
+					src={`${base == '/' ? '' : base}/5standing-cropped.webp`}
 					alt="ok"
 					class="banner-img opacity-0"
 				/>
@@ -88,7 +88,7 @@
 				</p>
 				<div class="max-w-lg relative w-full mt-10 h-[100vw] max-h-[600px] m-auto">
 					<img
-						src={`${base}/hair1.jpeg`}
+						src={`${base == '/' ? '' : base}/hair1.jpeg`}
 						alt="one"
 						class="border-4 border-[#0bc0e0] box-shadow"
 						style={`position:absolute; top: 10px; left 10px; transform: rotate(-5deg);
@@ -96,7 +96,7 @@
           `}
 					/>
 					<img
-						src={`${base}/nails.jpeg`}
+						src={`${base == '/' ? '' : base}/nails.jpeg`}
 						alt="three"
 						class="border-4 border-[#0bc0e0] box-shadow"
 						style={`position:absolute; bottom: 0; left: 80px; transform: rotate(-89deg);
@@ -104,7 +104,7 @@
         `}
 					/>
 					<img
-						src={`${base}/lashes.png`}
+						src={`${base == '/' ? '' : base}/lashes.png`}
 						alt="two"
 						class="border-4 border-[#0bc0e0] box-shadow"
 						style={`position:absolute; top: 100px; right: 10px; transform: rotate(6deg);
@@ -144,7 +144,7 @@
 				</p>
 				<br />
 				<img
-					src={`${base}/offer.png`}
+					src={`${base == '/' ? '' : base}/offer.png`}
 					alt="one"
 					class="w-full border-double border-8 border-[#0bc0e0]"
 				/>
@@ -165,12 +165,12 @@
 				<br />
 				<div class="flex flex-row justify-center gap-2 flex-wrap">
 					<a
-						href={`${base}/courses`}
+						href={`${base == '/' ? '' : base}/courses`}
 						class=" text-xs rounded-lg p-4 bg-white bg-opacity-20 whitespace-nowrap font-serif font-thin"
 						>View Available Courses</a
 					>
 					<a
-						href={`${base}/login`}
+						href={`${base == '/' ? '' : base}/login`}
 						class="text-xs rounded-lg p-4 bg-violet-700 bg-opacity-70 whitespace-nowrap font-serif font-thin"
 						>Student Login</a
 					>
@@ -214,7 +214,7 @@
 				North on <span class="text-lime-400 font-light">HWY 76 / US-79</span>, on the right after
 				Shady Grove Rd.
 			</div>
-			<img class="border border-white" src={`${base}/map.png`} alt="map" />
+			<img class="border border-white" src={`${base == '/' ? '' : base}/map.png`} alt="map" />
 		</div>
 	</div>
 </div>
