@@ -30,17 +30,17 @@
 
 	const refreshCourses = () => {
 		coursesLoading = true;
-		getAllCourses().then((_courses) => {
-			courses = _courses.concat({
-				courseId: 'crs_' + Math.floor(Math.random() * 9e9),
-				title: 'NEW COURSE',
-				summary: '',
-				image: '',
-				fake: true // fake denotes that it's just client-side and hasn't been saved yet
-			});
-		});
-		// .catch(toastErrorCatch)
-		// .then(() => (coursesLoading = false));
+		getAllCourses()
+			.then((_courses) => {
+				courses = _courses.concat({
+					courseId: 'crs_' + Math.floor(Math.random() * 9e9),
+					title: 'NEW COURSE',
+					summary: '',
+					image: '',
+					fake: true // fake denotes that it's just client-side and hasn't been saved yet
+				});
+			})
+			.then(() => (coursesLoading = false));
 	};
 
 	onMount(() => {
