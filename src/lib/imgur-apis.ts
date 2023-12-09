@@ -1,6 +1,7 @@
 import { env } from '$env/dynamic/public';
 import { images } from '../stores/images';
-import { throwIfNot2xx } from './fetch-utils';
+import { throwCustomIfNot2xx } from './fetch-utils';
+import { toastErrorCatch } from './toast';
 
 const headers = {
 	Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
@@ -19,9 +20,9 @@ export const createAlbum = () => {
 		body: formdata
 	};
 
-	return fetch('https://api.imgur.com/3/album', requestOptions).then(
-		throwIfNot2xx('Failed to create album')
-	);
+	return fetch('https://api.imgur.com/3/album', requestOptions)
+		.then(throwCustomIfNot2xx('Failed to create album'))
+		.catch(toastErrorCatch);
 };
 
 const moveToAlbum = (imageHash: string) => {
@@ -34,19 +35,9 @@ const moveToAlbum = (imageHash: string) => {
 		body: formdata
 	};
 
-	return fetch(`https://api.imgur.com/3/album/${albumHash}/add`, requestOptions).then(
-		throwIfNot2xx('Failed to add image to album')
-	);
-};
-
-export const deleteImage = (imageHash: string) => {
-	const requestOptions = {
-		method: 'DELETE',
-		headers
-	};
-	return fetch(`https://api.imgur.com/3/image/${imageHash}`, requestOptions).then(
-		throwIfNot2xx('Failed to delete image')
-	);
+	return fetch(`https://api.imgur.com/3/album/${albumHash}/add`, requestOptions)
+		.then(throwCustomIfNot2xx('Failed to add image to album'))
+		.catch(toastErrorCatch);
 };
 
 export const upload = (
@@ -63,9 +54,24 @@ export const upload = (
 	};
 
 	return fetch('https://api.imgur.com/3/image', requestOptions)
-		.then(throwIfNot2xx('Failed to upload image'))
+		.then(throwCustomIfNot2xx('Failed to upload image'))
 		.then((response) => response.json())
-		.then((result) => moveToAlbum(result.data.deletehash));
+		.then((result) => {
+			console.log({ data: result.data });
+			return result;
+		})
+		.then((result) => moveToAlbum(result.data.deletehash))
+		.catch(toastErrorCatch);
+};
+
+export const deleteImage = (imageHash: string) => {
+	const requestOptions = {
+		method: 'DELETE',
+		headers
+	};
+	return fetch(`https://api.imgur.com/3/image/${imageHash}`, requestOptions)
+		.then(throwCustomIfNot2xx('Failed to delete image'))
+		.catch(toastErrorCatch);
 };
 
 export const getAlbumImages = () => {
@@ -75,7 +81,7 @@ export const getAlbumImages = () => {
 	};
 
 	return fetch(`https://api.imgur.com/3/album/${albumHash}/images`, requestOptions)
-		.then(throwIfNot2xx('Failed to read album'))
+		.then(throwCustomIfNot2xx('Failed to read album'))
 		.then((response) => response.json())
 		.then((result) => {
 			if (result.data?.error) {
@@ -85,7 +91,8 @@ export const getAlbumImages = () => {
 				const sortedImages = imgs.sort((a, b) => b.datetime - a.datetime);
 				images.set(sortedImages);
 			}
-		});
+		})
+		.catch(toastErrorCatch);
 };
 
 export const setMockImages = () => {

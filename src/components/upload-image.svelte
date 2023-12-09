@@ -33,7 +33,6 @@
 				toastMsg(`${imageSelected} uploaded`);
 				imageSelected = '';
 			})
-			.catch()
 			.then(() => (uploading = false));
 	};
 </script>
@@ -44,6 +43,7 @@
 		name="image"
 		id="image"
 		accept="image"
+		multiple
 		hidden
 		bind:this={fileInput}
 		on:change={fileChange}
