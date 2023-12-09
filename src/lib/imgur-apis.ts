@@ -1,7 +1,7 @@
 import { env } from '$env/dynamic/public';
 import { images } from '../stores/images';
 import { throwCustomIfNot2xx } from './fetch-utils';
-import { toastErrorCatch } from './toast';
+import { toastErrorCatch, toastMsg } from './toast';
 
 const headers = {
 	Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
@@ -25,7 +25,7 @@ export const createAlbum = () => {
 		.catch(toastErrorCatch);
 };
 
-const moveToAlbum = (imageHash: string) => {
+const moveToAlbum = (imageHash: string, imageName: string) => {
 	const formdata = new FormData();
 	formdata.append('deletehashes[]', imageHash);
 
@@ -37,6 +37,7 @@ const moveToAlbum = (imageHash: string) => {
 
 	return fetch(`https://api.imgur.com/3/album/${albumHash}/add`, requestOptions)
 		.then(throwCustomIfNot2xx('Failed to add image to album'))
+		.then(() => toastMsg(imageName + ' uploaded'))
 		.catch(toastErrorCatch);
 };
 
@@ -67,7 +68,7 @@ export const upload = async (
 				console.log({ data: result.data });
 				return result;
 			})
-			.then((result) => moveToAlbum(result.data.deletehash))
+			.then((result) => moveToAlbum(result.data.deletehash, f.get('image').name))
 			.catch(toastErrorCatch);
 	}
 };

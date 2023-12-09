@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { upload } from '$lib/imgur-apis';
-	import { toastMsg } from '$lib/toast';
 	import { createEventDispatcher } from 'svelte';
 
 	let fileInput: HTMLInputElement;
@@ -31,7 +30,6 @@
 		upload(e)
 			.then((r) => {
 				dispatch('image-uploaded', r);
-				toastMsg(`${imagesSelected} image${imagesSelected > 1 ? 's' : ''} uploaded`);
 				imagesSelected = 0;
 			})
 			.then(() => (uploading = false));
