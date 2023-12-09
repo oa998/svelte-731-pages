@@ -28,9 +28,6 @@
 				{#each courses as course (course.courseId)}
 					<CourseSummary {course} />
 				{/each}
-				{#each courses as course (course.courseId)}
-					<CourseSummary {course} />
-				{/each}
 			</div>
 		{:catch error}
 			<div>An error occurred {error}</div>
