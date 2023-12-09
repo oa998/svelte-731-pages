@@ -7,6 +7,7 @@ const headers = {
 	Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
 };
 
+// const albumHash = 'bEsql5b';
 const albumHash = 'bEsql5b';
 // const albumDelete = 'zOhklJIXmESkgad';
 

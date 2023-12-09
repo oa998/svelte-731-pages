@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { createAlbum } from '$lib/imgur-apis';
 	import ImageColumn, { refreshImages } from './image-column.svelte';
 	import UploadImage from './upload-image.svelte';
 	export let open = false;
@@ -7,6 +8,7 @@
 <aside>
 	<input type="checkbox" bind:checked={open} hidden />
 	<div>
+		<button on:click={createAlbum}>Create Album</button>
 		<UploadImage on:image-uploaded={refreshImages} />
 		<ImageColumn />
 	</div>
