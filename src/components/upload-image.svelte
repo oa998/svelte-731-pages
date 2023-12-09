@@ -4,7 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	let fileInput: HTMLInputElement;
-	let imageSelected: string | undefined = '';
+	let imagesSelected: number = 0;
 	const dispatch = createEventDispatcher();
 	let uploading = false;
 
@@ -14,7 +14,8 @@
 			currentTarget: EventTarget & HTMLInputElement;
 		}
 	) => {
-		imageSelected = (e.target as HTMLInputElement).files?.[0]?.name;
+		// imageSelected = (e.target as HTMLInputElement).files?.[0]?.name;
+		imagesSelected = (e.target as HTMLInputElement).files?.length || 0;
 	};
 
 	$: _selectFile = () => fileInput.click();
@@ -30,8 +31,8 @@
 		upload(e)
 			.then((r) => {
 				dispatch('image-uploaded', r);
-				toastMsg(`${imageSelected} uploaded`);
-				imageSelected = '';
+				toastMsg(`${imagesSelected} image${imagesSelected > 1 ? 's' : ''} uploaded`);
+				imagesSelected = 0;
 			})
 			.then(() => (uploading = false));
 	};
@@ -53,13 +54,13 @@
 		class="overflow-hidden"
 		on:click|preventDefault|stopPropagation={_selectFile}
 	>
-		{#if !!imageSelected}
-			{imageSelected}
+		{#if imagesSelected > 0}
+			{`${imagesSelected} image${imagesSelected > 1 ? 's' : ''}`}
 		{:else}
 			Upload Image
 		{/if}
 	</button>
-	{#if !!imageSelected}
+	{#if imagesSelected > 0}
 		<button type="submit" class="border border-black rounded" disabled={uploading}
 			>{uploading ? 'Uploading' : 'Upload'}</button
 		>
@@ -77,7 +78,7 @@
 		@apply w-full;
 	}
 
-	button:disabled {
+	button[type='submit']:disabled {
 		@apply bg-gray-500 text-gray-700;
 	}
 </style>
