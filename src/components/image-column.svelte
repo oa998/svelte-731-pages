@@ -69,7 +69,7 @@
 	}
 
 	div.images {
-		grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+		grid-template-columns: 1fr;
 		@apply grid gap-2 relative;
 	}
 
