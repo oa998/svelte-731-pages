@@ -6,9 +6,8 @@ import { toastErrorCatch, toastMsg } from './toast';
 const headers = {
 	Authorization: `Bearer ${env.PUBLIC_IMGUR_ACCESS_TOKEN}`
 };
-
 // const albumHash = 'bEsql5b';
-const albumHash = 'bEsql5b';
+const albumHash = 'vdt9oAp'; // delete #2 -- WX4r2s54ABuloZt
 // const albumDelete = 'zOhklJIXmESkgad';
 
 export const createAlbum = () => {
