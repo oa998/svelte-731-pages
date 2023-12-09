@@ -7,7 +7,6 @@ export const session = writable({
 });
 
 export const resetSession = () => {
-	console.log('reset session');
 	session.set({
 		admin: false,
 		auth: false,

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 	import type { Course } from '$lib/courses';
 	import { onMount } from 'svelte';
 
@@ -53,7 +55,9 @@
 			<form method="dialog">
 				<button>Close</button>
 			</form>
-			<button class="bg-blue-800">Enroll</button>
+			<button on:click={() => goto(`${base}/course/${course.courseId}`)} class="bg-blue-800"
+				>Enroll</button
+			>
 		</div>
 	</div>
 </dialog>
@@ -77,6 +81,6 @@
 		@apply border border-white py-1 px-4 rounded;
 	}
 	dialog::backdrop {
-		@apply bg-pink-900 bg-opacity-50;
+		@apply bg-pink-900 bg-opacity-50 overflow-hidden;
 	}
 </style>

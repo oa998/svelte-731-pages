@@ -1,4 +1,5 @@
 import { throwCustomIfNot2xx } from './fetch-utils';
+import { toastErrorCatch } from './toast';
 
 export type Course = {
 	courseId: string;
@@ -17,29 +18,28 @@ export type Chapter = {
 };
 
 export function getAllCourses() {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/course-overview`, {
 	return fetch(`/data/course-overview`, {
 		method: 'GET',
 		credentials: 'include'
 	})
 		.then(throwCustomIfNot2xx(`Unable to read all courses`))
 		.then((r) => r.json())
-		.then((j) => j as Course[]);
+		.then((j) => j as Course[])
+		.catch(toastErrorCatch);
 }
 
 export function getAllChapters(courseId: string) {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${courseId}/chapter`, {
 	return fetch(`/data/storage?q=course/${courseId}/chapter`, {
 		method: 'GET',
 		credentials: 'include'
 	})
 		.then(throwCustomIfNot2xx(`Unable to read all chapters for ${courseId}`))
 		.then((r) => r.json())
-		.then((j) => j as Chapter[]);
+		.then((j) => j as Chapter[])
+		.catch(toastErrorCatch);
 }
 
 export function getCourse(courseId: string) {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${courseId}`, {
 	return fetch(`/data/storage?q=course/${courseId}`, {
 		method: 'GET',
 		credentials: 'include'
@@ -50,11 +50,11 @@ export function getCourse(courseId: string) {
 			const courses = j as Course[];
 			if (courses.length > 0) return courses[0];
 			throw new Error(`Course ${courseId} does not exist.`);
-		});
+		})
+		.catch(toastErrorCatch);
 }
 
 export function getChapter(courseId: string, chapterId: string) {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${courseId}/chapter/${chapterId}`, {
 	return fetch(`/data/storage?q=course/${courseId}/chapter/${chapterId}`, {
 		method: 'GET',
 		credentials: 'include'
@@ -65,11 +65,11 @@ export function getChapter(courseId: string, chapterId: string) {
 			const chapters = j as Chapter[];
 			if (chapters.length > 0) return chapters[0];
 			throw new Error(`Chapter ${chapterId} from course ${courseId} does not exist.`);
-		});
+		})
+		.catch(toastErrorCatch);
 }
 
 export function postCourse(body: Course) {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${body.courseId}`, {
 	return fetch(`/data/storage?q=course/${body.courseId}`, {
 		method: 'POST',
 		headers: {
@@ -79,11 +79,11 @@ export function postCourse(body: Course) {
 		credentials: 'include'
 	})
 		.then(throwCustomIfNot2xx(`Unable to set course ${body.courseId}`))
-		.then((r) => r.json());
+		.then((r) => r.json())
+		.catch(toastErrorCatch);
 }
 
 export function postChapter(courseId: string, body: Chapter) {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/storage?q=course/${courseId}/chapter/${body.chapterId}`, {
 	return fetch(`/data/storage?q=course/${courseId}/chapter/${body.chapterId}`, {
 		method: 'POST',
 		headers: {
@@ -93,5 +93,6 @@ export function postChapter(courseId: string, body: Chapter) {
 		credentials: 'include'
 	})
 		.then(throwCustomIfNot2xx(`Unable to set chapter ${body.chapterId} of course ${courseId}`))
-		.then((r) => r.json());
+		.then((r) => r.json())
+		.catch(toastErrorCatch);
 }

@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
+	import { page } from '$app/stores';
 	import Header from '$components/header.svelte';
 	import Menu, { type MenuAction } from '$components/menu.svelte';
 	import { logout, sessionPing } from '$lib/auth';
@@ -8,17 +11,22 @@
 
 	onMount(() => {
 		if (!$session.auth) {
-			console.log('calling session ping');
 			sessionPing();
 		}
 	});
 
-	let actions: MenuAction[] = [];
+	let loggedInActions: MenuAction[] = [];
+	let loggedOutActions: MenuAction[] = [
+		{
+			text: 'Log In',
+			class: 'bg-slate-900 text-white',
+			action: () => goto(`${base}/login`)
+		}
+	];
 	$: {
-		console.log({ $session });
-		actions = [];
+		loggedInActions = [];
 		if ($session.auth) {
-			actions = actions.concat([
+			loggedInActions = loggedInActions.concat([
 				{
 					text: $session.email,
 					class: 'bg-slate-900 text-white font-bold border-b border-white'
@@ -31,7 +39,7 @@
 			]);
 		}
 		if ($session.admin) {
-			actions = actions.concat([
+			loggedInActions = loggedInActions.concat([
 				{
 					text: 'Admin',
 					class: 'bg-red-500 pt-1 font-bold'
@@ -39,28 +47,45 @@
 				{
 					text: 'Manage Courses',
 					class: 'bg-red-500',
-					action: () => console.log('hi')
+					action: () => goto(`${base}/course/edit`)
 				}
 			]);
 		}
 	}
 </script>
 
-{#if $session.auth}
+{#if $page.url.pathname != '/login'}
 	<Header>
 		<div class="flex flex-row pr-5 gap-3 items-center">
-			<button class="courses">Courses</button>
+			<button on:click={() => goto(`${base}/courses`)} class="courses">Courses</button>
 			<div class="menu">
-				<Menu size="1.5rem" icon={'ic:round-menu'} {actions} />
+				{#if $session.auth}
+					<Menu size="1.5rem" icon={'ic:round-menu'} actions={loggedInActions} />
+				{:else}
+					<Menu size="1.5rem" icon={'ic:round-menu'} actions={loggedOutActions} />
+				{/if}
 			</div>
 		</div>
 	</Header>
 {/if}
-<slot />
+
+<div class="fixed top-14 sm:top-20 w-full slot">
+	<slot />
+</div>
 <SvelteToast options={{ reversed: true, intro: { y: 192 } }} />
 
 <style lang="postcss">
 	button.courses {
 		@apply px-2 rounded-lg text-white border border-white;
+	}
+
+	.slot {
+		max-height: calc(100lvh - 5rem);
+		overflow: scroll;
+	}
+	@media (max-width: 640px) {
+		.slot {
+			max-height: calc(100lvh - 3.5rem);
+		}
 	}
 </style>

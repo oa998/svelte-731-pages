@@ -8,8 +8,6 @@
 	let containerRef: HTMLDivElement;
 	const scrollOffset = 125;
 
-	console.log({ base });
-
 	$: if (contentWidth && bannerImgRef) {
 		bannerImgRef.width = contentWidth * 0.9;
 		bannerImgRef.style.opacity = '1';
@@ -46,17 +44,15 @@
 <svelte:window on:scroll={_onscroll} />
 <div class="svg-bg">
 	<div class="pb-4 relative overflow-hidden">
-		<div class="poly poly-behind" />
+		<div class="poly poly-front">
+			<img
+				bind:this={bannerImgRef}
+				src={`${base == '/' ? '' : base}/5standing-cropped.webp`}
+				alt="ok"
+				class="banner-img opacity-0"
+			/>
+		</div>
 		<div class="bg" bind:clientWidth={contentWidth}>
-			<div class="bg-2" />
-			<div class="poly poly-front">
-				<img
-					bind:this={bannerImgRef}
-					src={`${base == '/' ? '' : base}/5standing-cropped.webp`}
-					alt="ok"
-					class="banner-img opacity-0"
-				/>
-			</div>
 			<div class="container" bind:this={containerRef}>
 				<div class="container-731 text-[4rem] sm:text-[5rem] opacity-0" bind:this={titleRef}>
 					<CompanyName textSize="" />
@@ -115,7 +111,7 @@
 				<div class="text-sm font-extrathin dark-text-shadow font-serif font-thin text-center">
 					We love our friends and clients!
 
-					<div class="img-carousel">
+					<div class="img-carousel hide-scroll">
 						{#each images as src, i (src)}
 							<img
 								{src}
@@ -224,11 +220,6 @@
 	</span>
 </div>
 
-<!-- </div>
-</div> -->
-
-<!--beauty | pamper, relax, indulge -->
-
 <style lang="postcss">
 	:root {
 		--banner-height: calc(max(200px, 30lvh));
@@ -246,20 +237,16 @@
 		margin-top: 6lvh;
 	}
 	.poly-front {
-		background: color-mix(in srgb, var(--bottom-color) 80%, black);
 		z-index: 12;
 		overflow: hidden;
 		margin-top: 6.5lvh;
+		@apply border-y-2 border-[#0bc0e0];
 	}
 	@media (max-width: 720px) {
 		.poly-front {
 			margin-top: 6lvh;
 		}
 	}
-	.poly-behind {
-		background: var(--bottom-color);
-	}
-
 	.svg-bg {
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3CradialGradient id='a' cx='1000' cy='750' r='50.7%25' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%230059a3'/%3E%3Cstop offset='1' stop-color='%23271C7D'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='objectBoundingBox' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23048AAF' /%3E%3Cstop offset='0.35' stop-color='%230059a3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3ClinearGradient id='b2' gradientUnits='objectBoundingBox' x1='1' y1='0' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%23048AAF'/%3E%3Cstop offset='0.35' stop-color='%230059a3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3ClinearGradient id='c' gradientUnits='objectBoundingBox' x1='0.5' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23048AAF'/%3E%3Cstop offset='0.5' stop-color='%230059a3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3ClinearGradient id='c2' gradientUnits='objectBoundingBox' x1='0.5' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23048AAF'/%3E%3Cstop offset='0.5' stop-color='%230059a3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3CradialGradient id='d' cx='1000' cy='750' r='50.2%25' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0.5' stop-color='%23a00070' stop-opacity='0.5'/%3E%3Cstop offset='1' stop-color='%23E00B43'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='2000' height='1500'/%3E%3Cg fill-opacity='0.7'%3E%3Cpath fill='url(%23b)' d='M2035 1550h-950c0 0 202-1600 950-1600h0V1550z'/%3E%3Cpath fill='url(%23b2)' d='M-35 1550L-35 1550l0-1600h950C915-50 713 1550-35 1550z'/%3E%3Cpath fill='url(%23c)' d='M2035 1550L2035 1550l-2070 0V815.7C-35 815.7 2035 971.8 2035 1550z'/%3E%3Cpath fill='url(%23c2)' d='M2035-50v734.3c0 0-2070-156.1-2070-734.3v0H2035z'/%3E%3C/g%3E%3Crect fill-opacity='0.7' fill='url(%23d)' width='2000' height='1500'/%3E%3C/svg%3E");
 		background-attachment: fixed;
@@ -271,28 +258,23 @@
 	.bg {
 		overflow: hidden;
 		position: relative;
-		/* min-height: 200lvh; */
 		z-index: 10;
 		min-height: calc(var(--banner-height) * 1.7);
 		@apply max-w-2xl m-auto;
-	}
-	.bg-2 {
-		position: absolute;
-		width: 96%;
-		height: 50%;
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'%3E%3Cdefs%3E%3CradialGradient id='a' cx='1000' cy='750' r='50.7%25' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%230059a3'/%3E%3Cstop offset='1' stop-color='%23271C7D'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='objectBoundingBox' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23048AAF' /%3E%3Cstop offset='0.35' stop-color='%230059a3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3ClinearGradient id='b2' gradientUnits='objectBoundingBox' x1='1' y1='0' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%23048AAF'/%3E%3Cstop offset='0.35' stop-color='%230059a3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3ClinearGradient id='c' gradientUnits='objectBoundingBox' x1='0.5' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23048AAF'/%3E%3Cstop offset='0.5' stop-color='%230059a3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3ClinearGradient id='c2' gradientUnits='objectBoundingBox' x1='0.5' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23048AAF'/%3E%3Cstop offset='0.5' stop-color='%230059a3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3CradialGradient id='d' cx='1000' cy='750' r='50.2%25' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0.5' stop-color='%23a00070' stop-opacity='0.5'/%3E%3Cstop offset='1' stop-color='%23E00B43'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='2000' height='1500'/%3E%3Cg fill-opacity='0.7'%3E%3Cpath fill='url(%23b)' d='M2035 1550h-950c0 0 202-1600 950-1600h0V1550z'/%3E%3Cpath fill='url(%23b2)' d='M-35 1550L-35 1550l0-1600h950C915-50 713 1550-35 1550z'/%3E%3Cpath fill='url(%23c)' d='M2035 1550L2035 1550l-2070 0V815.7C-35 815.7 2035 971.8 2035 1550z'/%3E%3Cpath fill='url(%23c2)' d='M2035-50v734.3c0 0-2070-156.1-2070-734.3v0H2035z'/%3E%3C/g%3E%3Crect fill-opacity='0.7' fill='url(%23d)' width='2000' height='1500'/%3E%3C/svg%3E");
-		background-attachment: fixed;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
-		z-index: 11;
-		top: 0;
-		left: 2%;
 	}
 
 	.container {
 		position: relative;
 		z-index: 11;
+	}
+
+	.banner-img {
+		transform: rotate(2deg) translate(-5vw, -3vh);
+		height: 120%;
+		object-fit: cover;
+		object-position: top center;
+		margin: 0 auto;
+		mask: linear-gradient(90deg, transparent, white 5%, white 95%, transparent);
 	}
 
 	@media (max-height: 650px) {
@@ -301,16 +283,16 @@
 		}
 	}
 
-	.spacer {
-		min-height: calc(var(--banner-height) + 15lvh);
+	@media (max-width: 500px) {
+		.banner-img {
+			width: 100%;
+			border: solid white 3px;
+			mask: unset;
+		}
 	}
 
-	.banner-img {
-		transform: rotate(2deg) translate(8vw, -3vh);
-		height: 120%;
-		object-fit: cover;
-		object-position: top center;
-		mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+	.spacer {
+		min-height: calc(var(--banner-height) + 15lvh);
 	}
 
 	.container-731 {
@@ -323,10 +305,6 @@
 	.dark-text-shadow {
 		text-shadow: 0 0 4px black, 0 0 6px black, 0 0 8px black;
 	}
-	.light-text-shadow {
-		text-shadow: 0 0 4px lightpink, 0 0 4px white;
-	}
-
 	.box-shadow {
 		box-shadow: -3px 0 15px black;
 	}

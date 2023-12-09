@@ -4,7 +4,7 @@
 	export let textSize: string = 'text-3xl';
 </script>
 
-<a href={`${base}`} class={` ${$$props.class} ${textSize}`}>731 Vibes</a>
+<a href={`${base || '/'}`} class={` ${$$props.class} ${textSize}`}>731 Vibes</a>
 
 <style lang="postcss">
 	a {

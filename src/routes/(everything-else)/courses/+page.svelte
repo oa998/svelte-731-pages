@@ -8,8 +8,7 @@
 
 	onMount(() => {
 		coursePromise = getAllCourses().then((_courses) => {
-			console.log('_courses', _courses);
-			return _courses;
+			return _courses || [];
 		});
 	});
 </script>

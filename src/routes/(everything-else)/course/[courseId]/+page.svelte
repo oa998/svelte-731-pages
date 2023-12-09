@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Article from '$components/article.svelte';
-	import Header from '$components/header.svelte';
 	import MarkdownSection from '$components/markdown-section.svelte';
 	import { getAllChapters, getCourse, type Chapter, type Course } from '$lib/courses';
 	import { customMarked } from '$lib/marked-custom';
@@ -71,7 +70,6 @@
 	/>
 	<label for="show-chapters">{showChapters ? 'Hide' : 'Show'} Chapters</label>
 	<aside id="sidebar">
-		<Header />
 		<span class="subtitle">Course:</span>
 		<div id="course-title">{course.title}</div>
 		<span class="subtitle">Chapters:</span>
@@ -121,7 +119,6 @@
 		</Article>
 	</div>
 </div>
-<div class="py-[200px]" />
 
 <style lang="postcss">
 	#pg {
@@ -130,7 +127,7 @@
 		min-height: calc(100lvh);
 		max-height: calc(100lvh);
 		width: 100vw;
-		@apply fixed top-0;
+		@apply max-h-[100lvh];
 	}
 	label[for='show-chapters'] {
 		background: color-mix(in srgb, blue 90%, transparent);
@@ -174,15 +171,14 @@
 
 	aside#sidebar {
 		background: color-mix(in srgb, var(--rich-black) 30%, transparent);
-		max-height: 100lvh;
-		@apply flex flex-col gap-1 sticky top-0 overflow-scroll;
+		@apply flex flex-col gap-1 sticky top-0 overflow-scroll max-h-[90lvh];
 	}
 	aside#sidebar::-webkit-scrollbar {
 		display: none;
 	}
 
 	#article {
-		@apply pb-20 overflow-y-scroll max-h-[100lvh];
+		@apply pb-20 overflow-y-scroll max-h-[90lvh];
 	}
 
 	#course-title {

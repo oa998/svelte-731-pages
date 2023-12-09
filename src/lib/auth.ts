@@ -5,12 +5,10 @@ import { peekFor401, throwIfNot2xx } from './fetch-utils';
 import { toastErrorCatch, toastMsg } from './toast';
 
 export function ping() {
-	// fetch(`${env.PUBLIC_SERVER_URL}/auth/wakeup-ping`);
 	fetch(`/data/auth/wakeup-ping`);
 }
 
 export function sessionPing() {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/auth/session-ping`, {
 	return fetch(`/data/auth/session-ping`, {
 		method: 'GET',
 		headers: {
@@ -23,7 +21,6 @@ export function sessionPing() {
 		.then(throwIfNot2xx)
 		.then((r) => r.json())
 		.then((j) => {
-			alert('we are setting session');
 			if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
 				session.set(j);
 			}
@@ -31,7 +28,6 @@ export function sessionPing() {
 }
 
 export function login(email: string, password: string) {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/auth/login`, {
 	return fetch(`/data/auth/login`, {
 		method: 'POST',
 		headers: {
@@ -60,7 +56,6 @@ export function login(email: string, password: string) {
 }
 
 export function logout() {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/auth/logout`, {
 	return fetch(`/data/auth/logout`, {
 		method: 'POST',
 		headers: {
@@ -77,11 +72,11 @@ export function logout() {
 			return r;
 		})
 		.then(() => toastMsg('Logged out'))
-		.then(() => goto(`${base}`));
+		.then(() => goto(`${base || '/'}`))
+		.catch(toastErrorCatch);
 }
 
 export function passwordReset(email: string) {
-	// return fetch(`${env.PUBLIC_SERVER_URL}/auth/email-reset`, {
 	return fetch(`/data/auth/email-reset`, {
 		method: 'PUT',
 		headers: {
@@ -94,5 +89,6 @@ export function passwordReset(email: string) {
 		credentials: 'include'
 	})
 		.then(throwIfNot2xx)
-		.then(() => toastMsg(`Password reset sent for ${email}`));
+		.then(() => toastMsg(`Password reset sent for ${email}`))
+		.catch(toastErrorCatch);
 }

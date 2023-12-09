@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.no-scroll::-webkit-scrollbar {
+.hide-scroll::-webkit-scrollbar {
 	display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.no-scroll {
+.hide-scroll {
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
