@@ -4,7 +4,7 @@
 		if (window.location.host.includes('localhost')) {
 			setMockImages();
 		} else {
-			getAlbumImages().catch(toastErrorCatch('Could not load images'));
+			getAlbumImages();
 		}
 	}
 </script>

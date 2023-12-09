@@ -8,7 +8,7 @@ export const toastErrorMsg = (str: string) => {
 	});
 };
 export const toastErrorCatch = (err: Error) => {
-	toastErrorMsg(err.message);
+	if (err.message) toastErrorMsg(err.message);
 };
 
 export const toastMsg = (str: string) =>
