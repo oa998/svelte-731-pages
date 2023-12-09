@@ -36,8 +36,8 @@
 <div class={`relative ${$$props.class}`} on:mouseleave={exit} on:mouseenter={enter}>
 	<input type="checkbox" {id} class="hidden" bind:checked={focused} />
 	<label for={id} class="flex items-end space-x-1 cursor-pointer">
-		<div class:rotate={focused} class="transistion">
-			<Icon {icon} class="z-10" style={`font-size: ${size}`} color="white" />
+		<div class="transistion">
+			<Icon {icon} class="z-10" style={`font-size: ${size}`} color={focused ? 'black' : 'white'} />
 		</div>
 	</label>
 
@@ -77,7 +77,7 @@
 		transition: transform 100ms linear;
 	}
 	div.rotate {
-		transform: rotate(90deg);
+		color: green;
 	}
 
 	li {

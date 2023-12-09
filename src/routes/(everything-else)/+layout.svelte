@@ -52,9 +52,11 @@
 			]);
 		}
 	}
+
+	$: isLoginPage = $page.url.pathname == '/login';
 </script>
 
-{#if $page.url.pathname != '/login'}
+{#if !isLoginPage}
 	<Header>
 		<div class="flex flex-row pr-5 gap-3 items-center">
 			<button on:click={() => goto(`${base}/courses`)} class="courses">Courses</button>
@@ -69,7 +71,7 @@
 	</Header>
 {/if}
 
-<div class="fixed top-14 sm:top-20 w-full slot">
+<div class="fixed top-14 sm:top-20 w-full slot" class:top0={isLoginPage}>
 	<slot />
 </div>
 <SvelteToast options={{ reversed: true, intro: { y: 192 } }} />
@@ -87,5 +89,9 @@
 		.slot {
 			max-height: calc(100lvh - 3.5rem);
 		}
+	}
+	.top0 {
+		top: 0;
+		max-height: 100lvh;
 	}
 </style>
