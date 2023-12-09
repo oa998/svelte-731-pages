@@ -3,7 +3,6 @@
 	import CourseEditForm from '$components/course-edit-form.svelte';
 	import ImageSheet from '$components/image-sheet.svelte';
 	import { getAllChapters, getAllCourses, type Chapter, type Course } from '$lib/courses';
-	import { toastErrorCatch } from '$lib/toast';
 	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
 
@@ -31,18 +30,17 @@
 
 	const refreshCourses = () => {
 		coursesLoading = true;
-		getAllCourses()
-			.then((_courses) => {
-				courses = _courses.concat({
-					courseId: 'crs_' + Math.floor(Math.random() * 9e9),
-					title: 'NEW COURSE',
-					summary: '',
-					image: '',
-					fake: true // fake denotes that it's just client-side and hasn't been saved yet
-				});
-			})
-			.catch(toastErrorCatch)
-			.then(() => (coursesLoading = false));
+		getAllCourses().then((_courses) => {
+			courses = _courses.concat({
+				courseId: 'crs_' + Math.floor(Math.random() * 9e9),
+				title: 'NEW COURSE',
+				summary: '',
+				image: '',
+				fake: true // fake denotes that it's just client-side and hasn't been saved yet
+			});
+		});
+		// .catch(toastErrorCatch)
+		// .then(() => (coursesLoading = false));
 	};
 
 	onMount(() => {
@@ -54,11 +52,9 @@
 			chapters = [];
 		} else {
 			chaptersLoading = true;
-			await getAllChapters(courseId)
-				.then((_chapters) => {
-					chapters = _chapters;
-				})
-				.catch(toastErrorCatch);
+			await getAllChapters(courseId).then((_chapters) => {
+				chapters = _chapters;
+			});
 		}
 		chaptersLoading = false;
 		chapters = chapters.concat({
