@@ -67,7 +67,7 @@
 
 <style lang="postcss">
 	form {
-		@apply flex flex-col text-center;
+		@apply flex flex-col text-center h-min;
 	}
 
 	form button[type='submit'] {
@@ -77,7 +77,6 @@
 	}
 
 	button[type='submit']:disabled {
-		height: min-content;
 		@apply bg-gray-500 text-gray-800;
 	}
 </style>
