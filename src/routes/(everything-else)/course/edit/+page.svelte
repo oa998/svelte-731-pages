@@ -141,9 +141,10 @@
 	#pg {
 		display: grid;
 		gap: 10px;
-		min-height: calc(100lvh);
-		max-height: calc(100lvh);
+		/* min-height: calc(100lvh);
+		max-height: calc(100lvh); */
 		width: 100vw;
+		@apply h-full;
 	}
 
 	#pg {
