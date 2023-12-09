@@ -70,11 +70,12 @@
 	}
 
 	.bg-img {
-		@apply w-full h-full absolute top-0 blur-sm bg-cover bg-no-repeat bg-center;
+		@apply w-full h-full absolute top-0 blur-sm bg-cover bg-no-repeat bg-center brightness-50;
 	}
 
 	.outer h1 {
 		color: var(--lemon-chiffon);
+		text-shadow: 0 0 5px black, 0 0 3px black, 0 0 1px black;
 		@apply text-3xl w-full text-center py-2 z-10 absolute bottom-1 font-sans font-thin;
 	}
 	dialog div button {
