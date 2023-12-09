@@ -40,28 +40,36 @@ const moveToAlbum = (imageHash: string) => {
 		.catch(toastErrorCatch);
 };
 
-export const upload = (
+export const upload = async (
 	e: Event & {
 		readonly submitter: HTMLElement | null;
 	} & {
 		currentTarget: EventTarget & HTMLFormElement;
 	}
 ) => {
-	const requestOptions = {
-		method: 'POST',
-		headers,
-		body: new FormData(e.currentTarget)
-	};
+	const images = new FormData(e.currentTarget).getAll('image');
 
-	return fetch('https://api.imgur.com/3/image', requestOptions)
-		.then(throwCustomIfNot2xx('Failed to upload image'))
-		.then((response) => response.json())
-		.then((result) => {
-			console.log({ data: result.data });
-			return result;
-		})
-		.then((result) => moveToAlbum(result.data.deletehash))
-		.catch(toastErrorCatch);
+	for (const image of images) {
+		const f = new FormData();
+		f.set('image', image);
+		console.log('little formdata', f.get('image'));
+
+		const requestOptions = {
+			method: 'POST',
+			headers,
+			body: f
+		};
+
+		await fetch('https://api.imgur.com/3/image', requestOptions)
+			.then(throwCustomIfNot2xx('Failed to upload image'))
+			.then((response) => response.json())
+			.then((result) => {
+				console.log({ data: result.data });
+				return result;
+			})
+			.then((result) => moveToAlbum(result.data.deletehash))
+			.catch(toastErrorCatch);
+	}
 };
 
 export const deleteImage = (imageHash: string) => {
