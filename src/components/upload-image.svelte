@@ -77,6 +77,7 @@
 	}
 
 	button[type='submit']:disabled {
-		@apply bg-gray-500 text-gray-700;
+		height: min-content;
+		@apply bg-gray-500 text-gray-800;
 	}
 </style>

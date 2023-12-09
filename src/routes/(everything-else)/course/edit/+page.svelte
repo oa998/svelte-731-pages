@@ -140,6 +140,7 @@
 		/* min-height: calc(100lvh);
 		max-height: calc(100lvh); */
 		width: 100vw;
+		min-height: 90lvh;
 		@apply h-full;
 	}
 
