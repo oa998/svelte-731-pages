@@ -23,6 +23,7 @@ export const createAlbum = () => {
 
 	return fetch('https://api.imgur.com/3/album', requestOptions)
 		.then(throwCustomIfNot2xx('Failed to create album'))
+		.then(async (r) => console.log(await r.text()))
 		.catch(toastErrorCatch);
 };
 
