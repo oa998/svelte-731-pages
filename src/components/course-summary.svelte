@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 
 	export let course: Course;
+	export let previewMode = false;
 	let modalRef: HTMLDialogElement;
 
 	onMount(() => {
@@ -55,8 +56,12 @@
 			<form method="dialog">
 				<button>Close</button>
 			</form>
-			<button on:click={() => goto(`${base}/course/${course.courseId}`)} class="bg-blue-800"
-				>Enroll</button
+			<button
+				on:click={() => {
+					if (previewMode) return;
+					goto(`${base}/course/${course.courseId}`);
+				}}
+				class="bg-blue-800">Enroll</button
 			>
 		</div>
 	</div>

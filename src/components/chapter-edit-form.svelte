@@ -186,4 +186,10 @@
 	.preview {
 		@apply m-auto flex justify-center border border-white pb-20;
 	}
+
+	input[type='text'],
+	input[type='number'],
+	textarea {
+		@apply text-xs;
+	}
 </style>

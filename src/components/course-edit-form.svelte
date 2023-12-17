@@ -77,7 +77,14 @@
 				/>
 
 				<label for="image">Image URL</label>
-				<input id="image" name="image" required pattern="^[^\s]+.*$" bind:value={image} />
+				<input
+					type="text"
+					id="image"
+					name="image"
+					required
+					pattern="^[^\s]+.*$"
+					bind:value={image}
+				/>
 
 				<label for="summary">Summary</label>
 				<textarea
@@ -105,6 +112,7 @@
 	{#if preview && !minimize}
 		<div class="preview">
 			<CourseSummary
+				previewMode={true}
 				course={{
 					courseId,
 					image,
@@ -159,5 +167,11 @@
 
 	.preview {
 		@apply m-auto flex justify-center pb-20;
+	}
+
+	input[type='text'],
+	input[type='number'],
+	textarea {
+		@apply text-xs;
 	}
 </style>

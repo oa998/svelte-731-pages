@@ -28,10 +28,6 @@
 		if ($session.auth) {
 			loggedInActions = loggedInActions.concat([
 				{
-					text: $session.email,
-					class: 'bg-slate-900 text-white font-bold border-b border-white'
-				},
-				{
 					text: 'Log Out 👋',
 					class: 'bg-slate-900 text-white',
 					action: () => logout()
@@ -42,7 +38,7 @@
 			loggedInActions = loggedInActions.concat([
 				{
 					text: 'Admin',
-					class: 'bg-red-500 pt-1 font-bold'
+					class: 'bg-red-600 pt-1 font-bold border-t border-slate-300'
 				},
 				{
 					text: 'Manage Courses',
@@ -62,6 +58,7 @@
 			<button on:click={() => goto(`${base}/courses`)} class="courses">Courses</button>
 			<div class="menu">
 				{#if $session.auth}
+					<div class="email">{$session.email}</div>
 					<Menu size="1.5rem" icon={'ic:round-menu'} actions={loggedInActions} />
 				{:else}
 					<Menu size="1.5rem" icon={'ic:round-menu'} actions={loggedOutActions} />
@@ -77,6 +74,13 @@
 <SvelteToast options={{ reversed: true, intro: { y: 192 } }} />
 
 <style lang="postcss">
+	.menu {
+		@apply flex flex-row rounded-md bg-slate-700 text-white items-center border border-white;
+	}
+	.email {
+		border-radius: 0.3rem 0 0 0.3rem;
+		@apply px-2 bg-black;
+	}
 	button.courses {
 		@apply px-2 rounded-lg text-white border border-white;
 	}
