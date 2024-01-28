@@ -58,18 +58,26 @@
 				<button>Close</button>
 			</form>
 			<div class="flex flex-col text-right items-end">
-				<button
-					on:click={() => {
-						if (previewMode) return;
-						goto(`${base}/course/${course.courseId}`);
-					}}
-					disabled={!$session.courses.includes(course.courseId)}
-					class="bg-blue-800 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed max-w-fit"
-					>View</button
-				>
 				{#if !$session.auth}
-					<span class="text-white text-xs bg-green-800 px-3">Log in to view your course work.</span>
-				{:else if !$session.courses.includes(course.courseId)}
+					<button
+						on:click={() => {
+							if (previewMode) return;
+							goto(`${base}/login`);
+						}}
+						class="bg-blue-800 max-w-fit">Log In</button
+					>
+				{:else}
+					<button
+						on:click={() => {
+							if (previewMode) return;
+							goto(`${base}/course/${course.courseId}`);
+						}}
+						disabled={!$session.courses.includes(course.courseId)}
+						class="bg-green-800 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed max-w-fit"
+						>View</button
+					>
+				{/if}
+				{#if !$session.courses.includes(course.courseId)}
 					<span class="text-white text-xs bg-green-800 px-3"
 						>Work with your instructor for access to this course.</span
 					>

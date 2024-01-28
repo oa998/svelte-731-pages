@@ -50,9 +50,14 @@
 					class: 'bg-red-600 pt-1 font-bold border-t border-slate-300'
 				},
 				{
-					text: 'Manage Courses',
+					text: 'Edit Courses',
 					class: 'bg-red-500',
 					action: () => goto(`${base}/course/edit`)
+				},
+				{
+					text: 'Course Access',
+					class: 'bg-red-500',
+					action: () => goto(`${base}/admin/user-access`)
 				}
 			]);
 		}

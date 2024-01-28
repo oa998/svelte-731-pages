@@ -6,6 +6,7 @@ export type Course = {
 	title: string;
 	summary: string;
 	image: string;
+	users: string[];
 	fake?: boolean;
 };
 
