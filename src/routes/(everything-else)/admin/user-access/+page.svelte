@@ -2,7 +2,7 @@
 	import { getAllCourses, postCourse, type Course } from '$lib/courses';
 	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
-	import { toastErrorCatch, toastErrorMsg } from './../../../../lib/toast.ts';
+	import { toastErrorCatch, toastErrorMsg, toastMsg } from './../../../../lib/toast.ts';
 
 	let courses: Course[] = [];
 	let loading = true;
@@ -38,7 +38,22 @@
 					{#each course.users || ['bob', 'tim', 'tony'] as user}
 						<div class="pl-3">
 							<div class="flex flex-row gap-3 border border-white items-center">
-								<button class="w-[100px] bg-red-500 text-black p-2 text-xs">Remove</button>
+								<button
+									class="w-[100px] bg-red-500 text-black p-2 text-xs"
+									on:click={() => {
+										const userSet = new Set(course.users || []);
+										userSet.delete(user);
+										const updatedCourse = {
+											...course,
+											users: [...userSet]
+										};
+										loading = true;
+										postCourse(updatedCourse)
+											.then(() => toastMsg(`${user} removed from ${course.title}`))
+											.then(reloadCourses)
+											.catch(toastErrorCatch);
+									}}>Remove</button
+								>
 								<div>{user}</div>
 							</div>
 						</div>
@@ -59,9 +74,9 @@
 									};
 									loading = true;
 									postCourse(updatedCourse)
+										.then(() => toastMsg(`${name} added to ${course.title}`))
 										.then(reloadCourses)
-										.catch(toastErrorCatch)
-										.then(() => (loading = false));
+										.catch(toastErrorCatch);
 								}}>Add</button
 							>
 							<input type="text" id={`add_name_${course.courseId}`} class="text-black w-[300px]" />
