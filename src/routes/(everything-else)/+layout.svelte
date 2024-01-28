@@ -75,7 +75,7 @@
 
 <style lang="postcss">
 	.menu {
-		@apply flex flex-row rounded-md bg-slate-700 text-white items-center border border-white;
+		@apply flex flex-row rounded-md text-white items-center;
 	}
 	.email {
 		border-radius: 0.3rem 0 0 0.3rem;

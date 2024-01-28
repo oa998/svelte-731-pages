@@ -189,7 +189,7 @@
 
 	<!-- outside column -->
 
-	<hr class="border-white border-1" />
+	<hr class="mt-10 border-white border-1" />
 	<div class="text-white max-w-2xl m-auto py-20 px-10 flex flex-col gap-10">
 		<div>
 			<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin text-center">Reach Us</h1>

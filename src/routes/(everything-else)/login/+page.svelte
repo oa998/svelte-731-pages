@@ -56,29 +56,25 @@
 		class=""
 	>
 		<div class="form-container">
-			<div class="form-label">
-				<label for="email">Email:</label>
-				<input
-					type="text"
-					name="email"
-					id="email"
-					pattern=".+@.+\..+"
-					title="Valid email address"
-					required
-				/>
-			</div>
+			<input
+				type="text"
+				name="email"
+				id="email"
+				pattern=".+@.+\..+"
+				title="Valid email address"
+				placeholder="Email"
+				required
+			/>
 			{#if showLoginForm}
-				<div class="form-label">
-					<label for="password">Password:</label>
-					<input
-						type="password"
-						name="password"
-						id="password"
-						pattern=".+"
-						required
-						title="Password"
-					/>
-				</div>
+				<input
+					type="password"
+					name="password"
+					id="password"
+					pattern=".+"
+					required
+					title="Password"
+					placeholder="Password"
+				/>
 
 				<button type="submit" id="login" disabled={loading}>LOG IN</button>
 			{:else}
