@@ -16,7 +16,6 @@ export const session = writable<Session>({
 
 export const resetSession = () => {
 	if (!browser) return;
-	sessionStorage.removeItem('token');
 	session.set({
 		admin: false,
 		auth: false,
@@ -25,10 +24,8 @@ export const resetSession = () => {
 };
 
 export const applyToken = (token: string) => {
-	if (!browser) return;
 	if (token) {
 		const decoded = jwtDecode(token) satisfies { claims: string[]; email: string };
-		sessionStorage.setItem('token', token);
 		session.set({
 			admin: decoded?.claims?.includes('admin'),
 			auth: !!decoded?.email,
@@ -38,11 +35,4 @@ export const applyToken = (token: string) => {
 	} else {
 		resetSession();
 	}
-};
-
-export const applyFromSessionStorage = () => {
-	if (!browser) return;
-	const token = sessionStorage.getItem('token');
-	applyToken(token || '');
-	return !!token;
 };
