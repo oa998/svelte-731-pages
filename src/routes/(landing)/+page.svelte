@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import CompanyName from '$components/company-name.svelte';
-	import Menu from '$components/menu.svelte';
+	import SessionMenu from '$components/session-menu.svelte';
 	import Icon from '@iconify/svelte';
 	let contentWidth: number;
 	let bannerImgRef: HTMLImageElement;
@@ -47,22 +46,7 @@
 <div class="svg-bg">
 	<div class="pb-4 relative overflow-hidden">
 		<div class="flex justify-end fixed top-0 right-0 w-full z-20">
-			<Menu
-				size="2.5rem"
-				icon={'ic:round-menu'}
-				actions={[
-					{
-						text: 'Log In',
-						class: 'bg-blue-600 text-white border border-gray-300 rounded-t',
-						action: () => goto(`${base}/login`)
-					},
-					{
-						text: 'Downloads',
-						class: 'bg-slate-900 text-white',
-						action: () => goto(`${base}/downloads`)
-					}
-				]}
-			/>
+			<SessionMenu size="2.5rem" />
 		</div>
 		<div class="poly poly-front">
 			<img

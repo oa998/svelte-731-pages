@@ -25,6 +25,7 @@ export function getAllCourses() {
 		.then(throwCustomIfNot2xx(`Unable to read all courses`))
 		.then((r) => r.json())
 		.then((j) => j as Course[])
+		.then((courses) => courses.filter((c) => !!c.courseId))
 		.catch(toastErrorCatch);
 }
 

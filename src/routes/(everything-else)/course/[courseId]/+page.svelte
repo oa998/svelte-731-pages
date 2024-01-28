@@ -87,7 +87,9 @@
 					<ul>
 						{#each chapter.anchors as anchor}
 							<li>
-								<button on:click={() => _scroll(anchor.href)}>{anchor.text}</button>
+								<button class="hover:underline" on:click={() => _scroll(anchor.href)}
+									>{anchor.text}</button
+								>
 							</li>
 						{/each}
 					</ul>
