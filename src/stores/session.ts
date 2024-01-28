@@ -24,6 +24,7 @@ export const resetSession = () => {
 };
 
 export const applyToken = (token: string) => {
+	console.log('applying token', token);
 	if (token) {
 		const decoded = jwtDecode(token) satisfies { claims: string[]; email: string };
 		session.set({
