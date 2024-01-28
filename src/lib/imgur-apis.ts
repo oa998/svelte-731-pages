@@ -54,7 +54,6 @@ export const upload = async (
 	for (const image of images) {
 		const f = new FormData();
 		f.set('image', image);
-		console.log('little formdata', f.get('image'));
 
 		const requestOptions = {
 			method: 'POST',
@@ -65,10 +64,6 @@ export const upload = async (
 		await fetch('https://api.imgur.com/3/image', requestOptions)
 			.then(throwCustomIfNot2xx('Failed to upload image'))
 			.then((response) => response.json())
-			.then((result) => {
-				console.log({ data: result.data });
-				return result;
-			})
 			.then((result) => moveToAlbum(result.data.deletehash, f.get('image').name))
 			.catch(toastErrorCatch);
 	}

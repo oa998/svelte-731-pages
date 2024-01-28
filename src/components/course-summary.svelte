@@ -3,6 +3,7 @@
 	import { base } from '$app/paths';
 	import type { Course } from '$lib/courses';
 	import { session } from '$stores/session';
+	import Icon from '@iconify/svelte';
 	import { onMount } from 'svelte';
 
 	export let course: Course;
@@ -40,7 +41,12 @@
 		class="object-contain object-center w-full h-auto absolute top-1/2 -translate-y-1/2"
 	/>
 	<!-- <div class="bg-image" style={`background-image: url(${course.image});`} /> -->
-	<h1>{course.title}</h1>
+	<h1 class="flex flex-row gap-3 text-center justify-center items-center">
+		<span>{course.title}</span>
+		{#if course.users.includes($session.email)}
+			<Icon icon={'line-md:confirm-circle-twotone'} color="green" />
+		{/if}
+	</h1>
 </button>
 
 <dialog
@@ -66,8 +72,8 @@
 						}}
 						class="bg-blue-800 max-w-fit">Log In</button
 					>
-				{:else if !course.users.includes(course.courseId)}
-					<span class="text-white text-xs bg-green-800 px-3"
+				{:else if !course.users.includes($session.email)}
+					<span class="text-white text-xs bg-pink-800 px-3"
 						>Work with your instructor for access to this course.</span
 					>
 				{:else}
@@ -76,7 +82,7 @@
 							if (previewMode) return;
 							goto(`${base}/course/${course.courseId}`);
 						}}
-						disabled={!$session.courses.includes(course.courseId)}
+						disabled={!course.users.includes($session.email)}
 						class="bg-green-800 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed max-w-fit"
 						>View</button
 					>
