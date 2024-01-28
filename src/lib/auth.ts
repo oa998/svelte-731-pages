@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
 import { base } from '$app/paths';
 import { resetSession, session } from '$stores/session';
+import { jwtDecode } from 'jwt-decode';
 import { peekFor401, throwIfNot2xx } from './fetch-utils';
 import { toastErrorCatch, toastMsg } from './toast';
 
@@ -28,31 +29,31 @@ export function sessionPing() {
 }
 
 export function login(email: string, password: string) {
-	return fetch(`/data/auth/login`, {
-		method: 'POST',
-		headers: {
-			accept: 'application/json',
-			['content-type']: 'application/json'
-		},
-		body: JSON.stringify({
-			email,
-			password
-		}),
-		credentials: 'include'
-	})
-		.then(throwIfNot2xx)
-		.then(async (r) => {
-			if (/^2..$/.test(`${r.status}`)) {
-				const j = await r.json();
-				if (Object.keys(j).includes('auth') && Object.keys(j).includes('admin')) {
-					session.set(j);
-				}
-			}
-			return r;
+	return (
+		fetch(`/data/auth/login`, {
+			method: 'POST',
+			headers: {
+				accept: 'application/json',
+				['content-type']: 'application/json'
+			},
+			body: JSON.stringify({
+				email,
+				password
+			}),
+			credentials: 'include'
 		})
-		.then(() => toastMsg('Logged in'))
-		.then(() => goto(`${base == '/' ? '' : base}/courses`))
-		.catch(toastErrorCatch);
+			.then(throwIfNot2xx)
+			.then(async (r) => {
+				if (/^2..$/.test(`${r.status}`)) {
+					const token = await r.text();
+					const decoded = jwtDecode(token);
+					console.log({ decoded });
+				}
+			})
+			.then(() => toastMsg('Logged in'))
+			// .then(() => goto(`${base == '/' ? '' : base}/courses`))
+			.catch(toastErrorCatch)
+	);
 }
 
 export function logout() {
