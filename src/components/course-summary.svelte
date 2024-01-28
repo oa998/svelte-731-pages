@@ -53,7 +53,7 @@
 		</div>
 		<div class="font-serif font-thin whitespace-pre-wrap">{course.summary}</div>
 		<br />
-		<div class="flex items-start justify-between gap-3">
+		<div class="flex items-center justify-between gap-3">
 			<form method="dialog">
 				<button>Close</button>
 			</form>
