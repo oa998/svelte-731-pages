@@ -21,3 +21,9 @@
 	font-family: 'Josefin Sans', sans-serif;
 	@apply font-thin;
 }
+
+@font-face {
+	font-family: 'vibes';
+	src: url('/fonts/queenside.ttf') format('truetype-variations');
+	font-weight: 1 999;
+}

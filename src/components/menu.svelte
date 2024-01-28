@@ -42,6 +42,7 @@
 	</label>
 
 	<div
+		class:ztop={focused}
 		class="absolute mt-1 right-1 top-full rounded overflow-hidden min-w-max shadow hidden transition delay-75 ease-in-out z-20"
 		on:mouseenter={enter}
 		on:mouseleave={exit}
@@ -68,7 +69,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="postcss">
 	input[type='checkbox']:checked ~ div {
 		display: unset;
 	}
@@ -87,5 +88,8 @@
 	ul,
 	li {
 		@apply p-0;
+	}
+	.ztop {
+		@apply z-40;
 	}
 </style>

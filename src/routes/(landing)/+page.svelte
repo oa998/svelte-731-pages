@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import CompanyName from '$components/company-name.svelte';
+	import Menu from '$components/menu.svelte';
 	import Icon from '@iconify/svelte';
 	let contentWidth: number;
 	let bannerImgRef: HTMLImageElement;
@@ -44,6 +46,24 @@
 <svelte:window on:scroll={_onscroll} />
 <div class="svg-bg">
 	<div class="pb-4 relative overflow-hidden">
+		<div class="flex justify-end fixed top-0 right-0 w-full z-20">
+			<Menu
+				size="2.5rem"
+				icon={'ic:round-menu'}
+				actions={[
+					{
+						text: 'Log In',
+						class: 'bg-blue-600 text-white border border-gray-300 rounded-t',
+						action: () => goto(`${base}/login`)
+					},
+					{
+						text: 'Downloads',
+						class: 'bg-slate-900 text-white',
+						action: () => goto(`${base}/downloads`)
+					}
+				]}
+			/>
+		</div>
 		<div class="poly poly-front">
 			<img
 				bind:this={bannerImgRef}
@@ -55,24 +75,15 @@
 		<div class="bg" bind:clientWidth={contentWidth}>
 			<div class="container" bind:this={containerRef}>
 				<div class="container-731 text-[4rem] sm:text-[5rem] opacity-0" bind:this={titleRef}>
-					<CompanyName textSize="" />
+					<CompanyName shimmer textSize="" />
 				</div>
 			</div>
 			<div class="spacer" />
 		</div>
 	</div>
 
-	<div
-		class="text-center w-full text-2xl sm:text-3xl font-extrathin font-sans font-thin text-white"
-	>
-		<div class="hidden sm:block">Your Professional Beauty Salon in Paris</div>
-		<div class="block sm:hidden">
-			Your Professional<br />Beauty Salon in Paris
-		</div>
-	</div>
-
 	<div class="content">
-		<div class="text-white max-w-2xl m-auto py-20 px-10 flex flex-col gap-28">
+		<div class="text-white max-w-2xl m-auto px-10 flex flex-col gap-28">
 			<!-- Begin Excellence -->
 			<div>
 				<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Exceptional Client Care</h1>
@@ -240,7 +251,7 @@
 		z-index: 12;
 		overflow: hidden;
 		margin-top: 6.5lvh;
-		@apply border-y-2 border-[#0bc0e0];
+		/* @apply border-y-2 border-[#0bc0e0]; */
 	}
 	@media (max-width: 720px) {
 		.poly-front {
