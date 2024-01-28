@@ -7,13 +7,18 @@
 	let courses: Course[] = [];
 	let loading = true;
 
-	onMount(() => {
+	const reloadCourses = () => {
+		loading = true;
 		getAllCourses()
 			.then((_courses) => {
 				courses = _courses as Course[];
 			})
 			.catch(toastErrorCatch)
 			.then(() => (loading = false));
+	};
+
+	onMount(() => {
+		reloadCourses();
 	});
 </script>
 
@@ -54,6 +59,7 @@
 									};
 									loading = true;
 									postCourse(updatedCourse)
+										.then(reloadCourses)
 										.catch(toastErrorCatch)
 										.then(() => (loading = false));
 								}}>Add</button
