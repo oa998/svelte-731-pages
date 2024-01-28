@@ -30,6 +30,10 @@ export function getAllCourses() {
 		.catch(toastErrorCatch);
 }
 
+export function getMyCourses(email: string) {
+	getAllCourses().then((courses) => (courses || []).filter((c) => c.users.includes(email)));
+}
+
 export function getAllChapters(courseId: string) {
 	return fetch(`/data/storage?q=course/${courseId}/chapter`, {
 		method: 'GET',

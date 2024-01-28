@@ -41,7 +41,6 @@ export function login(email: string, password: string) {
 				applyToken(token);
 			}
 		})
-		.then(() => toastMsg('Logged in'))
 		.then(() => goto(`${base == '/' ? '' : base}/courses`))
 		.catch(toastErrorCatch);
 }

@@ -66,6 +66,10 @@
 						}}
 						class="bg-blue-800 max-w-fit">Log In</button
 					>
+				{:else if !course.users.includes(course.courseId)}
+					<span class="text-white text-xs bg-green-800 px-3"
+						>Work with your instructor for access to this course.</span
+					>
 				{:else}
 					<button
 						on:click={() => {
@@ -75,11 +79,6 @@
 						disabled={!$session.courses.includes(course.courseId)}
 						class="bg-green-800 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed max-w-fit"
 						>View</button
-					>
-				{/if}
-				{#if !$session.courses.includes(course.courseId)}
-					<span class="text-white text-xs bg-green-800 px-3"
-						>Work with your instructor for access to this course.</span
 					>
 				{/if}
 			</div>
