@@ -67,7 +67,9 @@
 					class="bg-blue-800 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed max-w-fit"
 					>View</button
 				>
-				{#if !$session.courses.includes(course.courseId)}
+				{#if !$session.auth}
+					<span class="text-white text-xs bg-green-800 px-3">Log in to view your course work.</span>
+				{:else if !$session.courses.includes(course.courseId)}
 					<span class="text-white text-xs bg-green-800 px-3"
 						>Work with your instructor for access to this course.</span
 					>
