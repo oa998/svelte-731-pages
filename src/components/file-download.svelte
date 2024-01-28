@@ -3,7 +3,7 @@
 	export let filename: String;
 	export let title: string;
 	export let details: string;
-	export let downloadedName: string;
+	export let downloadedName: string = '';
 
 	let anchorRef: HTMLAnchorElement;
 </script>

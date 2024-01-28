@@ -9,18 +9,16 @@
 	<div class="text-2xl text-white underline">Downloads</div>
 
 	<FileDownload
-		filename="info.txt"
-		downloadedName="lash-license-application.txt"
-		title="Lash License Application"
-		details="Earn your license. Print, fill out, and return to the salon."
+		filename="instructor enrollment agreement.pdf"
+		title="Student Enrollment Agreement"
+		details="Lash Student Enrollment Agreement. Print, fill out, and return to the program administrator."
 	/>
 
 	<FileDownload
-		filename="info.txt"
-		title="Instructor Application"
-		downloadedName="instructor-application.txt"
-		details="Earn all credentials needed to become an instructor. Print, fill out, and return to the
-    salon."
+		filename="lash enrollment agreement.pdf"
+		title="Instructor Enrollment Agreement"
+		details="Instructor Student Enrollment Agreement. Print, fill out, and return to the
+    program administrator."
 	/>
 </div>
 

@@ -44,7 +44,11 @@
 	<h1 class="flex flex-row gap-3 text-center justify-center items-center">
 		<span>{course.title}</span>
 		{#if course.users.includes($session.email)}
-			<Icon icon={'line-md:confirm-circle-twotone'} color="green" />
+			<Icon
+				icon={'line-md:confirm-circle-twotone'}
+				color="lime"
+				style="background:black;border-radius:100%;"
+			/>
 		{/if}
 	</h1>
 </button>
