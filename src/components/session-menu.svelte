@@ -10,20 +10,29 @@
 
 	let alwaysActions = [
 		{
-			text: 'Downloads',
-			class: 'bg-slate-900 text-white border-t border-white',
-			action: () => goto(`${base}/downloads`)
+			text: 'Lash University',
+			class: 'bg-violet-800 pt-1 font-bold border-t border-slate-300'
 		},
 		{
-			text: 'Courses',
-			class: 'bg-slate-900 text-white border-t border-white',
+			text: 'University Curriculum',
+			class: 'bg-violet-600',
+			action: () => goto(`${base}/university/curriculum`)
+		},
+		{
+			text: 'Applications and Downloads',
+			class: 'bg-violet-600',
+			action: () => goto(`${base}/university/downloads`)
+		},
+		{
+			text: 'Online Courses',
+			class: 'bg-violet-600 text-white ',
 			action: () => goto(`${base}/courses`)
 		}
 	];
 	const defaultActions: MenuAction[] = [
 		{
 			text: 'Log In',
-			class: 'bg-blue-600 text-white rounded-t',
+			class: 'bg-slate-900 text-white rounded-t',
 			action: () => goto(`${base}/login`)
 		}
 	];

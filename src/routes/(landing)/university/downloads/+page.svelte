@@ -5,8 +5,10 @@
 
 <CompanyName />
 <div class="max-w-2xl m-auto flex flex-col gap-10 py-10 px-5">
-	<div class="text-4xl text-white">Lash University</div>
-	<div class="text-2xl text-white underline">Downloads</div>
+	<div class="flex flex-col">
+		<div class="text-4xl text-white font-bold">Lash University</div>
+		<div class="text-xl text-white">File Downloads</div>
+	</div>
 
 	<FileDownload
 		filename="instructor enrollment agreement.pdf"
@@ -23,26 +25,4 @@
 </div>
 
 <style lang="postcss">
-	.card-shadow {
-		transition: box-shadow 100ms linear;
-		text-align: left;
-		box-shadow: 6px 6px 5px 0 black;
-		@apply active:shadow-sm active:shadow-black;
-	}
-	.areas {
-		grid-template-areas:
-			'header icon'
-			'details icon';
-	}
-	.header {
-		grid-area: header;
-		@apply text-xl;
-	}
-	.icon {
-		grid-area: icon;
-		@apply w-full flex justify-end;
-	}
-	.details {
-		grid-area: details;
-	}
 </style>
