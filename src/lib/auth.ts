@@ -18,7 +18,8 @@ export function sessionPing() {
 		credentials: 'include'
 	})
 		.then(peekFor401)
-		.then(throwIfNot2xx);
+		.then(throwIfNot2xx)
+		.then((r) => r.text()); // token
 }
 
 export function login(email: string, password: string) {
