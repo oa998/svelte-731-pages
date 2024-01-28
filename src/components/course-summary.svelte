@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import type { Course } from '$lib/courses';
+	import { session } from '$stores/session';
 	import { onMount } from 'svelte';
 
 	export let course: Course;
@@ -52,17 +53,26 @@
 		</div>
 		<div class="font-serif font-thin whitespace-pre-wrap">{course.summary}</div>
 		<br />
-		<div class="flex justify-between gap-3">
+		<div class="flex items-start justify-between gap-3">
 			<form method="dialog">
 				<button>Close</button>
 			</form>
-			<button
-				on:click={() => {
-					if (previewMode) return;
-					goto(`${base}/course/${course.courseId}`);
-				}}
-				class="bg-blue-800">Enroll</button
-			>
+			<div class="flex flex-col text-right items-end">
+				<button
+					on:click={() => {
+						if (previewMode) return;
+						goto(`${base}/course/${course.courseId}`);
+					}}
+					disabled={!$session.courses.includes(course.courseId)}
+					class="bg-blue-800 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed max-w-fit"
+					>View</button
+				>
+				{#if !$session.courses.includes(course.courseId)}
+					<span class="text-white text-xs bg-green-800 px-3"
+						>Work with your instructor for access to this course.</span
+					>
+				{/if}
+			</div>
 		</div>
 	</div>
 </dialog>

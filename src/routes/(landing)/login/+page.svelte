@@ -3,7 +3,7 @@
 	import { base } from '$app/paths';
 	import CompanyName from '$components/company-name.svelte';
 	import { login, passwordReset } from '$lib/auth';
-	import { toastErrorMsg } from '$lib/toast';
+	import { toastErrorMsg, toastMsg } from '$lib/toast';
 	import { session } from '$stores/session';
 
 	let loading = false;
@@ -11,6 +11,7 @@
 	let showLoginForm = true;
 
 	$: if ($session.auth) {
+		toastMsg('Logged in');
 		goto(`${base == '/' ? '' : base}/courses`);
 	}
 
