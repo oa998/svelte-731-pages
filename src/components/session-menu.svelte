@@ -14,7 +14,7 @@
 			class: 'bg-violet-800 pt-1 font-bold border-t border-slate-300'
 		},
 		{
-			text: 'University Curriculum',
+			text: 'University Details',
 			class: 'bg-violet-600',
 			action: () => goto(`${base}/university/curriculum`)
 		},

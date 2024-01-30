@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
 	import Header from '$components/header.svelte';
 	import SessionMenu from '$components/session-menu.svelte';
 	import { session } from '$stores/session';
@@ -8,12 +6,12 @@
 
 <Header>
 	<div class="flex flex-row pr-5 gap-3 items-center">
-		<button on:click={() => goto(`${base}/courses`)} class="courses">Courses</button>
+		<!-- <button on:click={() => goto(`${base}/courses`)} class="courses">Courses</button> -->
 		<div class="menu">
 			{#if $session.auth}
 				<div class="email">{$session.email}</div>
 			{/if}
-			<SessionMenu />
+			<SessionMenu size="2.5rem" />
 		</div>
 	</div>
 </Header>
@@ -27,11 +25,7 @@
 		@apply flex flex-row rounded-md text-white items-center;
 	}
 	.email {
-		border-radius: 0.3rem;
-		@apply px-2 bg-black;
-	}
-	button.courses {
-		@apply px-2 rounded-lg text-white border border-white;
+		@apply px-2;
 	}
 
 	.slot {

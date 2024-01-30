@@ -22,7 +22,7 @@
 	});
 </script>
 
-<div class="text-white max-w-2xl m-auto flex flex-col">
+<div class="text-white max-w-2xl m-auto flex flex-col px-10">
 	{#if loading}
 		<div
 			class="text-3xl font-sans flex flex-row text-white gap-6 w-full justify-center absolute top-1/2 bg-black items-center py-3"
@@ -34,12 +34,12 @@
 		<div class="flex flex-col gap-10 pt-10">
 			{#each courses as course}
 				<div class="flex flex-col gap-3">
-					<div class="font-bold">{course.title}</div>
+					<div class="">{course.title}</div>
 					{#each course.users || ['bob', 'tim', 'tony'] as user}
-						<div class="pl-3">
-							<div class="flex flex-row gap-3 border border-white items-center">
+						<div>
+							<div class="flex flex-row gap-1 border border-white items-center">
 								<button
-									class="w-[100px] bg-red-500 text-black p-2 text-xs"
+									class="w-[100px] max-w-[100px] bg-red-500 text-black p-2 text-xs"
 									on:click={() => {
 										const userSet = new Set(course.users || []);
 										userSet.delete(user);
@@ -54,12 +54,12 @@
 											.catch(toastErrorCatch);
 									}}>Remove</button
 								>
-								<div>{user}</div>
+								<div class=" text-ellipsis">{user}</div>
 							</div>
 						</div>
 					{/each}
-					<div class="pl-3">
-						<div class="flex flex-row gap-3 border border-white items-center">
+					<div>
+						<div class="flex flex-row gap-1 border border-white items-center pr-1">
 							<button
 								class="w-[100px] bg-green-500 text-black p-2 text-xs"
 								on:click={() => {
@@ -79,7 +79,7 @@
 										.catch(toastErrorCatch);
 								}}>Add</button
 							>
-							<input type="text" id={`add_name_${course.courseId}`} class="text-black w-[300px]" />
+							<input type="text" id={`add_name_${course.courseId}`} class="text-black flex-1" />
 						</div>
 					</div>
 				</div>

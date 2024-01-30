@@ -1,13 +1,11 @@
 <script>
-	import CompanyName from '$components/company-name.svelte';
 	import FileDownload from '$components/file-download.svelte';
 </script>
 
-<CompanyName />
 <div class="max-w-2xl m-auto flex flex-col gap-10 py-10 px-5">
-	<div class="flex flex-col">
-		<div class="text-4xl text-white font-bold">Lash University</div>
-		<div class="text-xl text-white">File Downloads</div>
+	<div class=" text-white flex flex-col">
+		<div class="text-4xl sm:text-6xl font-serif text-center font-extralight">Lash University</div>
+		<div class="text-xl text-center">File Downloads</div>
 	</div>
 
 	<FileDownload
