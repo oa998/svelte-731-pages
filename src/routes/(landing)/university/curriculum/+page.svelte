@@ -82,7 +82,15 @@
 		take the first step towards unlocking your full potential as a licensed lash artist. Your journey
 		to mastering the art of lashes starts here!
 	</div>
-	<!-- Welcome to 731 Vibes Lash University – where beauty meets expertise, and dreams of becoming a skilled licensed lash artist come to life! At our esteemed lash university, we invite you to embark on an exciting journey that goes beyond the ordinary, shaping your passion for beauty into a thriving career.
+</div>
+
+<style lang='postcss'>
+  .dark-text-shadow {
+		text-shadow: 0 0 4px black, 0 0 6px black, 0 0 8px black;
+	}
+</style>
+
+<!-- Welcome to 731 Vibes Lash University – where beauty meets expertise, and dreams of becoming a skilled licensed lash artist come to life! At our esteemed lash university, we invite you to embark on an exciting journey that goes beyond the ordinary, shaping your passion for beauty into a thriving career.
 
 Why choose 731 Vibes Lash University for your Eyelash License?
 
@@ -99,4 +107,3 @@ Hands-On Training: Practice makes perfect! Our hands-on training approach allows
 Continuous Support: Join a supportive community of students, alumni, and industry professionals. Our network offers ongoing support, collaboration opportunities, and a platform to share experiences, fostering a sense of belonging in the world of lash artistry.
 
 Don't just dream about a career in lash artistry – make it a reality with 731 Vibes Lash University. Enroll today and take the first step towards unlocking your full potential as a licensed lash artist. Your journey to mastering the art of lashes starts here! -->
-</div>
