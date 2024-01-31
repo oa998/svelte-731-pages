@@ -59,7 +59,7 @@
 		<div class="bg" bind:clientWidth={contentWidth}>
 			<div class="container" bind:this={containerRef}>
 				<div class="container-731 text-[4rem] sm:text-[5rem] opacity-0" bind:this={titleRef}>
-					<CompanyName shimmer textSize="" />
+					<CompanyName subtitle textSize="" />
 				</div>
 			</div>
 			<div class="spacer" />
@@ -137,7 +137,7 @@
 				<img
 					src={`${base == '/' ? '' : base}/offer.png`}
 					alt="one"
-					class="w-full border-double border-8 border-[#0bc0e0]"
+					class="w-full border-double border-8 border-[#0bc0e0] box-shadow"
 				/>
 			</div>
 
@@ -147,22 +147,25 @@
 			<div>
 				<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Professional Growth</h1>
 				<p class="text-base sm:text-lg font-extrathin dark-text-shadow font-serif font-thin">
-					Our dynamic educational platform offers a flexible and accessible approach to acquiring
-					new skills and knowledge. Our expert practitioners can guide your growth. Elevate your
-					skill set and broaden your horizons by investing in your <span
-						class="text-lime-400 font-light">personal and professional development</span
-					>.
+					At <span class="text-white font-light italic">Lash University</span>, we offer a flexible
+					and accessible approach to acquiring new skills and knowledge. Our expert practitioners
+					can guide your growth. Elevate your skill set and broaden your horizons by investing in
+					your
+					<span class="text-lime-400 font-light">personal and professional development</span>.
 				</p>
 				<br />
 				<div class="flex flex-row justify-center gap-2 flex-wrap">
 					<a
-						href={`${base == '/' ? '' : base}/courses`}
-						class=" text-xs rounded-lg p-4 bg-white bg-opacity-20 whitespace-nowrap font-serif font-thin"
-						>View Available Courses</a
+						href={`${base == '/' ? '' : base}/university/curriculum`}
+						class=" text-xs rounded-lg p-4 py-2 bg-white bg-opacity-20 border border-violet-600 whitespace-nowrap font-serif font-thin flex flex-row gap-2 items-center"
+						><span>Lash University</span><img
+							src={`${base == '/' ? '' : base}/lash_uni_icon_32.png`}
+							alt="icon"
+						/></a
 					>
 					<a
 						href={`${base == '/' ? '' : base}/login`}
-						class="text-xs rounded-lg p-4 bg-violet-700 bg-opacity-70 whitespace-nowrap font-serif font-thin"
+						class="text-xs rounded-lg p-4 py-2 bg-violet-800 border border-violet-600 whitespace-nowrap font-serif font-thin flex flex-row gap-2 items-center"
 						>Student Login</a
 					>
 				</div>
@@ -259,7 +262,6 @@
 	}
 
 	.container {
-		position: relative;
 		z-index: 11;
 	}
 
