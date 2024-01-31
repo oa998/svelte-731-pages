@@ -2,7 +2,7 @@
 	import { base } from '$app/paths';
 </script>
 
-<div class="text-white max-w-2xl m-auto pt-10 px-10 flex flex-col gap-2">
+<div class="text-white flex flex-col gap-2">
 	<div class="text-4xl sm:text-6xl font-serif text-center font-extralight">Lash University</div>
 
 	<img src="/lash_university_crest.webp" alt="crest" class="max-w-xs m-auto" />
@@ -11,7 +11,7 @@
 		Why choose <span class="font-normal">731 Vibes Lash University</span> for your Eyelash License?
 	</div>
 </div>
-<div class="text-white max-w-2xl m-auto py-20 px-10 flex flex-col gap-20">
+<div class="text-white py-20 flex flex-col gap-20">
 	<div>
 		<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Comprehensive Curriculum</h1>
 		<p class="text-base sm:text-lg font-extrathin dark-text-shadow font-serif font-thin">

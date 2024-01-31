@@ -11,14 +11,11 @@
 	<SessionMenu size="2.5rem" />
 </Header>
 
-<div class="fixed top-14 sm:top-20 w-full slot">
+<div class="fixed top-12 sm:top-12 w-full slot">
 	<slot />
 </div>
 
 <style lang="postcss">
-	.menu {
-		@apply flex flex-row rounded-md text-white items-center;
-	}
 	.email {
 		@apply px-2 text-xs sm:text-sm flex-shrink text-ellipsis overflow-hidden text-white;
 	}
