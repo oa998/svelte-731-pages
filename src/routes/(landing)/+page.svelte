@@ -139,6 +139,13 @@
 					alt="one"
 					class="w-full border-double border-8 border-[#0bc0e0] box-shadow"
 				/>
+				<div class="flex flex-row justify-center pt-5">
+					<a
+						href={`${base == '/' ? '' : base}/services`}
+						class="text-lg sm:text-2xl text-blue-300 underline"
+						>View all of our service details and pricing</a
+					>
+				</div>
 			</div>
 
 			<!-- End Relaxation -->
