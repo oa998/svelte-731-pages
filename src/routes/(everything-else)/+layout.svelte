@@ -5,15 +5,10 @@
 </script>
 
 <Header>
-	<div class="flex flex-row pr-5 gap-3 items-center">
-		<!-- <button on:click={() => goto(`${base}/courses`)} class="courses">Courses</button> -->
-		<div class="menu">
-			{#if $session.auth}
-				<div class="email">{$session.email}</div>
-			{/if}
-			<SessionMenu size="2.5rem" />
-		</div>
-	</div>
+	{#if $session.auth}
+		<div class="email">{$session.email}</div>
+	{/if}
+	<SessionMenu size="2.5rem" />
 </Header>
 
 <div class="fixed top-14 sm:top-20 w-full slot">
@@ -25,7 +20,7 @@
 		@apply flex flex-row rounded-md text-white items-center;
 	}
 	.email {
-		@apply px-2;
+		@apply px-2 text-xs sm:text-sm flex-shrink text-ellipsis overflow-hidden text-white;
 	}
 
 	.slot {
