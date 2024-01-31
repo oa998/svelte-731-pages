@@ -142,7 +142,7 @@
 				<div class="flex flex-row justify-center pt-5">
 					<a
 						href={`${base == '/' ? '' : base}/services`}
-						class="text-lg sm:text-2xl text-blue-300 underline"
+						class="text-lg sm:text-2xl text-blue-300 underline text-center"
 						>View all of our service details and pricing</a
 					>
 				</div>
