@@ -11,28 +11,33 @@
 	let alwaysActions = [
 		{
 			text: 'Lash University',
-			class: 'bg-violet-800 pt-1 font-bold border-t border-slate-300'
+			class: 'bg-violet-800 rounded-t pt-1 font-bold border-t border-x border-slate-300'
 		},
 		{
 			text: 'University Details',
-			class: 'bg-violet-600',
+			class: 'bg-violet-600 border-x border-slate-300',
 			action: () => goto(`${base}/university/curriculum`)
 		},
 		{
 			text: 'Applications and Downloads',
-			class: 'bg-violet-600',
+			class: 'bg-violet-600 border-x border-slate-300',
 			action: () => goto(`${base}/university/downloads`)
 		},
 		{
 			text: 'Online Courses',
-			class: 'bg-violet-600 text-white ',
+			class: 'bg-violet-600 border-x border-slate-300 border-b',
 			action: () => goto(`${base}/courses`)
+		},
+		{
+			text: 'Services',
+			class: 'bg-slate-900 border border-slate-700',
+			action: () => goto(`${base}/services`)
 		}
 	];
 	const defaultActions: MenuAction[] = [
 		{
 			text: 'Log In',
-			class: 'bg-slate-900 text-white rounded-t',
+			class: 'bg-slate-900 text-white rounded-b border border-slate-700',
 			action: () => goto(`${base}/login`)
 		}
 	];
@@ -41,16 +46,16 @@
 		actions = [];
 		if ($session.auth) {
 			// If logged in, give option to log out, plus other options
-			actions = [
+			actions = alwaysActions.concat([
 				{
 					text: 'Log Out 👋',
-					class: 'bg-slate-900 text-white',
+					class: 'bg-slate-900 text-white rounded-b border border-slate-700',
 					action: () => logout()
 				}
-			].concat(alwaysActions);
+			]);
 		} else {
 			// If logged out, give option to log in, plus other options
-			actions = defaultActions.concat(alwaysActions);
+			actions = alwaysActions.concat(defaultActions);
 		}
 		if ($session.admin) {
 			actions = actions.concat([
