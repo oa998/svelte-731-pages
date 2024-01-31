@@ -36,6 +36,8 @@ jobs:
           PUBLIC_SERVER_URL: ${{ vars.PUBLIC_SERVER_URL }}
           PUBLIC_IMGUR_CLIENT_ID: ${{ vars.PUBLIC_IMGUR_CLIENT_ID }}
           PUBLIC_IMGUR_ACCESS_TOKEN: ${{ vars.PUBLIC_IMGUR_ACCESS_TOKEN }}
+          PUBLIC_JEN_PHONE: ${{ vars.PUBLIC_JEN_PHONE }}
+          PUBLIC_EMAIL731: ${{ vars.PUBLIC_EMAIL731 }}
         run: |
           pnpm run build
           touch build/.nojekyll

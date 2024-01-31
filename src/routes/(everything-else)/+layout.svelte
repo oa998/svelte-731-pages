@@ -11,7 +11,7 @@
 	<SessionMenu size="2.5rem" />
 </Header>
 
-<div class="fixed top-12 sm:top-12 w-full slot">
+<div class="fixed top-12 sm:top-12 w-full slot min-w-[400px] overflow-scroll">
 	<slot />
 </div>
 
@@ -22,7 +22,6 @@
 
 	.slot {
 		max-height: calc(100lvh - 3rem);
-		overflow: scroll;
 	}
 	@media (max-width: 640px) {
 		.slot {

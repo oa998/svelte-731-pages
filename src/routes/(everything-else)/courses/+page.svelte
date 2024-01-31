@@ -38,7 +38,7 @@
 
 <style lang="postcss">
 	.bg {
-		overflow-x: hidden;
+		/* overflow-x: hidden; */
 		overflow-y: scroll;
 		@apply w-full h-full;
 	}
