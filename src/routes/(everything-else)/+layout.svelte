@@ -21,12 +21,12 @@
 	}
 
 	.slot {
-		max-height: calc(100lvh - 5rem);
+		max-height: calc(100lvh - 3rem);
 		overflow: scroll;
 	}
 	@media (max-width: 640px) {
 		.slot {
-			max-height: calc(100lvh - 3.5rem);
+			max-height: calc(100lvh - 2.5rem);
 		}
 	}
 </style>
