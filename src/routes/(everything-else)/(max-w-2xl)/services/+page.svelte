@@ -324,10 +324,6 @@
 -->
 
 <style lang="postcss">
-	.dark-text-shadow {
-		text-shadow: 0 0 4px black;
-	}
-
 	.price-grid-double {
 		grid-template-columns: 1fr min-content 1fr min-content;
 		@apply grid max-w-fit;
@@ -369,7 +365,7 @@
 	}
 
 	.article p {
-		@apply text-base sm:text-lg dark-text-shadow font-serif font-thin;
+		@apply text-base sm:text-lg font-serif font-thin;
 	}
 	.article p.emphasis {
 		@apply font-normal font-sans text-lg sm:text-2xl py-8;

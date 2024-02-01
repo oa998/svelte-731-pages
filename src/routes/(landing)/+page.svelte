@@ -71,7 +71,7 @@
 			<!-- Begin Excellence -->
 			<div>
 				<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Exceptional Client Care</h1>
-				<p class="text-base sm:text-lg font-extrathin dark-text-shadow font-serif font-thin">
+				<p class="text-base sm:text-lg font-extrathin font-serif font-thin">
 					Our skilled team of professionals is dedicated to crafting personalized styles that <span
 						class="text-lime-400 font-light">enhance your natural beauty</span
 					>. Elevate your senses, transform your look, and experience the ultimate in local salon
@@ -103,7 +103,7 @@
         `}
 					/>
 				</div>
-				<div class="text-sm font-extrathin dark-text-shadow font-serif font-thin text-center">
+				<div class="text-sm font-extrathin font-serif font-thin text-center">
 					We love our friends and clients!
 
 					<div class="img-carousel hide-scroll">
@@ -125,7 +125,7 @@
 			<!-- Begin Relaxation -->
 			<div class="text-right">
 				<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Renewed Wellness</h1>
-				<p class="text-base sm:text-lg font-extrathin dark-text-shadow font-serif font-thin">
+				<p class="text-base sm:text-lg font-extrathin font-serif font-thin">
 					Take a moment to escape the chaos and invest in your well-being with one of our services.
 					Make the conscious choice to prioritize your well-being, and let our exceptional services
 					be your guide to a more balanced and blissful life. Embracing relaxation is not a mere
@@ -143,7 +143,7 @@
 					<a
 						href={`${base == '/' ? '' : base}/services`}
 						class="text-lg sm:text-2xl text-blue-300 underline text-center"
-						>View all of our service details and pricing</a
+						>All of our services and pricing</a
 					>
 				</div>
 			</div>
@@ -153,7 +153,7 @@
 			<!-- Begin Growth -->
 			<div>
 				<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Professional Growth</h1>
-				<p class="text-base sm:text-lg font-extrathin dark-text-shadow font-serif font-thin">
+				<p class="text-base sm:text-lg font-extrathin font-serif font-thin">
 					At <span class="text-white font-light italic">Lash University</span>, we offer a flexible
 					and accessible approach to acquiring new skills and knowledge. Our expert practitioners
 					can guide your growth. Elevate your skill set and broaden your horizons by investing in
@@ -187,7 +187,7 @@
 	<div class="text-white max-w-2xl m-auto py-20 px-10 flex flex-col gap-10">
 		<div>
 			<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin text-center">Reach Us</h1>
-			<div class="text-base sm:text-lg dark-text-shadow text-center font-serif font-thin">
+			<div class="text-base sm:text-lg text-center font-serif font-thin">
 				Open most days from <span class="text-lime-400 font-light">8am to 9pm</span>. Call to book
 				an appointment or to ensure availability with your beautician.
 			</div>
@@ -211,7 +211,7 @@
 			</div>
 		</div>
 		<div>
-			<div class="text-base sm:text-lg dark-text-shadow text-center font-serif font-thin">
+			<div class="text-base sm:text-lg text-center font-serif font-thin">
 				North on <span class="text-lime-400 font-light">HWY 76 / US-79</span>, on the right after
 				Shady Grove Rd.
 			</div>
@@ -306,9 +306,6 @@
 		margin-left: 5%;
 	}
 
-	.dark-text-shadow {
-		text-shadow: 0 0 4px black, 0 0 6px black, 0 0 8px black;
-	}
 	.box-shadow {
 		box-shadow: -3px 0 15px black;
 	}

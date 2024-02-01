@@ -25,7 +25,7 @@
 		@apply p-2 sm:p-5;
 	}
 	.dark-text-shadow {
-		text-shadow: 0 0 4px #7c3aed, 0 0 6px #7c3aed, 0 0 8px #7c3aed;
+		text-shadow: 0 0 4px #a16ef9, 0 0 6px #a16ef9, 0 0 8px #a16ef9;
 		/* text-shadow: 0 0 4px blue; */
 	}
 </style>
