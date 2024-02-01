@@ -43,7 +43,7 @@
 </script>
 
 <svelte:window on:scroll={_onscroll} />
-<div class="svg-background">
+<div>
 	<div class="pb-4 relative overflow-hidden">
 		<div class="flex justify-end fixed top-0 right-0 w-full z-20">
 			<SessionMenu size="2.5rem" />
