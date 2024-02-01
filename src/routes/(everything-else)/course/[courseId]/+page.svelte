@@ -42,6 +42,7 @@
 				})
 				.sort((a, b) => a.sequence - b.sequence);
 			chapters = chapters;
+			console.log({ chapters });
 			chapterId = chapters[0].chapterId;
 		});
 	});
@@ -114,7 +115,9 @@
 				{/key}
 			{/if}
 			{#if markdown}
-				<MarkdownSection {markdown} />
+				{#key markdown}
+					<MarkdownSection {markdown} />
+				{/key}
 			{:else}
 				<div class="text-white">Loading....</div>
 			{/if}
@@ -133,7 +136,7 @@
 	}
 	label[for='show-chapters'] {
 		background: color-mix(in srgb, blue 90%, transparent);
-		@apply py-1 text-white text-center absolute top-0 left-0 z-20 w-full;
+		@apply py-1 text-white text-center fixed top-12 left-0 z-20 w-full;
 	}
 	label[for='show-chapters']:active {
 		background: color-mix(in srgb, blue 60%, transparent);
@@ -180,7 +183,7 @@
 	}
 
 	#article {
-		@apply pb-20 overflow-y-scroll max-h-[90lvh];
+		@apply pb-20 overflow-y-scroll max-h-[90lvh] pt-20 md:pt-10;
 	}
 
 	#course-title {
