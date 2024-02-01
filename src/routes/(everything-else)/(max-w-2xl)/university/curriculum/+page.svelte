@@ -103,7 +103,4 @@ Continuous Support: Join a supportive community of students, alumni, and industr
 Don't just dream about a career in lash artistry – make it a reality with 731 Vibes Lash University. Enroll today and take the first step towards unlocking your full potential as a licensed lash artist. Your journey to mastering the art of lashes starts here! -->
 
 <style lang="postcss">
-	 {
-		text-shadow: 0 0 4px black, 0 0 6px black, 0 0 8px black;
-	}
 </style>
