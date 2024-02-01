@@ -365,7 +365,7 @@
 	}
 
 	.article p {
-		@apply text-base sm:text-lg font-serif font-thin;
+		@apply text-base sm:text-lg font-serif font-light;
 	}
 	.article p.emphasis {
 		@apply font-normal font-sans text-lg sm:text-2xl py-8;

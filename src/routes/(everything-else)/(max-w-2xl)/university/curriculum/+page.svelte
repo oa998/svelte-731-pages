@@ -14,7 +14,7 @@
 <div class="text-white py-20 flex flex-col gap-20">
 	<div>
 		<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Comprehensive Curriculum</h1>
-		<p class="text-base sm:text-lg font-extrathin font-serif font-thin">
+		<p class="text-base sm:text-lg font-extrathin font-serif font-light">
 			Immerse yourself in a comprehensive curriculum designed to cover every aspect of eyelash
 			artistry. From the basics to advanced techniques, we ensure you <span
 				class="text-lime-400 font-light">master the skills</span
@@ -24,7 +24,7 @@
 
 	<div>
 		<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Experienced Instructors</h1>
-		<p class="text-base sm:text-lg font-extrathin font-serif font-thin">
+		<p class="text-base sm:text-lg font-extrathin font-serif font-light">
 			Learn from industry experts and seasoned professionals who are dedicated to nurturing your
 			talent. Our <span class="text-lime-400 font-light"
 				>experienced instructors bring a wealth of knowledge</span
@@ -34,7 +34,7 @@
 
 	<div>
 		<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Personalized Training</h1>
-		<p class="text-base sm:text-lg font-extrathin font-serif font-thin">
+		<p class="text-base sm:text-lg font-extrathin font-serif font-light">
 			Benefit from personalized attention with our low student-to-instructor ratio. Our experienced
 			educators tailor their guidance to <span class="text-lime-400 font-light"
 				>your unique learning style</span
@@ -44,7 +44,7 @@
 
 	<div>
 		<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">State-of-the-Art Facilities</h1>
-		<p class="text-base sm:text-lg font-extrathin font-serif font-thin">
+		<p class="text-base sm:text-lg font-extrathin font-serif font-light">
 			Train in a <span class="text-lime-400 font-light">modern and well-equipped environment</span>,
 			utilizing cutting-edge tools and products. Our school is designed to mimic real-world salon
 			settings, giving you the confidence to excel in any professional setting.
@@ -53,7 +53,7 @@
 
 	<div>
 		<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Hands-On Training</h1>
-		<p class="text-base sm:text-lg font-extrathin font-serif font-thin">
+		<p class="text-base sm:text-lg font-extrathin font-serif font-light">
 			Practice makes perfect! Our hands-on training approach allows you to work on real clients,
 			honing your skills and <span class="text-lime-400 font-light"
 				>building the confidence needed to succeed</span
@@ -63,7 +63,7 @@
 
 	<div>
 		<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin">Continuous Support</h1>
-		<p class="text-base sm:text-lg font-extrathin font-serif font-thin">
+		<p class="text-base sm:text-lg font-extrathin font-serif font-light">
 			Join a supportive community of students, alumni, and industry professionals. <span
 				class="text-lime-400 font-light">Our network offers ongoing support</span
 			>, collaboration opportunities, and a platform to share experiences, fostering a sense of
