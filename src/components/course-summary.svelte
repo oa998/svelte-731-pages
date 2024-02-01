@@ -61,7 +61,7 @@
 		<div class="w-full text-center text-3xl font-sans font-thin py-3" tabindex="-1">
 			{course.title}
 		</div>
-		<div class="font-serif font-thin whitespace-pre-wrap">{course.summary}</div>
+		<div class="font-serif font-light whitespace-pre-wrap">{course.summary}</div>
 		<br />
 		<div class="flex items-center justify-between gap-3">
 			<form method="dialog">
