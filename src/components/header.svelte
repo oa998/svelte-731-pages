@@ -2,7 +2,7 @@
 	import CompanyName from './company-name.svelte';
 </script>
 
-<header>
+<header class="bg-pink-800">
 	<CompanyName class="text-4xl text-left flex-1 whitespace-nowrap" />
 	<slot />
 </header>
