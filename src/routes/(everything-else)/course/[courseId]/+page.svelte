@@ -133,7 +133,7 @@
 	}
 	label[for='show-chapters'] {
 		background: color-mix(in srgb, blue 90%, transparent);
-		@apply py-1 text-white text-center absolute bottom-0 left-0 z-20 w-full;
+		@apply py-1 text-white text-center absolute top-0 left-0 z-20 w-full;
 	}
 	label[for='show-chapters']:active {
 		background: color-mix(in srgb, blue 60%, transparent);
