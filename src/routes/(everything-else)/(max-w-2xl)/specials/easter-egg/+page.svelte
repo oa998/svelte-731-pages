@@ -8,9 +8,9 @@
 
 	<h1 class="pb-2 text-2xl sm:text-5xl font-sans font-thin text-center">Sign up below:</h1>
 	<div class="flex flex-col sm:flex-row justify-around items-center gap-3">
-		<a target="_blank" href={'https://buy.stripe.com/8wMbLT71o7sHb847ss'}>50 Eggs - $40</a>
-		<a target="_blank" href={'https://buy.stripe.com/7sIdU11H414j5NKeUV'}>70 Eggs - $50</a>
-		<a target="_blank" href={'https://buy.stripe.com/7sI6rz2L84gv2ByeUW'}>100 Eggs - $75</a>
+		<a target="_blank" href={'https://buy.stripe.com/dR67vD0D0dR54JG7sx'}>50 Eggs - $40</a>
+		<a target="_blank" href={'https://buy.stripe.com/3cs3fngBY7sHfok6os'}>70 Eggs - $50</a>
+		<a target="_blank" href={'https://buy.stripe.com/14kcPX4Tg28nekg8wz'}>100 Eggs - $75</a>
 	</div>
 </div>
 
