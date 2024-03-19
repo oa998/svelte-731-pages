@@ -2,6 +2,7 @@
 	export type MenuAction = {
 		text: string;
 		action?: () => void;
+		icon?: string;
 		class: string;
 	};
 </script>
@@ -52,15 +53,24 @@
 				<li>
 					{#if !action.action}
 						<div class={`${action.class} px-5 py-1`}>
-							{action.text}
+							<span>
+								{action.text}
+							</span>
 						</div>
 					{:else}
 						<button
-							class={`block px-5 py-2 w-full ${action.class} hover:brightness-200`}
+							class={`px-5 py-2 w-full hover:brightness-200 flex flex-row gap-1 items-center ${action.class} `}
 							on:click={() => {
 								action.action?.();
 								focused = false;
-							}}>{action.text}</button
+							}}
+						>
+							<span>
+								{action.text}
+							</span>
+							{#if action.icon}
+								<Icon icon={action.icon} color="cyan" style="font-size: small" />
+							{/if}</button
 						>
 					{/if}
 				</li>
