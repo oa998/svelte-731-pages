@@ -109,20 +109,10 @@
 	#login:not(:disabled) {
 		background: rgb(17 130 153);
 	}
-	.form-label {
-		display: grid;
-		grid-template-columns: 80px 1fr;
-		@apply text-sm italic font-serif;
-	}
 
 	input {
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 100%, rgba(17, 130, 153, 0) 0%);
 		@apply text-white font-sans;
-	}
-
-	.form-label > label {
-		text-shadow: 0 0 2px black;
-		@apply text-right pr-2 text-white;
 	}
 
 	form {

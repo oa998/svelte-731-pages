@@ -29,12 +29,6 @@
 			action: () => goto(`${base}/courses`)
 		},
 		{
-			text: 'Easter Egg My Yard!',
-			class: 'bg-pink-500 border border-pink-700 hover:brightness-125',
-			icon: 'mdi:egg-easter',
-			action: () => goto(`${base}/specials/easter-egg`)
-		},
-		{
 			text: 'Services',
 			class: 'bg-slate-900 border border-slate-700',
 			action: () => goto(`${base}/services`)

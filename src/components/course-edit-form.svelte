@@ -170,7 +170,6 @@
 	}
 
 	input[type='text'],
-	input[type='number'],
 	textarea {
 		@apply text-xs;
 	}
