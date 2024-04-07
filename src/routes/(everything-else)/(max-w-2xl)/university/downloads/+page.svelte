@@ -9,13 +9,13 @@
 	</div>
 
 	<FileDownload
-		filename="instructor enrollment agreement.pdf"
+		filename="lash enrollment agreement.pdf"
 		title="Student Enrollment Agreement"
 		details="Lash Student Enrollment Agreement. Print, fill out, and return to the program administrator."
 	/>
 
 	<FileDownload
-		filename="lash enrollment agreement.pdf"
+		filename="instructor enrollment agreement.pdf"
 		title="Instructor Enrollment Agreement"
 		details="Instructor Student Enrollment Agreement. Print, fill out, and return to the
     program administrator."
