@@ -28,6 +28,8 @@ marked.use({
 				}
 			},
 			renderer(token) {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore-next-line
 				return `<div><details>${this.parser.parseInline(token.tokens)}\n</details></div>`; // parseInline to turn child tokens into HTML
 			}
 		},

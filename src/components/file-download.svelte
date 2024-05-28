@@ -2,7 +2,7 @@
 	import Icon from '@iconify/svelte';
 	export let filename: String;
 	export let title: string;
-	export let details: string;
+	export let details: string[];
 	export let downloadedName: string = '';
 
 	let anchorRef: HTMLAnchorElement;
@@ -26,7 +26,9 @@
 			<Icon icon="pepicons-print:file" style="font-size:xxx-large" />
 		</div>
 		<div class="details">
-			{details}
+			{#each details as a}
+				<div>{a}</div>
+			{/each}
 		</div>
 	</div>
 </button>

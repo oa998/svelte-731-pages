@@ -64,7 +64,8 @@ export const upload = async (
 		await fetch('https://api.imgur.com/3/image', requestOptions)
 			.then(throwCustomIfNot2xx('Failed to upload image'))
 			.then((response) => response.json())
-			.then((result) => moveToAlbum(result.data.deletehash, f.get('image').name))
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			.then((result) => moveToAlbum(result.data.deletehash, (f.get('image') as any)?.name))
 			.catch(toastErrorCatch);
 	}
 };

@@ -23,11 +23,11 @@
 			class: 'bg-violet-600 border-x border-slate-300',
 			action: () => goto(`${base}/university/downloads`)
 		},
-		{
-			text: 'Online Courses',
-			class: 'bg-violet-600 border-x border-slate-300 border-b',
-			action: () => goto(`${base}/courses`)
-		},
+		// {
+		// 	text: 'Online Courses',
+		// 	class: 'bg-violet-600 border-x border-slate-300 border-b',
+		// 	action: () => goto(`${base}/courses`)
+		// },
 		{
 			text: 'Services',
 			class: 'bg-slate-900 border border-slate-700',
