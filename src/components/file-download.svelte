@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
-	export let filename: String;
+	export let filename: string;
+	export let remoteFilename: string = '';
 	export let title: string;
 	export let details: string[];
 	export let downloadedName: string = '';
@@ -15,7 +16,7 @@
 	}}
 >
 	<a
-		href={`/downloads/${filename}`}
+		href={remoteFilename || `/downloads/${filename}`}
 		class="hidden"
 		bind:this={anchorRef}
 		download={downloadedName || filename}>download file</a

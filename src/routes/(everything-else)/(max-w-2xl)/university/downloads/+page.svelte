@@ -54,6 +54,7 @@
 
 	<FileDownload
 		filename="lash enrollment agreement.pdf"
+		remoteFilename="https://storage.googleapis.com/731-agreements/student_agreement.pdf"
 		title="Student Enrollment Agreement"
 		details={[
 			'Click to download the Lash Student Enrollment Agreement.',
