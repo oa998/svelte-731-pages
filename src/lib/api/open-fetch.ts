@@ -6,7 +6,7 @@
 // });
 
 export const studentApplicationUpload = (formData: FormData) => {
-	return fetch('/file/upload', {
+	return fetch('/file/app/upload', {
 		method: 'POST',
 		headers: {
 			Accept: '*/*'
